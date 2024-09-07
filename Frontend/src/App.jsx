@@ -1,13 +1,11 @@
-import './App.css'
+import './App.css';
+import Header from './components/Header';
 
 function App() {
   return (
-    <>
-      <div>
-        <h1 className='border p-10 text-center bg-slate-500'> Bail Reckoner</h1>
-        <h1> work in progress </h1>
-      </div>
-    </>
+    <div>
+      <Header />
+    </div>
   )
 }
 
