@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema(
     email: { type: String, required: true, unique: true, lowercase: true },
     fullName: {
       type: String,
-      required: [true, "Full  Name is required"],
+      // required: [true, "Full  Name is required"],
       lowercase: true,
       trim: true,
     },
@@ -20,6 +20,14 @@ const userSchema = new mongoose.Schema(
     },
     dob: {
       type: Date,
+    },
+    role: {
+      type: String,
+      required: [true, "Role is required"],
+    },
+    idProof: {
+      type: String,
+      lowercase: true,
     },
   },
   { timestamps: true }

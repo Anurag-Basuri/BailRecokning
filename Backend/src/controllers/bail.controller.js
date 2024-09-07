@@ -1,7 +1,7 @@
 import { Bail } from "../models/bail.models.js";
-import { ApiError } from "../utils/ApiError";
-import { ApiResponse } from "../utils/ApiResponse";
-import { asyncHandler } from "../utils/asyncHandler";
+import { ApiError } from "../utils/ApiError.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
 
 const addBail = asyncHandler(async (res,req)=>{
     const {accused}= req.body;
@@ -21,10 +21,14 @@ const addBail = asyncHandler(async (res,req)=>{
 
 // const deleteBail = 
 
-// const updateBail = 
+// const updateBail = asyncHandler(async(req,res)=>{
+
+
+// })
+
 
 const getBail = asyncHandler(async (req,res)=>{
-    const {bailId} = req.body;
+    const {bailId} = req.params;
 
     if(!bailId){
         throw new ApiError(400,"id is required")
@@ -40,4 +44,4 @@ const getBail = asyncHandler(async (req,res)=>{
 })
 
 
-export {getbail}
+export {addBail,getBail}

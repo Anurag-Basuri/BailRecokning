@@ -1,10 +1,10 @@
 import { Law } from "../models/law.models.js";
-import { ApiError } from "../utils/ApiError";
-import { ApiResponse } from "../utils/ApiResponse";
-import { asyncHandler } from "../utils/asyncHandler";
+import { ApiError } from "../utils/ApiError.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
 
 const getLaw = asyncHandler(async (req, res) => {
-  const { lawId } = req.body;
+  const { lawId } = req.params;
 
   if (!lawId) {
     throw new ApiError(400, "all fields are required");

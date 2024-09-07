@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose,{Schema} from "mongoose";
 
 const bailSchema = new mongoose.Schema(
   {
@@ -30,7 +30,7 @@ const bailSchema = new mongoose.Schema(
     },
     bailStatus: {
       type: String,
-      default: Pending,
+      default: "Pending",
     },
     // judgeComments:{ //can make a new table and this can be an array
     //     type:
@@ -41,16 +41,20 @@ const bailSchema = new mongoose.Schema(
     personalBondAmount: {
       type: Number,
     },
-    lawyer:{
-        type: Schema.Types.ObjectId,
-        ref: "User",
-    },judge:{
-        type: Schema.Types.ObjectId,
-        ref: "User",
-    }
+    verdict: {
+      type: String,
+      lowercase: true,
+    },
+    lawyer: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
+    judge: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
   },
   { timestamps: true }
 );
 
-
-export const Bail = mongoose.model("Bail",bailSchema)
+export const Bail = mongoose.model("Bail", bailSchema);
