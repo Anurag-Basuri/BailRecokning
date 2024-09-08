@@ -1,88 +1,172 @@
-'use client'
+import {
+	Popover,
+	PopoverButton,
+	PopoverGroup,
+	PopoverPanel,
+} from "@headlessui/react";
 
 import {
-    Popover,
-    PopoverButton,
-    PopoverGroup,
-    PopoverPanel,
-} from '@headlessui/react'
+	ScaleIcon,
+	DocumentTextIcon,
+	CalendarIcon,
+	BookOpenIcon,
+	ExclamationCircleIcon,
+	IdentificationIcon,
+} from "@heroicons/react/24/outline";
 
-import {
-    ScaleIcon,
-    DocumentTextIcon,
-    CalendarIcon,
-    BookOpenIcon,
-    ExclamationCircleIcon,
-    IdentificationIcon
-} from '@heroicons/react/24/outline'
-
-import { ChevronDownIcon} from '@heroicons/react/20/solid'
-
+import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../app/authSlice";
+import axios from "axios";
+import { useState } from "react";
+import { SideAccount } from "./index";
 const products = [
-    { name: 'Imprisonment & Compensation', description: 'Track imprisonment duration and calculate potential compensation amounts', href: '#', icon: CalendarIcon }, 
-    { name: 'Document Assistance', description: 'Help with drafting and managing legal documents', href: '#', icon: DocumentTextIcon },
-    { name: 'Legal Advice', description: 'network of legal professionals who can offer advice or represent users if needed', href: '#', icon: BookOpenIcon },
-    { name: 'Offense Types', description: 'Explore different types of offenses and their legal implications', href: '#', icon: IdentificationIcon },
-    { name: 'Allegation Details', description: 'Understand the nature of allegations and their impact on bail decisions', href: '#', icon: ExclamationCircleIcon },
-]
+	{
+		name: "Imprisonment & Compensation",
+		description:
+			"Track imprisonment duration and calculate potential compensation amounts",
+		href: "#",
+		icon: CalendarIcon,
+	},
+	{
+		name: "Document Assistance",
+		description: "Help with drafting and managing legal documents",
+		href: "#",
+		icon: DocumentTextIcon,
+	},
+	{
+		name: "Legal Advice",
+		description:
+			"network of legal professionals who can offer advice or represent users if needed",
+		href: "#",
+		icon: BookOpenIcon,
+	},
+	{
+		name: "Offense Types",
+		description:
+			"Explore different types of offenses and their legal implications",
+		href: "#",
+		icon: IdentificationIcon,
+	},
+	{
+		name: "Allegation Details",
+		description:
+			"Understand the nature of allegations and their impact on bail decisions",
+		href: "#",
+		icon: ExclamationCircleIcon,
+	},
+];
 
 export default function Header() {
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
+	const status = useSelector((state) => state.auth.status);
+	const userData = useSelector((state) => state.auth.userData);
 
-  return (
-      <header className="fixed left-0 top-0 w-full bg-navy text-white">
-          <nav aria-label="Global" className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
-            <div className="flex lg:flex-1 justify-between">
-                <a href="#" className="-m-1.5 p-1.5 justify-between items-center border border-gold rounded-full bg-navy hover:bg-gray-800 hover:border-gray-400 ease-in-out">
-                    <ScaleIcon className="h-8 w-8 text-gold" aria-hidden="true" />
-                </a>
-            </div>
+	const [showAccount, setShowAccount] = useState(false);
+	const logoutbtn = async () => {
+		try {
+			const response = await axios.post("/api/v1/user/logout");
+			console.log(response);
+			localStorage.removeItem("token");
+			dispatch(logout());
+			navigate("/");
+		} catch (error) {
+			console.log("error on logout", error);
+		}
+	};
+	const addBail = async () => {
+		const response = await axios.get("/api/v1/bail/add");
 
-            <PopoverGroup className="hidden lg:flex lg:gap-x-12 text-white">
-              <Popover className="relative">
-                <PopoverButton className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-white">
-                  Features
-                  <ChevronDownIcon aria-hidden="true" className="h-5 w-5 flex-none text-gray-400" />
-                </PopoverButton>
+		console.log(response.data.data._id);
+		navigate("/Bail/" + response.data.data._id);
+	};
 
-                <PopoverPanel
-                  transition
-                  className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5 transition data-[closed]:translate-y-1 data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in">
-                  <div className="p-4">
-                    {products.map((item) => (
-                      <div
-                        key={item.name}
-                        className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50">
-                        <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-                          <item.icon aria-hidden="true" className="h-6 w-6 text-gray-600 group-hover:text-indigo-600" />
-                        </div>
-                        <div className="flex-auto">
-                          <a href={item.href} className="block font-semibold text-gray-900">
-                            {item.name}
-                            <span className="absolute inset-0" />
-                          </a>
-                          <p className="mt-1 text-gray-600">{item.description}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </PopoverPanel>
-              </Popover>
+	return (
+		<header className="fixed left-0 top-0 w-full bg-navy text-white">
+			<nav
+				aria-label="Global"
+				className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
+				<div className="flex lg:flex-1 justify-between">
+					<a
+						href="#"
+						className="-m-1.5 p-1.5 justify-between items-center border border-gold rounded-full bg-navy hover:bg-gray-800 hover:border-gray-400 ease-in-out">
+						<ScaleIcon className="h-8 w-8 text-gold" aria-hidden="true" />
+					</a>
+				</div>
 
-              <a href="#" className="text-sm font-semibold leading-6 text-white">
-                Bail Eligiblity
-              </a>
-              <a href="#" className="text-sm font-semibold leading-6 text-white">
-                Dashboard
-              </a>
-            </PopoverGroup>
+				<PopoverGroup className="hidden lg:flex lg:gap-x-12 text-white">
+					<Link to="/" className="text-sm font-semibold leading-6 text-white">
+						Home
+					</Link>
+					<div
+						className="text-sm font-semibold leading-6 text-white"
+						onClick={() => addBail()}>
+						Bail Eligiblity
+					</div>
+					<Popover className="relative">
+						<PopoverButton className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-white">
+							Features
+							<ChevronDownIcon
+								aria-hidden="true"
+								className="h-5 w-5 flex-none text-gray-400"
+							/>
+						</PopoverButton>
 
-            <div className="hidden lg:flex lg:flex-1 lg:justify-end text-white">
-              <a href="#" className="text-sm font-semibold leading-6">
-                Log in / Sign up <span aria-hidden="true">&rarr;</span>
-              </a>
-            </div>
-          
-          </nav>
-      </header>
-  )
+						<PopoverPanel
+							transition
+							className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5 transition data-[closed]:translate-y-1 data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in">
+							<div className="p-4">
+								{products.map((item) => (
+									<div
+										key={item.name}
+										className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50">
+										<div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
+											<item.icon
+												aria-hidden="true"
+												className="h-6 w-6 text-gray-600 group-hover:text-indigo-600"
+											/>
+										</div>
+										<div className="flex-auto">
+											<a
+												href={item.href}
+												className="block font-semibold text-gray-900">
+												{item.name}
+												<span className="absolute inset-0" />
+											</a>
+											<p className="mt-1 text-gray-600">{item.description}</p>
+										</div>
+									</div>
+								))}
+							</div>
+						</PopoverPanel>
+					</Popover>
+				</PopoverGroup>
+
+				<div className="hidden lg:flex lg:flex-1 lg:justify-end text-white">
+					<div
+						className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+						onClick={() => setShowAccount((prev) => !prev)}>
+						Default
+					</div>
+					{status ? (
+						<button
+							onClick={logoutbtn}
+							type="button"
+							className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+							Logout
+						</button>
+					) : (
+						<div className="text-sm font-semibold leading-6">
+							<span onClick={() => navigate("/login")}> Log in</span>/{" "}
+							<span onClick={() => navigate("/signup")}> Sign up </span>{" "}
+							<span aria-hidden="true">&rarr;</span>
+						</div>
+					)}
+				</div>
+			</nav>
+			{showAccount ? <SideAccount /> : ""}
+		</header>
+	);
 }
