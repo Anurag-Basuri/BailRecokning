@@ -29,7 +29,7 @@ import pronouncementRouter from "./routes/pronouncement.routes.js";
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/law", lawRouter); // only for admin but now anyone can use it - update in future
 app.use("/api/v1/bail", bailRouter);
-app.use("/api/v1/charges", chargesRouter);
+app.use("/api/v1/charge", chargesRouter);
 app.use("/api/v1/lawyer", lawyerRouter);
 app.use("/api/v1/judge", judgeRouter);
 app.use("/api/v1/pronouncement", pronouncementRouter);

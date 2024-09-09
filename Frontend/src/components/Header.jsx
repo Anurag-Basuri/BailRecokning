@@ -79,8 +79,8 @@ export default function Header() {
 	const addBail = async () => {
 		const response = await axios.get("/api/v1/bail/add");
 
-		console.log(response.data.data._id);
-		navigate("/Bail/" + response.data.data._id);
+		console.log(response.data.data);
+		navigate("/bail/" + response.data.data._id);
 	};
 
 	return (

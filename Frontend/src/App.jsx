@@ -7,28 +7,33 @@ import { login } from "./app/authSlice";
 import axios from "axios";
 
 function App() {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    const funC = async () => {
-      const token = localStorage.getItem("token");
-      const userData = localStorage.getItem("userData");
-      if (userData) {
-        const response = await axios.get("/api/v1/user/current-user");
-        // console.log(response.data.data);
-        const data = response.data.data;
-        dispatch(login(data));
-      }
-    };
-    funC();
-  }, []);
+	const dispatch = useDispatch();
+	useEffect(() => {
+		try {
+			const funC = async () => {
+				const token = localStorage.getItem("token");
+				const userData = localStorage.getItem("userData");
+				if (userData) {
+					const response = await axios.get("/api/v1/user/current-user");
+					// console.log(response.data.data);
+					const data = response.data.data;
+					dispatch(login(data));
+				}
+			};
 
-  return (
-    <div>
-      <Header />
-      <Outlet />
-      <Footer />
-    </div>
-  );
+			funC();
+		} catch (error) {
+			console.log("error while getting user data");
+		}
+	}, []);
+
+	return (
+		<div>
+			<Header />
+			<Outlet />
+			<Footer />
+		</div>
+	);
 }
 
 export default App;

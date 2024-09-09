@@ -9,6 +9,7 @@ import { AuthLayout } from "./components/index.js";
 import Login from "./pages/Login.jsx";
 import SignUp from "./pages/Signup.jsx";
 import Home from "./pages/Home.jsx";
+import Bail from "./pages/Bail.jsx"
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "/signup",
         element: <SignUp />,
+      },
+      {
+        path: "/bail/:bailId",
+        element: <Bail/>,
       },
     ],
   },

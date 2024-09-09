@@ -7,6 +7,11 @@ const chargesSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
+    bailId: {
+      type: Schema.Types.ObjectId,
+      ref: "Bail",
+      required: true,
+    },
     charge: {
       type: String,
       required: true,

@@ -11,7 +11,6 @@ const Login = () => {
   const [error, setError] = useState("");
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
-  const [role, setRole] = useState("User");
 
   const loginFunc = async (data) => {
     // event.preventDefault()
@@ -25,7 +24,6 @@ const Login = () => {
 
       localStorage.setItem("token", response.data.data.accessToken);
       localStorage.setItem("userData", JSON.stringify(response.data.data.user));
-      // localStorage.setItem("cards", JSON.stringify(cards));
 
       navigate("/");
     } catch (error) {
@@ -50,35 +48,7 @@ const Login = () => {
             {/* <img className="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo"/> */}
             Bail Reckoner
           </a>
-          <div className="mb-4">
-            <button
-              type="button"
-              className={`inline-flex items-center mx-2 px-10 py-2.5 text-sm font-medium text-center text-white  rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ${
-                role === "User" ? "bg-blue-800" : "bg-blue-600"
-              }`}
-              onClick={() => setRole("User")}
-            >
-              User
-            </button>
-            <button
-              type="button"
-              className={`inline-flex items-center mx-2 px-10 py-2.5 text-sm font-medium text-center text-white bg-blue-600 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800  ${
-                role === "Lawyer" ? "bg-blue-800" : "bg-blue-600"
-              }`}
-              onClick={() => setRole("Lawyer")}
-            >
-              Legal aid Provider
-            </button>
-            <button
-              type="button"
-              className={`inline-flex items-center mx-2 px-10 py-2.5 text-sm font-medium text-center text-white bg-blue-600 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800  ${
-                role === "Judge" ? "bg-blue-800" : "bg-blue-600"
-              }`}
-              onClick={() => setRole("Judge")}
-            >
-              Judge
-            </button>
-          </div>
+         
           <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
@@ -118,7 +88,7 @@ const Login = () => {
                 </div>
                 <div>
                   <label
-                    for="password"
+                    htmlFor="password"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                     Password
@@ -148,7 +118,7 @@ const Login = () => {
                     </div>
                     <div className="ml-3 text-sm">
                       <label
-                        for="remember"
+                        htmlFor="remember"
                         className="text-gray-500 dark:text-gray-300"
                       >
                         Remember me
