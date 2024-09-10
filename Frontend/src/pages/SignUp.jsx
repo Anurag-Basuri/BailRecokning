@@ -6,46 +6,47 @@ import { login } from "../app/authSlice";
 import axios from "axios";
 
 const SignUp = () => {
-  const status = useSelector((state) => state.auth.status);
-  const dispatch = useDispatch();
-  const [error, setError] = useState("");
-  const { register, handleSubmit } = useForm();
-  const navigate = useNavigate();
-  const [role, setRole] = useState("User");
+	const status = useSelector((state) => state.auth.status);
+	const dispatch = useDispatch();
+	const [error, setError] = useState("");
+	const { register, handleSubmit } = useForm();
+	const navigate = useNavigate();
+	const [role, setRole] = useState("User");
 
-  const create = async (data) => {
-    setError("");
-    try {
-      const newurl = `/api/v1/user/register`;
-      const newData = {
-        email: data.email,
-        password: data.password,
-        role,
-      };
-      const response = await axios.post(newurl, newData);
-      // setUser(response.data.data)
-      dispatch(login(newData));
-      console.log(response.data.data);
+	const create = async (data) => {
+		setError("");
+		try {
+			const newurl = `/api/v1/user/register`;
+			const newData = {
+				email: data.email,
+				password: data.password,
+				fullName: data.fullName,
+				role,
+			};
+			const response = await axios.post(newurl, newData);
+			// setUser(response.data.data)
+			dispatch(login(newData));
+			console.log(response.data.data);
 
-      navigate("/");
-    } catch (error) {
-      setError(error.message);
-    }
-  };
+			navigate("/");
+		} catch (error) {
+			setError(error.message);
+		}
+	};
 
-  useEffect(() => {
-    if (status) {
-      navigate("/");
-    }
-  }, []);
+	useEffect(() => {
+		if (status) {
+			navigate("/");
+		}
+	}, []);
 
-  return (
+	return (
 		<>
 			<section className="bg-gray-50 dark:bg-gray-900">
-				<div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+				<div className="flex flex-col mt-6 items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
 					<a
 						href="#"
-						className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
+						className="flex items-center  mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
 						{/* <img className="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo"/> */}
 						Bail Reckoner
 					</a>

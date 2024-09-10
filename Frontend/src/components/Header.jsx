@@ -19,7 +19,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../app/authSlice";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SideAccount } from "./index";
 const products = [
 	{
@@ -62,20 +62,20 @@ export default function Header() {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const status = useSelector((state) => state.auth.status);
-	const userData = useSelector((state) => state.auth.userData);
+	// const userData = useSelector((state) => state.auth.userData);
 
 	const [showAccount, setShowAccount] = useState(false);
-	const logoutbtn = async () => {
-		try {
-			const response = await axios.post("/api/v1/user/logout");
-			console.log(response);
-			localStorage.removeItem("token");
-			dispatch(logout());
-			navigate("/");
-		} catch (error) {
-			console.log("error on logout", error);
-		}
-	};
+	// const logoutbtn = async () => {
+	// 	try {
+	// 		const response = await axios.post("/api/v1/user/logout");
+	// 		console.log(response);
+	// 		localStorage.removeItem("token");
+	// 		dispatch(logout());
+	// 		navigate("/");
+	// 	} catch (error) {
+	// 		console.log("error on logout", error);
+	// 	}
+	// };
 	const addBail = async () => {
 		const response = await axios.get("/api/v1/bail/add");
 
@@ -145,18 +145,18 @@ export default function Header() {
 				</PopoverGroup>
 
 				<div className="hidden lg:flex lg:flex-1 lg:justify-end text-white">
-					<div
-						className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-						onClick={() => setShowAccount((prev) => !prev)}>
-						Default
-					</div>
 					{status ? (
-						<button
-							onClick={logoutbtn}
-							type="button"
-							className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-							Logout
-						</button>
+						<div
+							className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+							onClick={() => setShowAccount((prev) => !prev)}>
+							Profile
+						</div>
+					) : (
+						""
+					)}
+
+					{status ? (
+						""
 					) : (
 						<div className="text-sm font-semibold leading-6">
 							<span onClick={() => navigate("/login")}> Log in</span>/{" "}

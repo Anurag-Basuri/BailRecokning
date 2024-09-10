@@ -11,10 +11,11 @@ const addCharges = asyncHandler(async (req, res) => {
     throw new ApiError(400, "all fields are required");
   }
 
+  const char = charge.toLowerCase()
   const charges = await Charges.create({
     accused: req.user._id,
     bailId,
-    charge,
+    charge: char,
   });
 
   if (!charges) {
@@ -70,4 +71,42 @@ const getallCharges = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, charges, "successfully fetched all charges "));
 });
 
-export { addCharges, removeCharges, getallCharges };
+const getallChargesWithLaw = asyncHandler(async (req, res) => {
+  const { bailId } = req.params;
+
+  if (!bailId) {
+    throw new ApiError(400, "all fields are required");
+  }
+
+  const charges = await Charges.aggregate([
+    {
+      $match: {
+        bailId: new mongoose.Types.ObjectId(bailId),
+      },
+    },
+    {
+      $lookup: {
+        from: "law",
+        localField: "charge",
+        foreignField: "section",
+        as: "lawBySection",
+      },
+    },
+  ]);
+
+  if (!charges) {
+    throw new ApiError(500, "something went wrong");
+  }
+
+  return res
+    .status(200)
+    .json(
+      new ApiResponse(
+        200,
+        charges,
+        "successfully fetched all charges with law "
+      )
+    );
+});
+
+export { addCharges, removeCharges, getallCharges, getallChargesWithLaw };

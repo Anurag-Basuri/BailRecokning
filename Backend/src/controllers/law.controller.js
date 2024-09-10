@@ -3,7 +3,7 @@ import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 
-const getLaw = asyncHandler(async (req, res) => {
+const getLawByID = asyncHandler(async (req, res) => {
   const { lawId } = req.params;
 
   if (!lawId) {
@@ -22,29 +22,128 @@ const getLaw = asyncHandler(async (req, res) => {
 });
 
 const addlaw = asyncHandler(async (req, res) => {
-  const { lawName, sectionTitle,sectionDesc } = req.body;
+  const { lawName, section, sectionTitle, sectionDesc } = req.body;
 
   // ,chapter,explanation,exception,illustration,punishment,penaltyDescription,congnisable,bailable,triableByCourt,compoundable,fineAmount,maxImprisonment
 
   if (
-    [lawName,sectionTitle,sectionDesc].some(
+    [lawName, sectionTitle, section, sectionDesc].some(
       (fields) => fields?.trim() === ""
     )
   ) {
     throw new ApiError(400, "all fields are required");
   }
-
-  const law = await Law.create({lawName,sectionTitle,sectionDesc})
+  const sec = section.toLowerCase();
+  const law = await Law.create({
+    lawName,
+    section: sec,
+    sectionTitle,
+    sectionDesc,
+  });
 
   if (!law) {
     throw new ApiError(500, "somthing went wrong");
   }
 
-  return res.status(200).json(new ApiResponse(200,law,"Successfully added the Law"))
+  return res
+    .status(200)
+    .json(new ApiResponse(200, law, "Successfully added the Law"));
 });
 
-// const editLaw
+const addLaws = asyncHandler(async (req, res) => {
+  const { laws } = req.body;
 
-// const findlaw
+  if (
+    laws.some(
+      (law) =>
+        !["lawName", "sectionTitle", "sectionDesc"].every(
+          (field) => law[field]?.trim() !== ""
+        )
+    )
+  ) {
+    throw new ApiError(400, "All fields are required for each law");
+  }
 
-export { getLaw, addlaw };
+  const createdLaws = await Law.insertMany(laws);
+
+  if (!createdLaws.length) {
+    throw new ApiError(500, "Something went wrong while adding laws");
+  }
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, createdLaws, "Successfully added the laws"));
+});
+
+const getLawBySearch = asyncHandler(async (req, res) => {
+  const { section } = req.params;
+
+  if (!section) {
+    throw new ApiError(400, "all fields are required");
+  }
+
+  const search = section.toLowerCase();
+  const law = await Law.aggregate([
+    {
+      $match: {
+        section: search,
+      },
+    },
+  ]);
+
+  if (!law) {
+    throw new ApiError(500, "something went wrong");
+  }
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, { law }, "Successfully the required law"));
+});
+
+const getLawsBySearch = asyncHandler(async (req, res) => {
+  const { sections } = req.body;
+  
+  console.log(sections);
+  if (!sections || sections.length === 0) {
+    throw new ApiError(400, "No sections provided");
+  }
+
+  const searchTerms = sections.map((section) => section.toLowerCase());
+
+  const laws = await Law.aggregate([
+    {
+      $match: {
+        section: { $in: searchTerms },
+      },
+    },
+  ]);
+
+  if (laws.length === 0) {
+    throw new ApiError(404, "No laws found for the given sections");
+  }
+
+  return res
+    .status(200)
+    .json(
+      new ApiResponse(200, { laws }, "Successfully retrieved the required laws")
+    );
+});
+
+const getAllLaws = asyncHandler(async (req, res) => {
+  const law = await Law.find({});
+
+  if (!law) {
+    throw new ApiError(500, "something went wrong");
+  }
+
+  return res.status(200).json();
+});
+
+export {
+  getLawByID,
+  addlaw,
+  getLawBySearch,
+  addLaws,
+  getAllLaws,
+  getLawsBySearch,
+};

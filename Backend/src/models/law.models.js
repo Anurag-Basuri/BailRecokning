@@ -11,6 +11,8 @@ const lawSchema = new mongoose.Schema({
   },
   section: {
     type: String,
+    lowercase:true,
+    unique:true,
     required: true,
   },
   sectionTitle: {

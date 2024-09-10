@@ -1,13 +1,14 @@
 import { Outlet } from "react-router-dom";
 import "./App.css";
 import { Footer, Header } from "./components";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { login } from "./app/authSlice";
 import axios from "axios";
 
 function App() {
 	const dispatch = useDispatch();
+
 	useEffect(() => {
 		try {
 			const funC = async () => {
@@ -15,8 +16,8 @@ function App() {
 				const userData = localStorage.getItem("userData");
 				if (userData) {
 					const response = await axios.get("/api/v1/user/current-user");
-					// console.log(response.data.data);
-					const data = response.data.data;
+					const data = response.data.data.user;
+					console.log(data);
 					dispatch(login(data));
 				}
 			};

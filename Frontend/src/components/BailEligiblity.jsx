@@ -61,13 +61,13 @@ export default function BailEligiblity() {
 		"West Bengal",
 	];
 
-	const stateSelect = document.getElementById("State");
-	statesOfIndia.forEach((state) => {
-		const option = document.createElement("option");
-		option.value = state;
-		option.textContent = state;
-		stateSelect.appendChild(option);
-	});
+	// const stateSelect = document.getElementById("State");
+	// statesOfIndia.forEach((state) => {
+	// 	const option = document.createElement("option");
+	// 	option.value = state;
+	// 	option.textContent = state;
+	// 	stateSelect.appendChild(option);
+	// });
 
 	return (
 		<form className="p-10">

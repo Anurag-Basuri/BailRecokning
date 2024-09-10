@@ -23,7 +23,7 @@ const generateAccessAndRefreshToken = async (userId) => {
 };
 
 const registerUser = asyncHandler(async (req, res) => {
-  const { fullName, email, password,role } = req.body;
+  const { fullName, email, password, role } = req.body;
 
   if ([fullName, email, password].some((fields) => fields?.trim() === "")) {
     throw new ApiError(400, "all field are required");
@@ -39,7 +39,7 @@ const registerUser = asyncHandler(async (req, res) => {
     fullName,
     email,
     password,
-    role
+    role,
   });
 
   const createdUser = await User.findById(user._id).select(
@@ -202,9 +202,21 @@ const changeCurrentPassword = asyncHandler(async (req, res) => {
 });
 
 const getCurrentUser = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id).select(
+    "-password -refreshToken"
+  );
+
+  // console.log(user);
+
   return res
     .status(200)
-    .json(new ApiResponse(200, req.user, " current user fetched successfully"));
+    .json(
+      new ApiResponse(
+        200,
+        { user },
+        " current user fetched successfully"
+      )
+    );
 });
 
 const updateAccountDetails = asyncHandler(async (req, res) => {

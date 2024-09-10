@@ -14,6 +14,7 @@ const chargesSchema = new mongoose.Schema(
     },
     charge: {
       type: String,
+      lowercase:true,
       required: true,
     },
   },

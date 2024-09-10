@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const Home = () => {
-	const [allUserBails, setAllUserBails] = useState([{}]);
+	const [allUserBails, setAllUserBails] = useState([]);
 	const [allBails, setAllBails] = useState([{}]);
 	const navigate = useNavigate();
 
@@ -49,10 +49,11 @@ const Home = () => {
 	const [acceptedCases, setAcceptedCases] = useState(0);
 	const [deniedCases, setDeniedCases] = useState(0);
 
-	// // Calculate the totals when the component mounts or when cases change
-	// useEffect(() => {}, [cases]);
+	const toCreate = async () => {
+		const response = await axios.get("/api/v1/bail/add");
+		navigate("/bail/" + response.data.data._id);
+	};
 
-	// const renameForm
 	useEffect(() => {
 		try {
 			const func = async () => {
@@ -85,12 +86,12 @@ const Home = () => {
 		} catch (error) {
 			console.log("error while getting all over bail data");
 		}
-	}, []);
+	}, [allUserBails]);
 
 	return (
 		<>
 			{showRename && (
-				<div className="fixed inset-0 flex justify-center items-center z-50 bg-gray-900 bg-opacity-50">
+				<div className="fixed inset-0 flex justify-center  items-center z-50 bg-gray-900 bg-opacity-50">
 					<RenameCard
 						cancel={setShowRename}
 						cancelState={showRename}
@@ -102,9 +103,9 @@ const Home = () => {
 					/>
 				</div>
 			)}
-			<div className="h-80v px-6 pt-4 pb-2  mt-16 flex flex-row flex-wrap justify-center mx-auto w-full">
+			<div className="h-80v px-6 pt-4 pb-2 mt-16 flex flex-row flex-wrap justify-center mx-auto w-full">
 				{allUserBails.length === 0 ? (
-					<h1 className=" text-black text-3xl flex justify-center items-center h-80v ">
+					<h1 className=" text-black mt-20 text-3xl flex justify-center items-center h-80v ">
 						No Bail application Exist -
 						<span className="hover:text-blue-400" onClick={() => toCreate()}>
 							Create now
