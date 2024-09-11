@@ -27,19 +27,19 @@ const Home = () => {
 	};
 
 	// // for rename of form
-	const [formTitle, setFormTitle] = useState("");
-	const [formRenameId, setFormRenameId] = useState("");
+	const [BailTitle, setBailTitle] = useState("");
+	const [bailRenameId, setbailRenameId] = useState("");
 	const onChangeHandlerRename = (event) => {
 		const value = event.target.value;
-		const name = event.target.name;
+		// const name = event.target.name;
 		// console.log(value,name)
-		setFormTitle(value);
+		setBailTitle(value);
 	};
 
-	const renameForm = (id, title) => {
+	const renameBail = (id, title) => {
 		// console.log(title);
-		setFormTitle(title.length === 0 ? "Untitled Form" : title);
-		setFormRenameId(id);
+		setBailTitle(title.length === 0 ? "Untitled Bail" : title);
+		setbailRenameId(id);
 		// console.log(id);
 		setShowRename(true);
 	};
@@ -65,7 +65,7 @@ const Home = () => {
 		} catch (error) {
 			console.log("while fetching all Bails");
 		}
-	}, []);
+	}, [showRename]);
 
 	useEffect(() => {
 		try {
@@ -95,10 +95,10 @@ const Home = () => {
 					<RenameCard
 						cancel={setShowRename}
 						cancelState={showRename}
-						formTitle={formTitle}
+						BailTitle={BailTitle}
 						onChangeHandlerRename={onChangeHandlerRename}
-						formRenameId={formRenameId}
-						setAllForms={setAllBails}
+						bailId={bailRenameId}
+						setAllBails={setAllBails}
 						className="m-44 border bg-white rounded-lg p-7 shadow-md"
 					/>
 				</div>
@@ -118,7 +118,7 @@ const Home = () => {
 								<HomeCard
 									fon={fon}
 									del={deleteBail}
-									rename={renameForm}
+									rename={renameBail}
 									id={fon._id}
 								/>
 							</div>

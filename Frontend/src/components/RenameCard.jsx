@@ -4,21 +4,21 @@ const RenameCard = ({
 	className = "",
 	cancelState,
 	cancel,
-	formRenameId,
-	formTitle,
+	bailId,
+	BailTitle,
 	onChangeHandlerRename,
-	setAllForms,
+	setAllBails,
 }) => {
 	// console.log(cancel,cancelState)
 	const onOk = async () => {
 		try {
-			const response = await axios.patch("/api/v1/form/f/" + formRenameId, {
-				formTitle,
+			const response = await axios.patch("/api/v1/bail/" + bailId, {
+				bailName:BailTitle,
 			});
 			console.log(response);
 			const func = async () => {
-				const response = await axios.get("/api/v1/form");
-				setAllForms(response.data.data.form);
+				const response = await axios.get("/api/v1/bail/u/all");
+				setAllBails(response.data.data.bail);
 				// console.log(response.data.data.form);
 			};
 			func();
@@ -38,7 +38,7 @@ const RenameCard = ({
 			<input
 				type="text"
 				name="formTitle"
-				value={formTitle}
+				value={BailTitle}
 				onChange={(event) => onChangeHandlerRename(event)}
 				className="bg-gray-50 border mt-7 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
 				placeholder="Unititled Form"

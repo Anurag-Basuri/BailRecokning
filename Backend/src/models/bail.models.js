@@ -7,6 +7,10 @@ const bailSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
+    bailApplicationName:{
+      type:String,
+      default: "Untitled Application"
+    },
     dateOfArrest: {
       type: Date,
     },

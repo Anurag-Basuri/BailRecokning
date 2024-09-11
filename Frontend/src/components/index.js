@@ -6,6 +6,7 @@ import SideAccount from "./SideAccount";
 import RenameCard from "./RenameCard";
 import HomeCard from "./HomeCard";
 import BailEligiblity from "./BailEligiblity"
+import BailCharges from "./BailCharges"
 
 export {
 	AuthLayout,
@@ -16,4 +17,5 @@ export {
 	HomeCard,
 	RenameCard,
 	BailEligiblity,
+	BailCharges,
 };

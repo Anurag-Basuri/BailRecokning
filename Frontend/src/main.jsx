@@ -5,7 +5,7 @@ import "./index.css";
 import { Provider } from "react-redux";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import store from "./app/store.js";
-import { AuthLayout } from "./components/index.js";
+import { AuthLayout, BailCharges } from "./components/index.js";
 import Login from "./pages/Login.jsx";
 import SignUp from "./pages/Signup.jsx";
 import Home from "./pages/Home.jsx";
@@ -39,7 +39,6 @@ const router = createBrowserRouter([
 			},
 			{
 				path: "/bail/:bailId",
-
 				element: <Bail />,
 			},
 		],

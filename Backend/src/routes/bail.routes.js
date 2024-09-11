@@ -7,12 +7,13 @@ import {
   getBail,
   getAllUserBail,
   getBailByStatus,
+  RenameBail,
 } from "../controllers/bail.controller.js";
 
 const router = Router();
 
 router.route("/add").get(verifyJWT, addBail);
-router.route("/:bailId").get(verifyJWT, getBail).delete(verifyJWT, deleteBail);
+router.route("/:bailId").get(verifyJWT, getBail).delete(verifyJWT, deleteBail).patch(verifyJWT, RenameBail)
 router.route("/u/all").get(verifyJWT, getAllUserBail);
 router.route("/a/all").get( getAllBail);
 router.route("/status/:bailStatus").get( getBailByStatus);
