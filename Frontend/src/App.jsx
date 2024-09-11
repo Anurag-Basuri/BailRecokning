@@ -19,7 +19,7 @@ function App() {
 				if (userData) {
 					const response = await axios.get("/api/v1/user/current-user");
 					const data = response.data.data.user;
-					console.log(data);
+					// console.log(data);
 					dispatch(login(data));
 				}
 			};
@@ -33,10 +33,10 @@ function App() {
 	return (
 		<div>
 			<Header />
-			{/* <Outlet />
-			<Footer /> */}
+			<Outlet />
+			<Footer />
 			{/* <Intoduction /> */}
-			<DocValidation />
+			{/* <DocValidation /> */}
 		</div>
 	);
 }

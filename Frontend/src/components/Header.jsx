@@ -86,17 +86,17 @@ export default function Header() {
 	// const userData = useSelector((state) => state.auth.userData);
 
 	const [showAccount, setShowAccount] = useState(false);
-	// const logoutbtn = async () => {
-	// 	try {
-	// 		const response = await axios.post("/api/v1/user/logout");
-	// 		console.log(response);
-	// 		localStorage.removeItem("token");
-	// 		dispatch(logout());
-	// 		navigate("/");
-	// 	} catch (error) {
-	// 		console.log("error on logout", error);
-	// 	}
-	// };
+	const logoutbtn = async () => {
+		try {
+			const response = await axios.post("/api/v1/user/logout");
+			// console.log(response);
+			localStorage.removeItem("token");
+			dispatch(logout());
+			navigate("/");
+		} catch (error) {
+			console.log("error on logout", error);
+		}
+	};
 	const addBail = async () => {
 		const response = await axios.get("/api/v1/bail/add");
 
@@ -157,7 +157,8 @@ export default function Header() {
 					{status ? (
 						<div
 							className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-							onClick={() => setShowAccount((prev) => !prev)}>
+							// onClick={() => setShowAccount((prev) => !prev)}>
+							onClick={() => navigate("/profile")}>
 							Profile
 						</div>
 					) : (
@@ -165,7 +166,11 @@ export default function Header() {
 					)}
 
 					{status ? (
-						""
+						<div
+							onClick={logoutbtn}
+							className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+							Logout
+						</div>
 					) : (
 						<div className="text-sm font-semibold leading-6">
 							<span onClick={() => navigate("/login")}> Log in</span>/{" "}

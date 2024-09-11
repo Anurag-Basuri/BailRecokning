@@ -185,7 +185,7 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
 
 const changeCurrentPassword = asyncHandler(async (req, res) => {
   const { oldPassword, newPassword } = req.body;
-
+  // console.log(oldP)
   const user = await User.findById(req.user?._id);
   const isPasswordCorrect = await user.isPasswordCorrect(oldPassword);
 
@@ -210,13 +210,7 @@ const getCurrentUser = asyncHandler(async (req, res) => {
 
   return res
     .status(200)
-    .json(
-      new ApiResponse(
-        200,
-        { user },
-        " current user fetched successfully"
-      )
-    );
+    .json(new ApiResponse(200, { user }, " current user fetched successfully"));
 });
 
 const updateAccountDetails = asyncHandler(async (req, res) => {
