@@ -19,8 +19,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../app/authSlice";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SideAccount } from "./index";
+
 const products = [
 	{
 		name: "Imprisonment & Compensation",
@@ -57,6 +58,26 @@ const products = [
 		icon: ExclamationCircleIcon,
 	},
 ];
+
+const ProductItem = ({ name, icon: Icon, href, description }) => {
+	return (
+		<a
+			href={href}
+			className="group relative flex items-center gap-6 rounded-lg p-4 transition-all duration-300 hover:bg-gray-100 focus:bg-gray-100"
+			aria-label={name}>
+			<div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gray-100 group-hover:bg-white transition duration-300">
+				<Icon
+					aria-hidden="true"
+					className="h-6 w-6 text-gray-600 group-hover:text-indigo-600 transition duration-300"
+				/>
+			</div>
+			<div className="flex-auto">
+				<h3 className="font-semibold text-gray-900">{name}</h3>
+				<p className="mt-1 text-gray-600">{description}</p>
+			</div>
+		</a>
+	);
+};
 
 export default function Header() {
 	const navigate = useNavigate();
@@ -117,27 +138,15 @@ export default function Header() {
 						<PopoverPanel
 							transition
 							className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5 transition data-[closed]:translate-y-1 data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in">
-							<div className="p-4">
+							<div className="p-5">
 								{products.map((item) => (
-									<div
+									<ProductItem
 										key={item.name}
-										className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50">
-										<div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-											<item.icon
-												aria-hidden="true"
-												className="h-6 w-6 text-gray-600 group-hover:text-indigo-600"
-											/>
-										</div>
-										<div className="flex-auto">
-											<a
-												href={item.href}
-												className="block font-semibold text-gray-900">
-												{item.name}
-												<span className="absolute inset-0" />
-											</a>
-											<p className="mt-1 text-gray-600">{item.description}</p>
-										</div>
-									</div>
+										name={item.name}
+										icon={item.icon}
+										href={item.href}
+										description={item.description}
+									/>
 								))}
 							</div>
 						</PopoverPanel>

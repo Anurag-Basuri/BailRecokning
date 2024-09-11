@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { login } from "./app/authSlice";
 import axios from "axios";
+import Intoduction from "./components/Introduction";
+import DocValidation from "./components/DocValidation";
 
 function App() {
 	const dispatch = useDispatch();
@@ -31,8 +33,10 @@ function App() {
 	return (
 		<div>
 			<Header />
-			<Outlet />
-			<Footer />
+			{/* <Outlet />
+			<Footer /> */}
+			{/* <Intoduction /> */}
+			<DocValidation />
 		</div>
 	);
 }
