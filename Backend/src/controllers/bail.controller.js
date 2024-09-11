@@ -18,6 +18,29 @@ const addBail = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, bail, "successfully created bail "));
 });
 
+const RenameBail = asyncHandler(async (req, res) => {
+  const { bailName } = req.body;
+  const { bailId } = req.params;
+
+  if (!(bailName && bailId)) {
+    throw new ApiError(400, "all fields are required");
+  }
+
+  const bail = await Bail.findByIdAndUpdate(
+    bailId,
+    { bailApplicationName: bailName },
+    { new: true }
+  );
+
+  if (!bail) {
+    throw new ApiError(500, "something went wrong");
+  }
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, bail, "successfully renamed the bail application "));
+});
+
 const deleteBail = asyncHandler(async (req, res) => {
   const { bailId } = req.params;
 
@@ -131,4 +154,5 @@ export {
   getAllUserBail,
   deleteBail,
   getBailByStatus,
+  RenameBail,
 };
