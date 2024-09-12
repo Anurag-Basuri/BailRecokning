@@ -22,14 +22,40 @@ const getLawByID = asyncHandler(async (req, res) => {
 });
 
 const addlaw = asyncHandler(async (req, res) => {
-  const { lawName, section, sectionTitle, sectionDesc } = req.body;
+  const {
+    lawName,
+    section,
+    sectionTitle,
+    sectionDesc,
+    chapter,
+    explanation,
+    exception,
+    illustration,
+    punishment,
+    penaltyDescription,
+    congnisable,
+    bailable,
+    triableByCourt,
+    compoundable,
+    fineAmount,
+    maxImprisonment,
+  } = req.body;
 
   // ,chapter,explanation,exception,illustration,punishment,penaltyDescription,congnisable,bailable,triableByCourt,compoundable,fineAmount,maxImprisonment
 
   if (
-    [lawName, sectionTitle, section, sectionDesc].some(
-      (fields) => fields?.trim() === ""
-    )
+    [
+      lawName,
+      sectionTitle,
+      section,
+      sectionDesc,
+      explanation,
+      exception,
+      illustration,
+      punishment,
+      penaltyDescription,
+      triableByCourt,
+    ].some((fields) => fields?.trim() === "")
   ) {
     throw new ApiError(400, "all fields are required");
   }
@@ -39,6 +65,18 @@ const addlaw = asyncHandler(async (req, res) => {
     section: sec,
     sectionTitle,
     sectionDesc,
+    chapter,
+    explanation,
+    exception,
+    illustration,
+    punishment,
+    penaltyDescription,
+    congnisable,
+    bailable,
+    triableByCourt,
+    compoundable,
+    fineAmount,
+    maxImprisonment,
   });
 
   if (!law) {
@@ -56,9 +94,18 @@ const addLaws = asyncHandler(async (req, res) => {
   if (
     laws.some(
       (law) =>
-        !["lawName", "sectionTitle", "sectionDesc"].every(
-          (field) => law[field]?.trim() !== ""
-        )
+        ![
+          "lawName",
+          "sectionTitle",
+          "sectionDesc",
+          "section",
+          "explanation",
+          "exception",
+          "illustration",
+          "punishment",
+          "penaltyDescription",
+          "triableByCourt",
+        ].every((field) => law[field]?.trim() !== "")
     )
   ) {
     throw new ApiError(400, "All fields are required for each law");
@@ -102,7 +149,7 @@ const getLawBySearch = asyncHandler(async (req, res) => {
 
 const getLawsBySearch = asyncHandler(async (req, res) => {
   const { sections } = req.body;
-  
+
   console.log(sections);
   if (!sections || sections.length === 0) {
     throw new ApiError(400, "No sections provided");

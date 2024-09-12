@@ -86,10 +86,17 @@ const getallChargesWithLaw = asyncHandler(async (req, res) => {
     },
     {
       $lookup: {
-        from: "law",
+        from: "laws",
         localField: "charge",
         foreignField: "section",
         as: "lawBySection",
+      },
+    },
+    {
+      $addFields: {
+        lawBySection: {
+          $first: "$lawBySection",
+        },
       },
     },
   ]);

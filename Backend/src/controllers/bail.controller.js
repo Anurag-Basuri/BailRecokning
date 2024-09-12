@@ -73,7 +73,7 @@ const getBail = asyncHandler(async (req, res) => {
   }
 
   const bail = await Bail.findById(bailId);
-
+ 
   if (!bail) {
     throw new ApiError(404, "not found or incorrect id");
   }
