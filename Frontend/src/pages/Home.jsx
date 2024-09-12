@@ -31,16 +31,12 @@ const Home = () => {
 	const [bailRenameId, setbailRenameId] = useState("");
 	const onChangeHandlerRename = (event) => {
 		const value = event.target.value;
-		// const name = event.target.name;
-		// console.log(value,name)
 		setBailTitle(value);
 	};
 
 	const renameBail = (id, title) => {
-		// console.log(title);
 		setBailTitle(title.length === 0 ? "Untitled Bail" : title);
 		setbailRenameId(id);
-		// console.log(id);
 		setShowRename(true);
 	};
 

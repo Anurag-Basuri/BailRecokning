@@ -25,7 +25,7 @@ const SignUp = () => {
 			};
 			const response = await axios.post(newurl, newData);
 			// setUser(response.data.data)
-			dispatch(login(newData));
+			// dispatch(login(newData));
 			console.log(response.data.data);
 
 			navigate("/");
