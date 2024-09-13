@@ -242,6 +242,55 @@ const updateAccountDetails = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, user, "account details updated successfully"));
 });
 
+const getAllLawyers = asyncHandler(async (req, res) => {
+  const user = await User.aggregate([
+    {
+      $match: {
+        role: "Lawyer",
+      },
+    },
+    {
+      $project: {
+        _id: 1,
+        email: 1,
+        fullName: 1,
+      },
+    },
+  ]);
+
+  if (!user) {
+    throw new ApiError(500, "something went wrong");
+  }
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, user, "Successfully fetched all the lawyers"));
+});
+
+const getAllJudges = asyncHandler(async (req, res) => {
+  const user = await User.aggregate([
+    {
+      $match: {
+        role: "Judge",
+      },
+    },
+    {
+      $project: {
+        _id: 1,
+        email: 1,
+        fullName: 1,
+      },
+    },
+  ]);
+
+  if (!user) {
+    throw new ApiError(500, "something went wrong");
+  }
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, user, "Successfully fetched all the lawyers"));
+});
 export {
   registerUser,
   loginUser,
@@ -250,4 +299,6 @@ export {
   changeCurrentPassword,
   getCurrentUser,
   updateAccountDetails,
+  getAllLawyers,
+  getAllJudges,
 };

@@ -50,7 +50,8 @@ const lawSchema = new mongoose.Schema({
     type: Boolean,
   },
   bailable: {
-    type: Boolean,
+    type: String,
+    lowercase: true,
   },
   triableByCourt: {
     type: String,

@@ -1,13 +1,13 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
 
-export default function legalaid() {
+export default function LegalAid({card}) {
 	const lawyer = [
 		{
-			Name: "XYZ Legal Aid",
+			Name: card.fullName,
 			
 			Phone: "123-456-7890",
-			Email: "contact@xyzlegalaid.com",
+			Email: card.email,
 			Address: "123 Main St, City, Country", // office
 			Specialization: "Criminal Law", // Example: Criminal Law, Family Law, etc.
 			License: "ABC12345", // License number of the legal aid provider
