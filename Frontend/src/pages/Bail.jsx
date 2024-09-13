@@ -1,50 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import { BailCharges, BailEligiblity } from "../components/index";
+import { BailCharges, BailLawyer, BailEligiblity } from "../components/index";
 import DocValidation from "../components/DocValidation";
 
 const Bail = () => {
 	const { bailId } = useParams();
-	// const [charge, setCharge] = useState("");
-	// const [allCharge, setAllCharge] = useState([]);
 	const navigate = useNavigate();
 	const [currentTab, setCurrentTab] = useState("Charges");
-
-	// const onchangeHandler = (event) => {
-	// 	const value = event.target.value;
-	// 	setCharge(value);
-	// };
-	// const addCharge = async () => {
-	// 	const response = await axios.post("/api/v1/charge/add", { bailId, charge });
-	// 	const response2 = await axios.get("/api/v1/charge/b/" + bailId);
-	// 	// console.log(response.data.data);
-	// 	// console.log(response2.data.data);
-	// 	setAllCharge(response2.data.data);
-	// };
-	// const removeCharges = async (id) => {
-	// 	const response = await axios.post("/api/v1/charge/" + id);
-	// 	const response2 = await axios.get("/api/v1/charge/b/" + bailId);
-	// 	setAllCharge(response2.data.data);
-	// };
-	// const getLaws = async () => {
-	// 	const newArray = allCharge.map((all) => `${all.charge}`);
-	// 	// const newCharges2 = newCharges.map((charge) => charge.replace(/"/g, ""));
-	// 	console.log(newArray);
-	// 	// console.log(newCharges2);
-	// 	const response3 = await axios.get("/api/v1/law/searchs/law", {
-	// 		sections: newArray,
-	// 	});
-	// 	console.log(response3.data.data);
-	// };
-	// useEffect(() => {
-	// 	const func = async () => {
-	// 		const response = await axios.get("/api/v1/bail/" + bailId);
-	// 		const response2 = await axios.get("/api/v1/charge/b/" + bailId);
-	// 		setAllCharge(response2.data.data);
-	// 	};
-	// 	func();
-	// }, []);
 
 	return (
 		<>
@@ -177,6 +140,7 @@ const Bail = () => {
 				{currentTab === "Charges" ? <BailCharges /> : ""}
 				{currentTab === "DashBoard" ? <BailEligiblity /> : ""}
 				{currentTab === "Settings" ? <DocValidation /> : ""}
+				{currentTab === "Contacts" ? <BailLawyer /> : ""}
 			</div>
 		</>
 	);

@@ -52,6 +52,7 @@ const addlaw = asyncHandler(async (req, res) => {
       sectionDesc,
       explanation,
       exception,
+      bailable,
       illustration,
       punishment,
       penaltyDescription,
