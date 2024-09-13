@@ -5,6 +5,7 @@ export default function legalaid() {
 	const lawyer = [
 		{
 			Name: "XYZ Legal Aid",
+			
 			Phone: "123-456-7890",
 			Email: "contact@xyzlegalaid.com",
 			Address: "123 Main St, City, Country", // office

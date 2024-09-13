@@ -1,105 +1,55 @@
-/* eslint-disable react/no-unescaped-entities */
-// eslint-disable-next-line no-unused-vars
 import React, { useState } from "react";
 
-export default function BailEligiblity() {
-	const [dob, setDob] = useState("");
-	const [age, setAge] = useState("");
+const YourFormComponent = () => {
+	const [useBackendAddress, setUseBackendAddress] = useState(false);
+	const [state, setState] = useState("");
+	const [city, setCity] = useState("");
+	const [postalCode, setPostalCode] = useState("");
+	const [dependents, setDependents] = useState("");
+	const [hasMotherFather, setHasMotherFather] = useState("");
+	const [isMarried, setIsMarried] = useState("");
+	const [childrenCount, setChildrenCount] = useState("");
 
-	const calculateAge = (dateOfBirth) => {
-		if (!dateOfBirth) return "";
-		const dobDate = new Date(dateOfBirth);
-		const today = new Date();
-		let age = today.getFullYear() - dobDate.getFullYear();
-		const monthDifference = today.getMonth() - dobDate.getMonth();
-
-		if (
-			monthDifference < 0 ||
-			(monthDifference === 0 && today.getDate() < dobDate.getDate())
-		) {
-			age--;
-		}
-
-		return age > 0 ? age : "";
-	};
-
-	const handleDobChange = (event) => {
-		const selectedDob = event.target.value;
-		setDob(selectedDob);
-		setAge(calculateAge(selectedDob));
-	};
-
-	/*For showing States of India*/
-	// eslint-disable-next-line no-unused-vars
-	const statesOfIndia = [
-		"Andhra Pradesh",
-		"Arunachal Pradesh",
-		"Assam",
-		"Bihar",
-		"Chhattisgarh",
-		"Goa",
-		"Gujarat",
-		"Haryana",
-		"Himachal Pradesh",
-		"Jharkhand",
-		"Karnataka",
-		"Kerala",
-		"Madhya Pradesh",
-		"Maharashtra",
-		"Manipur",
-		"Meghalaya",
-		"Mizoram",
-		"Nagaland",
-		"Odisha",
-		"Punjab",
-		"Rajasthan",
-		"Sikkim",
-		"Tamil Nadu",
-		"Telangana",
-		"Tripura",
-		"Uttar Pradesh",
-		"Uttarakhand",
-		"West Bengal",
-	];
-
-	// const stateSelect = document.getElementById("State");
-	// statesOfIndia.forEach((state) => {
-	// 	const option = document.createElement("option");
-	// 	option.value = state;
-	// 	option.textContent = state;
-	// 	stateSelect.appendChild(option);
-	// });
+	// Event Handlers
+	const handleStateChange = (e) => setState(e.target.value);
+	const handleCityChange = (e) => setCity(e.target.value);
+	const handlePostalCodeChange = (e) => setPostalCode(e.target.value);
+	const handleDependentsChange = (e) => setDependents(e.target.value);
+	const handleMotherFatherChange = (e) => setHasMotherFather(e.target.value);
+	const handleMarriedChange = (e) => setIsMarried(e.target.value);
+	const handleChildrenCountChange = (e) => setChildrenCount(e.target.value);
 
 	return (
 		<form className="p-10">
+			{/* Personal Information */}
 			<div className="space-y-12">
-				{/*Personal Information*/}
 				<div className="border-b border-gray-900/10 pb-12">
 					<h2 className="text-base font-semibold leading-7 text-gray-900">
-						Personal Information
+						Personal Information (Aadhaar Fetched)
 					</h2>
 
 					<div className="mt-3 p-4 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-						{/*For Full Name of the accused*/}
+						{/* Full Name */}
 						<div className="sm:col-span-4">
 							<label
 								htmlFor="fullname"
 								className="block text-sm font-medium leading-6 text-gray-900">
 								Full Name
 							</label>
-							<div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+							<div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 sm:max-w-md">
 								<input
-									id="fullrname"
+									id="fullname"
 									name="fullname"
 									type="text"
 									placeholder="Salman Khan"
 									autoComplete="fullname"
 									className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+									disabled
 								/>
 							</div>
 						</div>
 
-						{/*Date of Birth*/}
+						{/* Date of Birth */}
 						<div className="col-span-full">
 							<label
 								htmlFor="dob"
@@ -111,9 +61,8 @@ export default function BailEligiblity() {
 									type="date"
 									id="dob"
 									name="dob"
-									className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-									value={dob}
-									onChange={handleDobChange}
+									className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
+									disabled
 								/>
 							</div>
 							<label
@@ -127,73 +76,80 @@ export default function BailEligiblity() {
 									id="age"
 									name="age"
 									readOnly
-									className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
-									value={age}
+									className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6"
 								/>
 							</div>
-							<p className="mt-1 text-sm leading-6 text-gray-600">
-								Your age will be calculated based on the selected date of birth.
-							</p>
 						</div>
 
-						{/*Gender Selection*/}
+						{/* Gender */}
 						<fieldset className="col-span-full mt-4">
 							<legend className="text-sm font-semibold leading-6 text-gray-900">
 								Gender
 							</legend>
-
 							<div className="mt-2">
-								<div className="flex items-center gap-x-3">
-									<input
-										id="Gender"
-										name="Gender"
-										type="radio"
-										className="h-3 w-3 border-gray-300 text-indigo-600 focus:ring-indigo-600"
-									/>
-									<label
-										htmlFor="push-everything"
-										className="block text-sm font-small leading-6 text-gray-800">
-										Male
-									</label>
-								</div>
-								<div className="flex items-center gap-x-3">
-									<input
-										id="Gender"
-										name="Gender"
-										type="radio"
-										className="h-3 w-3 border-gray-300 text-indigo-600 focus:ring-indigo-600"
-									/>
-									<label
-										htmlFor="push-everything"
-										className="block text-sm font-small leading-6 text-gray-800">
-										Female
-									</label>
-								</div>
+								<input
+									name="gender"
+									type="radio"
+									checked
+									disabled
+									className="h-3 w-3 border-gray-300 text-indigo-600"
+								/>
+								<label className="ml-3 block text-sm font-medium leading-6 text-gray-800">
+									Male
+								</label>
 							</div>
 						</fieldset>
+					</div>
+				</div>
 
-						{/*Address*/}
+				{/* Address Section */}
+				<div className="border-b border-gray-900/10 pb-12">
+					<h2 className="text-base font-semibold leading-7 text-gray-900">
+						Address
+					</h2>
 
-						{/*State*/}
+					<div className="mb-4">
+						<label className="inline-flex items-center">
+							<input
+								type="checkbox"
+								id="useBackendAddress"
+								checked={useBackendAddress}
+								onChange={() => setUseBackendAddress(!useBackendAddress)}
+								className="h-4 w-4 text-indigo-600 border-gray-300 rounded"
+							/>
+							<span className="ml-2 text-sm font-medium text-gray-900">
+								Use address from Aadhaar
+							</span>
+						</label>
+					</div>
+
+					<div
+						className={`grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 ${
+							useBackendAddress ? "opacity-50" : ""
+						}`}>
+						{/* State */}
 						<div className="col-span-full">
 							<label
-								htmlFor="State"
+								htmlFor="state"
 								className="block text-sm font-medium leading-6 text-gray-900">
 								State
 							</label>
 							<div className="mt-2">
 								<select
-									id="State"
-									name="State"
-									className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-									<option value="" disabled selected>
+									id="state"
+									name="state"
+									className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-indigo-600 sm:text-sm sm:leading-6"
+									value={state}
+									onChange={handleStateChange}
+									disabled={useBackendAddress}>
+									<option value="" disabled>
 										Select your state
 									</option>
 								</select>
 							</div>
 						</div>
 
-						{/*City*/}
+						{/* City */}
 						<div className="sm:col-span-2 sm:col-start-1">
 							<label
 								htmlFor="city"
@@ -206,34 +162,149 @@ export default function BailEligiblity() {
 									name="city"
 									type="text"
 									autoComplete="address-level2"
-									className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+									className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-indigo-600 sm:text-sm sm:leading-6"
+									value={city}
+									onChange={handleCityChange}
+									disabled={useBackendAddress}
 								/>
 							</div>
 						</div>
 
-						{/*Postal Code*/}
-						<div className="sm:col-span-2">
+						{/* Postal Code */}
+						<div className="sm:col-span-2 sm:col-start-1">
 							<label
-								htmlFor="postal-code"
+								htmlFor="postalCode"
 								className="block text-sm font-medium leading-6 text-gray-900">
-								ZIP / Postal code
+								Postal Code
 							</label>
 							<div className="mt-2">
 								<input
-									id="postal-code"
-									name="postal-code"
+									id="postalCode"
+									name="postalCode"
 									type="text"
 									autoComplete="postal-code"
-									className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+									className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-indigo-600 sm:text-sm sm:leading-6"
+									value={postalCode}
+									onChange={handlePostalCodeChange}
+									disabled={useBackendAddress}
 								/>
 							</div>
 						</div>
 					</div>
 				</div>
-				{/*Personal Information End*/}
 
-				<div></div>
+				{/* Case Details */}
+				<div className="border-b border-gray-900/10 pb-12 mt-12">
+					<h2 className="text-base font-semibold leading-7 text-gray-900">
+						Case Details
+					</h2>
+
+					<div className="mt-3 p-4 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+						{/* Offense Description */}
+						<div className="col-span-full">
+							<label
+								htmlFor="offense-description"
+								className="block text-sm font-medium leading-6 text-gray-900">
+								Description of the Offense
+							</label>
+							<textarea
+								id="offense-description"
+								name="offense-description"
+								rows="3"
+								className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-indigo-600 sm:text-sm sm:leading-6"
+							/>
+						</div>
+
+						{/* Dependents */}
+						<div className="col-span-full">
+							<label
+								htmlFor="dependents"
+								className="block text-sm font-medium leading-6 text-gray-900">
+								Number of Dependents
+							</label>
+							<div className="mt-2">
+								<input
+									id="dependents"
+									name="dependents"
+									type="text"
+									className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-indigo-600 sm:text-sm sm:leading-6"
+									value={dependents}
+									onChange={handleDependentsChange}
+								/>
+							</div>
+						</div>
+
+						{/* Mother/Father */}
+						<div className="col-span-full">
+							<label
+								htmlFor="hasMotherFather"
+								className="block text-sm font-medium leading-6 text-gray-900">
+								Do you have any dependents?
+							</label>
+							<div className="mt-2">
+								<select
+									id="hasMotherFather"
+									name="hasMotherFather"
+									className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-indigo-600 sm:text-sm sm:leading-6"
+									value={hasMotherFather}
+									onChange={handleMotherFatherChange}>
+									<option value="" disabled>
+										Select an option
+									</option>
+									<option value="Yes">Yes</option>
+									<option value="No">No</option>
+								</select>
+							</div>
+						</div>
+
+						{/* Marital Status */}
+						<div className="col-span-full">
+							<label
+								htmlFor="marital-status"
+								className="block text-sm font-medium leading-6 text-gray-900">
+								Marital Status
+							</label>
+							<div className="mt-2">
+								<select
+									id="marital-status"
+									name="marital-status"
+									className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-indigo-600 sm:text-sm sm:leading-6"
+									value={isMarried}
+									onChange={handleMarriedChange}>
+									<option value="" disabled>
+										Select an option
+									</option>
+									<option value="Married">Married</option>
+									<option value="Single">Single</option>
+									<option value="Divorced">Divorced</option>
+								</select>
+							</div>
+						</div>
+
+						{/* Children Count */}
+						<div className="col-span-full">
+							<label
+								htmlFor="childrenCount"
+								className="block text-sm font-medium leading-6 text-gray-900">
+								Number of Children
+							</label>
+							<div className="mt-2">
+								<input
+									id="childrenCount"
+									name="childrenCount"
+									type="number"
+									min="0"
+									className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-indigo-600 sm:text-sm sm:leading-6"
+									value={childrenCount}
+									onChange={handleChildrenCountChange}
+								/>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</form>
 	);
-}
+};
+
+export default YourFormComponent;
