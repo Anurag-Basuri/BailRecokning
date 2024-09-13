@@ -8,6 +8,7 @@ import HomeCard from "./HomeCard";
 import BailEligiblity from "./BailEligiblity";
 import BailCharges from "./BailCharges";
 import PreviousCase from "./PreviousCase";
+import DisplayCases from "./DisplayCases";
 import RowDataCard from "./RowDataCard";
 import BailLawyer from "./BailLawyer";
 import LegalAid from "./LegalAid";
@@ -23,6 +24,7 @@ export {
 	BailEligiblity,
 	BailCharges,
 	PreviousCase,
+	DisplayCases,
 	RowDataCard,
 	BailLawyer,
 	LegalAid,
