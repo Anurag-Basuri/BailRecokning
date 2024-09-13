@@ -1,8 +1,9 @@
-import { ApiResponse } from "../utils/ApiResponse";
-import { asyncHandler } from "../utils/asyncHandler";
+import { SimilarCase } from "../models/SimilarCase.models.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
 
 const addCase = asyncHandler(async (req, res) => {
-  const { caseId, caseSummary, caseDetail, outcome } = req.body;
+  const { caseId, caseSummary, caseDetail, outcome, penaltyAmount } = req.body;
 
   if (
     [caseId, caseSummary, caseDetail, outcome].some(
@@ -17,6 +18,7 @@ const addCase = asyncHandler(async (req, res) => {
     caseSummary,
     caseDetail,
     outcome,
+    penaltyAmount,
   });
 
   if (!similar) {
@@ -26,6 +28,34 @@ const addCase = asyncHandler(async (req, res) => {
   return res
     .status(200)
     .json(new ApiResponse(200, similar, "Successfully added case "));
+});
+
+const editCase = asyncHandler(async (req, res) => {
+  const { caseSummary, caseDetail, outcome, penaltyAmount } = req.body;
+  const { SimilarCaseId} = req.params;
+
+  if (
+    [ caseSummary, caseDetail, outcome].some(
+      (fields) => fields?.trim() === ""
+    )
+  ) {
+    throw new ApiError(400, "all fields are required");
+  }
+
+  const similar = await SimilarCase.findByIdAndUpdate(SimilarCaseId, {
+    caseSummary,
+    caseDetail,
+    outcome,
+    penaltyAmount,
+  });
+
+  if (!similar) {
+    throw new ApiError(500, "somthing went wrong");
+  }
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, similar, "Successfully edited previous case "));
 });
 
 const getCaseById = asyncHandler(async (req, res) => {
@@ -47,4 +77,4 @@ const getCaseById = asyncHandler(async (req, res) => {
 });
 
 
-export { addCase, getCaseById };
+export { addCase, getCaseById, editCase };

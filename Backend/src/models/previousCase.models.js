@@ -1,6 +1,6 @@
-import mongoose,{Schema} from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
-const similarCaseSchema = new mongoose.Schema(
+const previusCaseSchema = new mongoose.Schema(
   {
     accused: {
       type: Schema.Types.ObjectId,
@@ -10,6 +10,8 @@ const similarCaseSchema = new mongoose.Schema(
       {
         type: Schema.Types.ObjectId,
         ref: "Law",
+        // type: String,
+        // lowercase: true,
       },
     ],
     caseId: {
@@ -37,7 +39,6 @@ const similarCaseSchema = new mongoose.Schema(
     },
     penaltyAmount: {
       type: Number,
-      default:0,
     },
     keyword: [
       {
@@ -49,4 +50,4 @@ const similarCaseSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export const SimilarCase = mongoose.model("SimilarCase", similarCaseSchema);
+export const PreviousCase = mongoose.model("PreviousCase", previusCaseSchema);

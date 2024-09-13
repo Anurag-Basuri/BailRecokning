@@ -38,6 +38,7 @@ const addlaw = asyncHandler(async (req, res) => {
     triableByCourt,
     compoundable,
     fineAmount,
+    specialCategories,
     maxImprisonment,
   } = req.body;
 
@@ -55,6 +56,7 @@ const addlaw = asyncHandler(async (req, res) => {
       punishment,
       penaltyDescription,
       triableByCourt,
+      specialCategories,
     ].some((fields) => fields?.trim() === "")
   ) {
     throw new ApiError(400, "all fields are required");
@@ -77,6 +79,7 @@ const addlaw = asyncHandler(async (req, res) => {
     compoundable,
     fineAmount,
     maxImprisonment,
+    specialCategories,
   });
 
   if (!law) {
@@ -103,6 +106,7 @@ const addLaws = asyncHandler(async (req, res) => {
           "exception",
           "illustration",
           "punishment",
+          " specialCategories",
           "penaltyDescription",
           "triableByCourt",
         ].every((field) => law[field]?.trim() !== "")

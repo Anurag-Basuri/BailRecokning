@@ -11,8 +11,8 @@ const lawSchema = new mongoose.Schema({
   },
   section: {
     type: String,
-    lowercase:true,
-    unique:true,
+    lowercase: true,
+    unique: true,
     required: true,
   },
   sectionTitle: {
@@ -61,6 +61,10 @@ const lawSchema = new mongoose.Schema({
   },
   fineAmount: {
     type: Number,
+  },
+  specialCategories: {
+    type: String,
+    lowercase: true,
   },
   maxImprisonment: {
     type: Number,

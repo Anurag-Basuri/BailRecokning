@@ -7,6 +7,7 @@ import RenameCard from "./RenameCard";
 import HomeCard from "./HomeCard";
 import BailEligiblity from "./BailEligiblity"
 import BailCharges from "./BailCharges"
+import PreviousCase from "./PreviousCase";
 
 export {
 	AuthLayout,
@@ -18,4 +19,5 @@ export {
 	RenameCard,
 	BailEligiblity,
 	BailCharges,
+	PreviousCase,
 };

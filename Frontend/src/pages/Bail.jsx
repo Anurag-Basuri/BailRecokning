@@ -9,7 +9,7 @@ const Bail = () => {
 	// const [charge, setCharge] = useState("");
 	// const [allCharge, setAllCharge] = useState([]);
 	const navigate = useNavigate();
-	const [currentTab, setCurrentTab] = useState("Profile");
+	const [currentTab, setCurrentTab] = useState("Charges");
 
 	// const onchangeHandler = (event) => {
 	// 	const value = event.target.value;

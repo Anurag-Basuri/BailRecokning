@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import { PreviousCase } from "../components";
 
 const Profile = () => {
 	const userData = useSelector((state) => state.auth.userData);
@@ -319,8 +320,7 @@ const Profile = () => {
 					<div className="p-6 bg-gray-50 text-medium text-gray-500 dark:text-gray-400 dark:bg-gray-800 rounded-lg w-full">
 						<ul className="mt-3 divide-y rounded bg-gray-100 py-2 px-3 text-gray-600 shadow-sm hover:text-gray-700 hover:shadow">
 							<li className="flex items-center py-3 text-sm">
-								<span>add previous legal history details </span>
-								{/* <span className="ml-auto">86t273,3623873</span> */}
+								<PreviousCase />
 							</li>
 						</ul>
 					</div>
