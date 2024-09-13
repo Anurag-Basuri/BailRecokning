@@ -8,6 +8,7 @@ import HomeCard from "./HomeCard";
 import BailEligiblity from "./BailEligiblity"
 import BailCharges from "./BailCharges"
 import PreviousCase from "./PreviousCase";
+import DisplayCases from "./DisplayCases";
 
 export {
 	AuthLayout,
@@ -20,4 +21,5 @@ export {
 	BailEligiblity,
 	BailCharges,
 	PreviousCase,
+	DisplayCases,
 };
