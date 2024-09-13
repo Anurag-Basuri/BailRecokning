@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Outlet } from "react-router-dom";
 import "./App.css";
 import { Footer, Header } from "./components";
@@ -35,8 +36,6 @@ function App() {
 			<Header />
 			<Outlet />
 			<Footer />
-			{/* <Intoduction /> */}
-			{/* <DocValidation /> */}
 		</div>
 	);
 }

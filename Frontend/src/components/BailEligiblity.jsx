@@ -30,6 +30,7 @@ export default function BailEligiblity() {
 	};
 
 	/*For showing States of India*/
+	// eslint-disable-next-line no-unused-vars
 	const statesOfIndia = [
 		"Andhra Pradesh",
 		"Arunachal Pradesh",
