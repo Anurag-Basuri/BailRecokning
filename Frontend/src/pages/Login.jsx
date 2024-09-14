@@ -23,6 +23,7 @@ const Login = () => {
 			console.log(response);
 
 			localStorage.setItem("token", response.data.data.accessToken);
+			localStorage.setItem("darkMode",false);
 			localStorage.setItem("userData", JSON.stringify(response.data.data.user));
 
 			navigate("/");

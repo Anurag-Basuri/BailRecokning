@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { RowDataCard, LegalAid } from ".";
+import { RowDataCard, LegalAid } from "..";
 import axios from "axios";
 
 const BailLawyer = () => {
@@ -19,7 +19,7 @@ const BailLawyer = () => {
 				className={`mb-6 bg-white  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor  `}
 				// value={card.data.question}
 			/>
-			
+
 			{allLawyer.map((card, id) => {
 				return (
 					<div key={id}>

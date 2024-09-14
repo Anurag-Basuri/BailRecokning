@@ -1,6 +1,7 @@
 import { PreviousCase } from "../models/previousCase.models.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
+import mongoose from "mongoose";
 
 const addPreviousCase = asyncHandler(async (req, res) => {
   const { caseId, caseSummary, caseDetail, outcome, penaltyAmount } =
@@ -17,6 +18,7 @@ const addPreviousCase = asyncHandler(async (req, res) => {
   // const chargesArr = JSON.parse(charges);
   // console.log(chargesArr);
   const previous = await PreviousCase.create({
+    accused:req.user._id,
     caseId,
     caseSummary,
     caseDetail,
@@ -57,7 +59,7 @@ const editPreviousCase = asyncHandler(async (req, res) => {
 
   return res
     .status(200)
-    .json(new ApiResponse(200, previous, "Successfully edited previous case "));
+    .json(new ApiResponse(200, {previous}, "Successfully edited previous case "));
 });
 
 const getPreviousCaseById = asyncHandler(async (req, res) => {
@@ -75,7 +77,36 @@ const getPreviousCaseById = asyncHandler(async (req, res) => {
 
   return res
     .status(200)
-    .json(new ApiResponse(200, previous, "Successfully fetched case "));
+    .json(new ApiResponse(200, {previous}, "Successfully fetched case "));
 });
 
-export { addPreviousCase, editPreviousCase, getPreviousCaseById };
+const getAllPreviousCaseByUser = asyncHandler(async (req, res) => {
+  // const { previuosCaseId } = req.params;
+
+  // if (!previuosCaseId) {
+  //   throw new ApiError(400, "all fields are required");
+  // }
+
+  const previous = await PreviousCase.aggregate([
+    {
+      $match: {
+        accused: new mongoose.Types.ObjectId(req.user._id),
+      },
+    },
+  ]);
+
+  if (!previous) {
+    throw new ApiError(500, "somthing went wrong");
+  }
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, {previous}, "Successfully fetched all previous case of user "));
+});
+
+export {
+  addPreviousCase,
+  editPreviousCase,
+  getPreviousCaseById,
+  getAllPreviousCaseByUser,
+};

@@ -321,6 +321,24 @@ const updateUserAvatar = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, { user }, "Updated avatar successfully"));
 });
 
+const toggleMode = asyncHandler(async (req, res) => {
+  const user = await User.findByIdAndUpdate(
+    req.user._id,
+    { mode: !req.user.mode },
+    { new: true }
+  ).select(
+    "-email -fullName -password -refreshToken -avatar -createdAt -updatedAt -role"
+  );
+
+  if (!user) {
+    throw new ApiError(500, "something went wrong");
+  }
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, { user }, "Updated avatar successfully"));
+});
+
 export {
   registerUser,
   loginUser,
@@ -332,4 +350,5 @@ export {
   getAllLawyers,
   getAllJudges,
   updateUserAvatar,
+  toggleMode,
 };

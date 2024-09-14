@@ -6,14 +6,17 @@ const previusCaseSchema = new mongoose.Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
     },
-    charges: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Law",
-        // type: String,
-        // lowercase: true,
-      },
-    ],
+    // charges: [
+    //   {
+    //     type: Schema.Types.ObjectId,
+    //     ref: "Law",
+    //     // type: String,
+    //     // lowercase: true,
+    //   },
+    // ],
+    charges: {
+      type:String,
+    },
     caseId: {
       // in govt database
       type: String,

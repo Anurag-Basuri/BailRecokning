@@ -3,16 +3,21 @@ import Header from "./Header";
 import Introduction from "./Introduction";
 import Footer from "./Footer";
 import SideAccount from "./SideAccount";
-import RenameCard from "./RenameCard";
-import HomeCard from "./HomeCard";
-import BailEligiblity from "./BailEligiblity";
-import BailCharges from "./BailCharges";
-import PreviousCase from "./PreviousCase";
-import DisplayCases from "./DisplayCases";
-import RowDataCard from "./RowDataCard";
-import BailLawyer from "./BailLawyer";
-import LegalAid from "./LegalAid";
-import UploadProfilePic from './UploadProfilePic'
+import RenameCard from "./home/RenameCard";
+import HomeCard from "./home/HomeCard";
+import BailEligiblity from "./bail/BailEligiblity";
+import BailCharges from "./bail/BailCharges";
+import PreviousCase from "./previousCases/PreviousCase";
+import DisplayCases from "./previousCases/DisplayCases";
+import RowDataCard from "./bail/lawyer/RowDataCard";
+import BailLawyer from "./bail/BailLawyer";
+import LegalAid from "./bail/lawyer/legalaid";
+import UploadProfilePic from "./profile/UploadProfilePic";
+import InputPreviousCases from "./previousCases/InputPreviousCases";
+import DocValidation from "./bail/DocValidation";
+import DisplayBox from "./home/DisplayBox";
+import Settings from "./profile/Settings";
+import ShowProfile from "./profile/ShowProfile"
 
 export {
 	AuthLayout,
@@ -30,4 +35,9 @@ export {
 	BailLawyer,
 	LegalAid,
 	UploadProfilePic,
+	InputPreviousCases,
+	DocValidation,
+	DisplayBox,
+	Settings,
+	ShowProfile,
 };

@@ -2,8 +2,13 @@
 import React, { useEffect, useState } from "react";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import { BailCharges, BailLawyer, BailEligiblity, LegalAid } from "../components/index";
-import DocValidation from "../components/DocValidation";
+import {
+	BailCharges,
+	BailLawyer,
+	BailEligiblity,
+	LegalAid,
+	DocValidation,
+} from "../components/index";
 
 const Bail = () => {
 	const { bailId } = useParams();

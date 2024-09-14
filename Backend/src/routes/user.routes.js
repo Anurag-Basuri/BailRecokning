@@ -10,6 +10,7 @@ import {
   getAllJudges,
   getAllLawyers,
   updateUserAvatar,
+  toggleMode,
 } from "../controllers/user.controller.js";
 import { upload } from "../middleware/multer.middleware.js";
 import { verifyJWT } from "../middleware/auth.middleware.js";
@@ -29,7 +30,8 @@ router.route("/change-password").post(verifyJWT, changeCurrentPassword);
 router.route("/refreshToken").post(refreshAccessToken);
 router.route("/update-account").patch(verifyJWT, updateAccountDetails);
 router
-  .route("/upload-profile-photo")
-  .post(verifyJWT, upload.single("avatar"), updateUserAvatar);
+.route("/upload-profile-photo")
+.post(verifyJWT, upload.single("avatar"), updateUserAvatar);
+router.route("/toggleMode").get(verifyJWT, toggleMode);
 
 export default router;
