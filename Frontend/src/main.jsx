@@ -12,6 +12,7 @@ import SignUp from "./pages/Signup.jsx";
 import Home from "./pages/Home.jsx";
 import Bail from "./pages/Bail.jsx";
 import Profile from "./pages/Profile.jsx";
+import Laywerprofile from "./components/laywerprofile.jsx";
 
 const router = createBrowserRouter([
 	{
@@ -36,7 +37,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: "/profile",
-				element: <Profile />,
+				element: <Laywerprofile />,
 			},
 			{
 				path: "/bail/:bailId",
