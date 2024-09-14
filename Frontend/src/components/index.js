@@ -12,6 +12,7 @@ import DisplayCases from "./DisplayCases";
 import RowDataCard from "./RowDataCard";
 import BailLawyer from "./BailLawyer";
 import LegalAid from "./LegalAid";
+import UploadProfilePic from './UploadProfilePic'
 
 export {
 	AuthLayout,
@@ -28,4 +29,5 @@ export {
 	RowDataCard,
 	BailLawyer,
 	LegalAid,
+	UploadProfilePic,
 };

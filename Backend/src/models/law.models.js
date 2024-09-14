@@ -70,12 +70,12 @@ const lawSchema = new mongoose.Schema({
   maxImprisonment: {
     type: Number,
   },
-  relatedStatutes: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Law",
-    },
-  ],
+    relatedStatutes: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Law",
+      },
+    ],
 });
 
 export const Law = mongoose.model("Law", lawSchema);

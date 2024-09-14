@@ -24,8 +24,8 @@ import chargesRouter from "./routes/charges.routes.js";
 import lawyerRouter from "./routes/lawyer.routes.js";
 import judgeRouter from "./routes/judge.routes.js";
 import pronouncementRouter from "./routes/pronouncement.routes.js";
-import similarRouter from "./routes/similarCase.routes.js"
-import previousRouter from "./routes/previousCase.routes.js"
+import similarRouter from "./routes/similarCase.routes.js";
+import previousRouter from "./routes/previousCase.routes.js";
 
 // routes declaration
 app.use("/api/v1/user", userRouter);

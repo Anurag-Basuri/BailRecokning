@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { DisplayCases, PreviousCase } from "../components/index.js";
+import {
+	DisplayCases,
+	PreviousCase,
+	UploadProfilePic,
+} from "../components/index.js";
 
 const Profile = () => {
 	const userData = useSelector((state) => state.auth.userData);
@@ -137,9 +141,10 @@ const Profile = () => {
 						<div className="relative mx-auto w-36 rounded-full">
 							<img
 								className="mx-auto h-auto w-full rounded-full"
-								src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80"
+								src={userData.avatar}
 								alt=""
 							/>
+							<UploadProfilePic />
 						</div>
 
 						<ul className="mt-3 divide-y rounded bg-gray-100 py-2 px-3 text-gray-600 shadow-sm hover:text-gray-700 hover:shadow">

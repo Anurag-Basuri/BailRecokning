@@ -9,7 +9,9 @@ import {
   updateAccountDetails,
   getAllJudges,
   getAllLawyers,
+  updateUserAvatar,
 } from "../controllers/user.controller.js";
+import { upload } from "../middleware/multer.middleware.js";
 import { verifyJWT } from "../middleware/auth.middleware.js";
 
 const router = Router();
@@ -26,5 +28,8 @@ router.route("/allJudge").get(verifyJWT, getAllJudges);
 router.route("/change-password").post(verifyJWT, changeCurrentPassword);
 router.route("/refreshToken").post(refreshAccessToken);
 router.route("/update-account").patch(verifyJWT, updateAccountDetails);
+router
+  .route("/upload-profile-photo")
+  .post(verifyJWT, upload.single("avatar"), updateUserAvatar);
 
 export default router;

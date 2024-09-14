@@ -23,7 +23,7 @@ import { logout } from "../app/authSlice";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { SideAccount } from "./index";
-
+import { toggle } from "../app/modeSlice";
 const products = [
 	{
 		name: "Imprisonment & Compensation",
@@ -85,7 +85,7 @@ export default function Header() {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const status = useSelector((state) => state.auth.status);
-	// const userData = useSelector((state) => state.auth.userData);
+	const darkmode = useSelector((state) => state.mode.darkmode);
 
 	const [showAccount, setShowAccount] = useState(false);
 	const logoutbtn = async () => {
@@ -156,6 +156,7 @@ export default function Header() {
 				</PopoverGroup>
 
 				<div className="hidden lg:flex lg:flex-1 lg:justify-end text-white">
+					<div onClick={()=> dispatch(toggle())}>dark</div>
 					{status ? (
 						<div
 							className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"

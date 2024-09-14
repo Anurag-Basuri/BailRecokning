@@ -2,12 +2,10 @@
 import { Outlet } from "react-router-dom";
 import "./App.css";
 import { Footer, Header } from "./components";
-import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { login } from "./app/authSlice";
 import axios from "axios";
-import Intoduction from "./components/Introduction";
-import DocValidation from "./components/DocValidation";
 
 function App() {
 	const dispatch = useDispatch();
@@ -20,7 +18,7 @@ function App() {
 				if (userData) {
 					const response = await axios.get("/api/v1/user/current-user");
 					const data = response.data.data.user;
-					// console.log(data);
+					console.log(data);
 					dispatch(login(data));
 				}
 			};

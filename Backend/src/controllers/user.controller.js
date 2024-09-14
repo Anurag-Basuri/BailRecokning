@@ -2,6 +2,7 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/ApiError.js";
 import { User } from "../models/user.models.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
+import { uploadOnCloudinary } from "../utils/fileUpload.js";
 import jwt from "jsonwebtoken";
 
 const generateAccessAndRefreshToken = async (userId) => {
@@ -291,6 +292,35 @@ const getAllJudges = asyncHandler(async (req, res) => {
     .status(200)
     .json(new ApiResponse(200, user, "Successfully fetched all the lawyers"));
 });
+
+const updateUserAvatar = asyncHandler(async (req, res) => {
+  const avatarLocalPath = req.file?.path;
+
+  if (!avatarLocalPath) {
+    throw new ApiError(400, "Avatar is required");
+  }
+
+  const avatar = await uploadOnCloudinary(avatarLocalPath);
+
+  if (!avatar) {
+    throw new ApiError(400, "Avatar is required");
+  }
+
+  const user = await User.findByIdAndUpdate(
+    req.user?._id,
+    { avatar: avatar.url },
+    { new: true }
+  ).select("-password -refreshToken");
+
+  if (!user) {
+    throw new ApiError(500, "something went wrong");
+  }
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, { user }, "Updated avatar successfully"));
+});
+
 export {
   registerUser,
   loginUser,
@@ -301,4 +331,5 @@ export {
   updateAccountDetails,
   getAllLawyers,
   getAllJudges,
+  updateUserAvatar,
 };
