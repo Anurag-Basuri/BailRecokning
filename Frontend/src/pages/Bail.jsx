@@ -1,7 +1,8 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import { BailCharges, BailLawyer, BailEligiblity } from "../components/index";
+import { BailCharges, BailLawyer, BailEligiblity, LegalAid } from "../components/index";
 import DocValidation from "../components/DocValidation";
 
 const Bail = () => {
@@ -140,7 +141,7 @@ const Bail = () => {
 				{currentTab === "Charges" ? <BailCharges /> : ""}
 				{currentTab === "DashBoard" ? <BailEligiblity /> : ""}
 				{currentTab === "Settings" ? <DocValidation /> : ""}
-				{currentTab === "Contacts" ? <BailLawyer /> : ""}
+				{currentTab === "Contacts" ? <LegalAid /> : ""}
 			</div>
 		</>
 	);

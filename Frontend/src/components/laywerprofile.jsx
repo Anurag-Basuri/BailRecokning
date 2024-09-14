@@ -10,6 +10,8 @@ import {
 	FaStarOfDavid,
 } from "react-icons/fa";
 
+import EditProfile from "./EditProfile";
+
 const lawyer = [
 	{
 		Name: "Alec M. Thompson",
