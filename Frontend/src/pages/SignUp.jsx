@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Profiler } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,6 +12,27 @@ const SignUp = () => {
 	const { register, handleSubmit } = useForm();
 	const navigate = useNavigate();
 	const [role, setRole] = useState("User");
+	const [profile, setProfile] = useState({
+		userId: "",
+		phone: 0,
+		experience: 0,
+		address: "",
+		specialization: "",
+		license: "",
+		languages: [],
+		website: "",
+		socialMedia: {
+			facebook: "",
+			x: "",
+		},
+		operatingHours: {
+			weekdays: "",
+			weekends: "",
+		},
+		accreditation: [],
+		publications: [],
+		awards: [],
+	});
 
 	const create = async (data) => {
 		setError("");
@@ -26,7 +47,14 @@ const SignUp = () => {
 			const response = await axios.post(newurl, newData);
 			// setUser(response.data.data)
 			// dispatch(login(newData));
-			console.log(response.data.data);
+			console.log(response.data.data._id);
+			// setProfile((prev) => (prev.userId = response.data.data._id));
+			if (newData.role === "Lawyer") {
+				const response2 = await axios.post(
+					"/api/v1/profile/add/" + response.data.data._id
+				);
+				console.log(response2);
+			}
 
 			navigate("/");
 		} catch (error) {

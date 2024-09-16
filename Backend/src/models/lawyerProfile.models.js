@@ -1,73 +1,77 @@
 import mongoose, { Schema } from "mongoose";
 
-const lawyerProfileSchema = new mongoose.Schema({
-  email: { type: String, required: true, unique: true, lowercase: true },
-  fullName: {
-    type: String,
-    required: [true, "Full  Name is required"],
-    lowercase: true,
-    trim: true,
-  },
-  password: {
-    type: String,
-    required: [true, "Password is required"],
-  },
-  refreshToken: {
-    type: String,
-  },
-  dob: {
-    type: Date,
-  },
-  specialization: {
-    type: String,
-  },
-  rating: {
-    type: Float,
-  },
-  license: {
-    type: String,
-  },
-  websiteUrl: {
-    type: String,
-  },
-  address: {
-    type: String,
-  },
-  OperatingHours: {
-    type: Object,
-    default: { weekdays: "9 AM - 5 PM", weekends: "Closed" },
-  },
-  //   accreditation: [
-  //     {
-  //       type: Schema.Types.ObjectId,
-  //       ref: "Language",
-  //     },
-  //   ],
-  publications: {
-    type: String,
-  },
-  awards: {
-    type: String,
-  },
-  education: {
-    type: String,
-  },
-  socialMedia: {
-    type: String,
-  },
-  accreditation: {
-    type: String,
-  },
-  experience: {
-    type: Number,
-  },
-  phone: {
-    type: Number,
-  },
-  languages: [
-    {
+const lawyerProfileSchema = new mongoose.Schema(
+  {
+    userId: {
       type: Schema.Types.ObjectId,
-      ref: "Language",
+      ref: "User",
+      required: true,
+      unique: true,
     },
-  ],
-});
+    accreditation: {
+      type: Array,
+    },
+    publications: {
+      type: Array,
+    },
+    awards: {
+      type: Array,
+    },
+    education: {
+      type: Array,
+    },
+    languages: {
+      type: Array,
+    },
+    phone: {
+      type: Number,
+      default: 0,
+    },
+    experience: {
+      type: Number,
+      default: 0,
+    },
+    address: {
+      type: String,
+      default: "",
+    },
+    specialization: {
+      type: String,
+      default: "",
+    },
+    license: {
+      type: String,
+      default: "",
+    },
+    languages: {
+      type: Array,
+    },
+    website: {
+      type: String,
+      default: "",
+    },
+    socialMedia: {
+      type: Object,
+      default: {
+        facebook: "",
+        x: "",
+      },
+    },
+    operatingHours: {
+      type: Object,
+      default: {
+        weekdays: "",
+        weekends: "",
+      },
+    },
+    accreditation: {
+      type: Array,
+    },
+  },
+  { new: true }
+);
+
+export const LawyerProfile = mongoose.model(
+  "LawyerProfile",
+  lawyerProfileSchema
+);

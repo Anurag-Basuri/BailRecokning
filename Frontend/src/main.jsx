@@ -12,7 +12,7 @@ import SignUp from "./pages/Signup.jsx";
 import Home from "./pages/Home.jsx";
 import Bail from "./pages/Bail.jsx";
 import Profile from "./pages/Profile.jsx";
-import Laywerprofile from "./components/profile/laywerprofile.jsx";
+import LawyerInfo from "./pages/LawyerInfo.jsx";
 
 const router = createBrowserRouter([
 	{
@@ -40,8 +40,8 @@ const router = createBrowserRouter([
 				element: <Profile />,
 			},
 			{
-				path: "/p/profile",
-				element: <ShowProfile />,
+				path: "/p/profile/:profileId",
+				element: <LawyerInfo />,
 			},
 			{
 				path: "/bail/:bailId",

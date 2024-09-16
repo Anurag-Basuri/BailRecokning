@@ -1,26 +1,27 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
-export default function EditProfile({ contact }) {
+export default function EditProfile({ contact, profileId }) {
 	const [profile, setProfile] = useState({
-		Name: "",
-		Phone: contact,
-		Email: contact,
-		Address: "",
-		Specialization: "",
-		License: "",
-		Languages: [],
-		Website: "",
-		SocialMedia: {
-			Facebook: "",
-			Twitter: "",
+		phone: 0,
+		experience: 0,
+		address: "",
+		specialization: "",
+		license: "",
+		languages: [],
+		website: "",
+		socialMedia: {
+			facebook: "",
+			x: "",
 		},
-		OperatingHours: {
-			Weekdays: "",
-			Weekends: "",
+		operatingHours: {
+			weekdays: "",
+			weekends: "",
 		},
-		Accreditation: [],
+		accreditation: [],
+		publications: [],
+		awards: [],
+		education: [],
 	});
 
 	const handleChange = (event) => {
@@ -34,22 +35,57 @@ export default function EditProfile({ contact }) {
 	const handleLanguagesChange = (event) => {
 		setProfile({
 			...profile,
-			Languages: event.target.value.split(",").map((lang) => lang.trim()),
+			languages: event.target.value.split(",").map((lang) => lang.trim()),
+		});
+	};
+
+	const handlePublicationsChange = (event) => {
+		setProfile({
+			...profile,
+			publications: event.target.value.split(",").map((lang) => lang.trim()),
+		});
+	};
+
+	const handleAwardsChange = (event) => {
+		setProfile({
+			...profile,
+			awards: event.target.value.split(",").map((lang) => lang.trim()),
 		});
 	};
 
 	const handleAccreditationChange = (event) => {
 		setProfile({
 			...profile,
-			Accreditation: event.target.value.split(",").map((acc) => acc.trim()),
+			accreditation: event.target.value.split(",").map((acc) => acc.trim()),
+		});
+	};
+	const handleEducationChange = (event) => {
+		setProfile({
+			...profile,
+			education: event.target.value.split(",").map((acc) => acc.trim()),
 		});
 	};
 
-	const handleSubmit = (event) => {
+	const handleSubmit = async (event) => {
 		event.preventDefault();
 		// Handle form submission, e.g., save profile data
+		const response = await axios.post("/api/v1/profile/" + profileId, profile);
+		console.log(response);
 		console.log("Profile submitted:", profile);
 	};
+
+	useEffect(() => {
+		try {
+			const fun = async () => {
+				const response = await axios.get("/api/v1/profile/" + profileId);
+				console.log(response.data.data.profile[0]);
+				setProfile(response.data.data.profile[0]);
+			};
+			fun();
+		} catch (error) {
+			console.log(error);
+		}
+	}, []);
 
 	return (
 		<main>
@@ -59,22 +95,31 @@ export default function EditProfile({ contact }) {
 			<section>
 				<form onSubmit={handleSubmit} className="flex flex-col gap-4">
 					<label>
-						Name:
+						Phone:
 						<input
 							type="text"
-							name="Name"
-							value={profile.Name}
+							name="phone"
+							value={profile.phone}
 							onChange={handleChange}
-							placeholder="Enter your name"
-							required
+							placeholder="Enter your phone"
+						/>
+					</label>
+					<label>
+						Experience:
+						<input
+							type="text"
+							name="experience"
+							value={profile.experience}
+							onChange={handleChange}
+							placeholder="Enter your experience"
 						/>
 					</label>
 					<label>
 						Address:
 						<input
 							type="text"
-							name="Address"
-							value={profile.Address}
+							name="address"
+							value={profile.address}
 							onChange={handleChange}
 							placeholder="Enter your address"
 						/>
@@ -83,8 +128,8 @@ export default function EditProfile({ contact }) {
 						Specialization:
 						<input
 							type="text"
-							name="Specialization"
-							value={profile.Specialization}
+							name="specialization"
+							value={profile.specialization}
 							onChange={handleChange}
 							placeholder="Enter your specialization"
 						/>
@@ -93,8 +138,8 @@ export default function EditProfile({ contact }) {
 						License:
 						<input
 							type="text"
-							name="License"
-							value={profile.License}
+							name="license"
+							value={profile.license}
 							onChange={handleChange}
 							placeholder="Enter your license number"
 						/>
@@ -103,8 +148,8 @@ export default function EditProfile({ contact }) {
 						Languages (comma-separated):
 						<input
 							type="text"
-							name="Languages"
-							value={profile.Languages.join(", ")}
+							name="languages"
+							value={profile.languages.join(", ")}
 							onChange={handleLanguagesChange}
 							placeholder="Enter languages spoken"
 						/>
@@ -113,8 +158,8 @@ export default function EditProfile({ contact }) {
 						Website:
 						<input
 							type="url"
-							name="Website"
-							value={profile.Website}
+							name="website"
+							value={profile.website}
 							onChange={handleChange}
 							placeholder="Enter your website"
 						/>
@@ -123,14 +168,14 @@ export default function EditProfile({ contact }) {
 						Facebook:
 						<input
 							type="url"
-							name="Facebook"
-							value={profile.SocialMedia.Facebook}
+							name="facebook"
+							value={profile.socialMedia.facebook}
 							onChange={(e) =>
 								setProfile({
 									...profile,
-									SocialMedia: {
-										...profile.SocialMedia,
-										Facebook: e.target.value,
+									socialMedia: {
+										...profile.socialMedia,
+										facebook: e.target.value,
 									},
 								})
 							}
@@ -140,33 +185,33 @@ export default function EditProfile({ contact }) {
 					<label>
 						Twitter:
 						<input
-							type="text"
-							name="Twitter"
-							value={profile.SocialMedia.Twitter}
+							type="url"
+							name="x"
+							value={profile.socialMedia.x}
 							onChange={(e) =>
 								setProfile({
 									...profile,
-									SocialMedia: {
-										...profile.SocialMedia,
-										Twitter: e.target.value,
+									socialMedia: {
+										...profile.socialMedia,
+										x: e.target.value,
 									},
 								})
 							}
-							placeholder="Twitter handle"
+							placeholder="x handle"
 						/>
 					</label>
 					<label>
 						Weekdays Operating Hours:
 						<input
 							type="text"
-							name="Weekdays"
-							value={profile.OperatingHours.Weekdays}
+							name="weekdays"
+							value={profile.operatingHours.weekdays}
 							onChange={(e) =>
 								setProfile({
 									...profile,
-									OperatingHours: {
-										...profile.OperatingHours,
-										Weekdays: e.target.value,
+									operatingHours: {
+										...profile.operatingHours,
+										weekdays: e.target.value,
 									},
 								})
 							}
@@ -177,14 +222,14 @@ export default function EditProfile({ contact }) {
 						Weekends Operating Hours:
 						<input
 							type="text"
-							name="Weekends"
-							value={profile.OperatingHours.Weekends}
+							name="weekends"
+							value={profile.operatingHours.weekends}
 							onChange={(e) =>
 								setProfile({
 									...profile,
-									OperatingHours: {
-										...profile.OperatingHours,
-										Weekends: e.target.value,
+									operatingHours: {
+										...profile.operatingHours,
+										weekends: e.target.value,
 									},
 								})
 							}
@@ -192,13 +237,43 @@ export default function EditProfile({ contact }) {
 						/>
 					</label>
 					<label>
+						Education (comma-separated):
+						<input
+							type="text"
+							name="education"
+							value={profile.education.join(", ")}
+							onChange={handleEducationChange}
+							placeholder="Enter educations"
+						/>
+					</label>
+					<label>
 						Accreditation (comma-separated):
 						<input
 							type="text"
-							name="Accreditation"
-							value={profile.Accreditation.join(", ")}
+							name="accreditation"
+							value={profile.accreditation.join(", ")}
 							onChange={handleAccreditationChange}
 							placeholder="Enter accreditations"
+						/>
+					</label>
+					<label>
+						Publications (comma-separated):
+						<input
+							type="text"
+							name="publications"
+							value={profile.publications.join(", ")}
+							onChange={handlePublicationsChange}
+							placeholder="Enter publications"
+						/>
+					</label>
+					<label>
+						Awards (comma-separated):
+						<input
+							type="text"
+							name="awards"
+							value={profile.awards.join(", ")}
+							onChange={handleAwardsChange}
+							placeholder="Enter awards"
 						/>
 					</label>
 					<button type="submit">Submit Profile</button>

@@ -1,35 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaFacebook, FaTwitter, FaStar, FaStarHalfAlt } from "react-icons/fa";
-
-const lawyer = [
-	{
-		Name: "Alec M. Thompson",
-		Phone: "123-456-7890",
-		Email: "alecthompson@mail.com",
-		Address: "123 Main St, City, Country",
-		Specialization: "Criminal Law",
-		License: "ABC12345",
-		Languages: ["English", "Spanish"],
-		Website: "http://www.xyzlegalaid.com",
-		SocialMedia: {
-			Facebook: "http://facebook.com/xyzlegalaid",
-			Twitter: "xyzlegalaid",
-		},
-		OperatingHours: {
-			Weekdays: "9 AM - 5 PM",
-			Weekends: "Closed",
-		},
-		Accreditation: ["State Bar Association", "National Legal Aid Association"],
-		Rating: 4.7,
-		Experience: "15 years",
-		Education: [
-			"Harvard Law School - JD",
-			"University of California - BA in Political Science",
-		],
-		Publications: ["Criminal Law Review", "The Advocate's Guide"],
-		Awards: ["Best Criminal Lawyer 2022", "Top 10 Lawyers Under 40"],
-	},
-];
 
 const Rating = ({ rating }) => {
 	const stars = [];
@@ -49,7 +19,7 @@ const Rating = ({ rating }) => {
 	return <div className="flex items-center">{stars}</div>;
 };
 
-const ShowProfile = () => {
+const ShowProfile = ({ provider }) => {
 	return (
 		<div className="mx-auto w-5/6 mt-28 rounded overflow-hidden shadow-lg bg-red-950">
 			<div className=" mx-auto  w-5/6 p-6 space-y-6">
@@ -59,19 +29,21 @@ const ShowProfile = () => {
 				<div className="bg-white shadow-lg rounded-lg p-6 flex items-center">
 					<div className="w-32 h-32 rounded-full overflow-hidden border-4 border-gray-200 mr-6">
 						<img
-							src="https://via.placeholder.com/150"
+							src={provider.userInfo.avatar}
 							alt="Profile"
 							className="w-full h-full object-cover"
 						/>
 					</div>
 					<div>
-						<h1 className="text-2xl font-semibold">{lawyer[0].Name}</h1>
-						<p className="text-sm text-gray-700">{lawyer[0].Specialization}</p>
+						<h1 className="text-2xl font-semibold">
+							{provider.userInfo.fullName}
+						</h1>
+						<p className="text-sm text-gray-700">{provider.specialization}</p>
 						<div className="mt-2">
-							<Rating rating={lawyer[0].Rating} />
+							{/* <Rating rating={lawyer[0].rating} />
 							<span className="text-gray-600 text-sm ml-2">
-								({lawyer[0].Rating}/5)
-							</span>
+								({lawyer.Rating}/5)
+							</span> */}
 						</div>
 					</div>
 				</div>
@@ -83,29 +55,29 @@ const ShowProfile = () => {
 						<ul className="space-y-2 text-sm text-gray-700">
 							<li>
 								<strong className="font-medium">Specialization:</strong>{" "}
-								{lawyer[0].Specialization}
+								{provider.specialization}
 							</li>
 							<li>
 								<strong className="font-medium">License:</strong>{" "}
-								{lawyer[0].License}
+								{provider.license}
 							</li>
 							<li>
 								<strong className="font-medium">Languages:</strong>{" "}
-								{lawyer[0].Languages.join(", ")}
+								{provider.languages.join(", ")}
 							</li>
 							<li>
 								<strong className="font-medium">Website:</strong>{" "}
 								<a
-									href={lawyer[0].Website}
+									href={provider.websitel}
 									className="text-blue-600"
 									target="_blank"
 									rel="noopener noreferrer">
-									{lawyer[0].Website}
+									{provider.website}
 								</a>
 							</li>
 							<li>
 								<strong className="font-medium">Experience:</strong>{" "}
-								{lawyer[0].Experience}
+								{provider.experience}
 							</li>
 						</ul>
 					</div>
@@ -115,18 +87,17 @@ const ShowProfile = () => {
 						<h2 className="text-xl font-semibold mb-4">Contact Information</h2>
 						<ul className="space-y-2 text-sm text-gray-700">
 							<li>
-								<strong className="font-medium">Phone:</strong>{" "}
-								{lawyer[0].Phone}
+								<strong className="font-medium">Phone:</strong> {provider.phone}
 							</li>
 							<li>
 								<strong className="font-medium">Email:</strong>{" "}
-								<a href={`mailto:${lawyer[0].Email}`} className="text-blue-600">
-									{lawyer[0].Email}
+								<a href={`mailto:${provider.email}`} className="text-blue-600">
+									{provider.userInfo.email}
 								</a>
 							</li>
 							<li>
 								<strong className="font-medium">Address:</strong>{" "}
-								{lawyer[0].Address}
+								{provider.address}
 							</li>
 						</ul>
 					</div>
@@ -139,13 +110,13 @@ const ShowProfile = () => {
 						<ul className="space-y-2 text-sm text-gray-700">
 							<li>
 								<strong className="font-medium">Operating Hours:</strong>{" "}
-								{lawyer[0].OperatingHours.Weekdays} /{" "}
-								{lawyer[0].OperatingHours.Weekends}
+								{provider.operatingHours.weekdays} /{" "}
+								{provider.operatingHours.weekends}
 							</li>
 							<li>
 								<strong className="font-medium">Accreditation:</strong>
 								<ul className="list-disc pl-5 space-y-1">
-									{lawyer[0].Accreditation.map((acc, index) => (
+									{provider.accreditation.map((acc, index) => (
 										<li key={index}>{acc}</li>
 									))}
 								</ul>
@@ -162,7 +133,7 @@ const ShowProfile = () => {
 							<li>
 								<strong className="font-medium">Publications:</strong>
 								<ul className="list-disc pl-5 space-y-1">
-									{lawyer[0].Publications.map((pub, index) => (
+									{provider.publications.map((pub, index) => (
 										<li key={index}>{pub}</li>
 									))}
 								</ul>
@@ -170,7 +141,7 @@ const ShowProfile = () => {
 							<li>
 								<strong className="font-medium">Awards:</strong>
 								<ul className="list-disc pl-5 space-y-1">
-									{lawyer[0].Awards.map((award, index) => (
+									{provider.awards.map((award, index) => (
 										<li key={index}>{award}</li>
 									))}
 								</ul>
@@ -185,7 +156,7 @@ const ShowProfile = () => {
 							<li>
 								<strong className="font-medium">Education:</strong>
 								<ul className="list-disc pl-5 space-y-1">
-									{lawyer[0].Education.map((edu, index) => (
+									{provider.education.map((edu, index) => (
 										<li key={index}>{edu}</li>
 									))}
 								</ul>
@@ -199,7 +170,7 @@ const ShowProfile = () => {
 						<ul className="list-disc pl-5 space-y-1 text-sm text-gray-700">
 							<li>
 								<a
-									href={lawyer[0].SocialMedia.Facebook}
+									href={provider.socialMedia.facebook}
 									className="text-blue-600 flex items-center"
 									target="_blank"
 									rel="noopener noreferrer">
@@ -208,11 +179,11 @@ const ShowProfile = () => {
 							</li>
 							<li>
 								<a
-									href={`https://twitter.com/${lawyer[0].SocialMedia.Twitter}`}
+									href={`https://twitter.com/${provider.socialMedia.x}`}
 									className="text-blue-600 flex items-center"
 									target="_blank"
 									rel="noopener noreferrer">
-									<FaTwitter className="mr-2" /> Twitter
+									<FaTwitter className="mr-2" /> X
 								</a>
 							</li>
 						</ul>

@@ -1,28 +1,29 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const RowDataCard = ({ provider }) => {
+	const navigate = useNavigate();
+	console.log(provider);
 	return (
 		<div
 			className="mx-auto w-2/3 bg-red-100 border rounded-2xl m-3  "
-			// key={id}
-			// onClick={() => updateCard(id, {id,data:{id,option,question,description,answer},multipleChoice,checkBoxes:checkBoxesF})}
-		>
+			onClick={() => navigate("/p/profile/"+provider._id)}>
 			<div className="flex p-3 justify-between gap-x-6 py-5">
 				<div className="flex min-w-0 gap-x-4">
 					<img
-						alt={provider.Name}
-						src={provider.imageUrl}
+						alt={provider.userInfo.fullName}
+						src={provider.userInfo.avatar}
 						className="h-12 w-12 flex-none rounded-full bg-gray-50"
 					/>
 					<div className="min-w-0 flex-auto">
 						<p className="text-sm font-semibold leading-6 text-gray-900">
-							{provider.Name}
+							{provider.userInfo.fullName}
 						</p>
 						<p className="mt-1 truncate text-xs leading-5 text-gray-500">
-							{provider.Email}
+							{provider.userInfo.email}
 						</p>
 						<p className="mt-1 truncate text-xs leading-5 text-gray-500">
-							{provider.Phone}
+							{provider.phone}
 						</p>
 						{/* <p className="mt-1 truncate text-xs leading-5 text-gray-500">
 							{provider.Specialization}
@@ -33,8 +34,8 @@ const RowDataCard = ({ provider }) => {
 					<p className="text-sm leading-6 text-gray-900">{provider.role}</p>
 					{provider.OperatingHours ? (
 						<p className="mt-1 text-xs leading-5 text-gray-500">
-							Weekdays: {provider.OperatingHours.Weekdays} <br />
-							Weekends: {provider.OperatingHours.Weekends}
+							Weekdays: {provider.OperatingHours.weekdays} <br />
+							Weekends: {provider.OperatingHours.weekends}
 						</p>
 					) : (
 						<div className="mt-1 flex items-center gap-x-1.5">

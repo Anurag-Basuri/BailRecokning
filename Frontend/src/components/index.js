@@ -17,7 +17,12 @@ import InputPreviousCases from "./previousCases/InputPreviousCases";
 import DocValidation from "./bail/DocValidation";
 import DisplayBox from "./home/DisplayBox";
 import Settings from "./profile/Settings";
-import ShowProfile from "./profile/ShowProfile"
+import ShowProfile from "./profile/ShowProfile";
+import Contact from "./profile/Contact";
+import EditProfile from "./profile/EditProfile";
+import UserProfileSection from "./profile/UserProfileSection";
+import UserProfile from "./profile/User/UserProfile";
+import LawyerProfile from "./profile/Lawyer/LawyerProfile";
 
 export {
 	AuthLayout,
@@ -40,4 +45,9 @@ export {
 	DisplayBox,
 	Settings,
 	ShowProfile,
+	Contact,
+	EditProfile,
+	UserProfileSection,
+	UserProfile,
+	LawyerProfile,
 };

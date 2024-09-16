@@ -1,34 +1,23 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useState, useEffect } from "react";
 import RowDataCard from "./RowDataCard";
+import axios from "axios";
 
 export default function LegalAid() {
-	const lawyer = [
-		{
-			Name: "N/A",
-			Phone: "123-456-7890",
-			Email: "N/A",
-			Address: "123 Main St, City, Country",
-			Specialization: "Criminal Law",
-			License: "ABC12345",
-			Languages: ["English", "Spanish"],
-			Website: "http://www.xyzlegalaid.com",
-			SocialMedia: {
-				Facebook: "http://facebook.com/xyzlegalaid",
-				Twitter: "@xyzlegalaid",
-			},
-			OperatingHours: {
-				Weekdays: "9 AM - 5 PM",
-				Weekends: "Closed",
-			},
-			Accreditation: [
-				"State Bar Association",
-				"National Legal Aid Association",
-			],
-			imageUrl: "https://via.placeholder.com/150",
-			role: "Criminal Lawyer",
-		},
-	];
+
+	const [lawyers, setLawyers] = useState([]);
+	useEffect(() => {
+		try {
+			const func = async () => {
+				const response = await axios.get("/api/v1/profile/l/all");
+				console.log(response.data.data.profile);
+				setLawyers(response.data.data.profile)
+			};
+			func();
+		} catch (error) {
+			console.log(error);
+		}
+	}, []);
 
 	return (
 		<div>
@@ -47,7 +36,7 @@ export default function LegalAid() {
 				</button>
 			</div>
 			<section>
-				{lawyer.map((provider, id) => (
+				{lawyers.map((provider, id) => (
 					<div key={id}>
 						<RowDataCard provider={provider} />
 					</div>
