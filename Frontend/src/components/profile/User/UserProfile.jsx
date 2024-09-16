@@ -1,15 +1,9 @@
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
+import { useSelector } from "react-redux";
 import {
-	DisplayCases,
-	InputPreviousCases,
 	PreviousCase,
-	UploadProfilePic,
 	Settings,
 	Contact,
-	EditProfile,
 	UserProfileSection,
 } from "../../index";
 
@@ -19,7 +13,7 @@ const UserProfile = () => {
 	return (
 		<div className="mx-auto w-5/6 mt-28 rounded overflow-hidden shadow-lg">
 			<div className="md:flex">
-				<ul className="flex-column space-y space-y-4 text-sm font-medium text-gray-500 dark:text-gray-400 md:me-4 mb-4 md:mb-0">
+				<ul className="flex-column space-y space-y-4 text-sm font-medium text-gray-500 dark:text-gray-400 md:me-4  mb-4 md:mb-0">
 					<li>
 						<div
 							className={`inline-flex items-center px-4 py-3 ${
@@ -55,7 +49,7 @@ const UserProfile = () => {
 								viewBox="0 0 18 18">
 								<path d="M6.143 0H1.857A1.857 1.857 0 0 0 0 1.857v4.286C0 7.169.831 8 1.857 8h4.286A1.857 1.857 0 0 0 8 6.143V1.857A1.857 1.857 0 0 0 6.143 0Zm10 0h-4.286A1.857 1.857 0 0 0 10 1.857v4.286C10 7.169 10.831 8 11.857 8h4.286A1.857 1.857 0 0 0 18 6.143V1.857A1.857 1.857 0 0 0 16.143 0Zm-10 10H1.857A1.857 1.857 0 0 0 0 11.857v4.286C0 17.169.831 18 1.857 18h4.286A1.857 1.857 0 0 0 8 16.143v-4.286A1.857 1.857 0 0 0 6.143 10Zm10 0h-4.286A1.857 1.857 0 0 0 10 11.857v4.286c0 1.026.831 1.857 1.857 1.857h4.286A1.857 1.857 0 0 0 18 16.143v-4.286A1.857 1.857 0 0 0 16.143 10Z" />
 							</svg>
-							Dashboard
+							All Cases
 						</div>
 					</li>
 					<li>
@@ -97,28 +91,12 @@ const UserProfile = () => {
 							Contact
 						</div>
 					</li>
-					<li>
-						<div
-							className="inline-flex items-center px-4 py-3 text-gray-400 rounded-lg  bg-gray-50 w-full dark:bg-gray-800 dark:text-gray-500"
-							onClick={() => setCurrentTab("Disabled")}>
-							<svg
-								className="w-4 h-4 me-2 text-gray-400 dark:text-gray-500"
-								aria-hidden="true"
-								xmlns="http://www.w3.org/2000/svg"
-								fill="currentColor"
-								viewBox="0 0 20 20">
-								<path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 11.793a1 1 0 1 1-1.414 1.414L10 11.414l-2.293 2.293a1 1 0 0 1-1.414-1.414L8.586 10 6.293 7.707a1 1 0 0 1 1.414-1.414L10 8.586l2.293-2.293a1 1 0 0 1 1.414 1.414L11.414 10l2.293 2.293Z" />
-							</svg>
-							edit profile
-						</div>
-					</li>
 				</ul>
 
 				{currentTab === "Profile" ? <UserProfileSection /> : ""}
 				{currentTab === "Settings" ? <Settings /> : ""}
 				{currentTab === "Contact" ? <Contact /> : ""}
 				{currentTab === "DashBoard" ? <PreviousCase /> : ""}
-				{currentTab === "Disabled" ? <EditProfile /> : ""}
 			</div>
 		</div>
 	);

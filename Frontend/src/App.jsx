@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { Outlet } from "react-router-dom";
 import "./App.css";
-import { Footer, Header } from "./components";
+import { Footer, Header, Navabar } from "./components";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "./app/authSlice";
@@ -34,7 +34,8 @@ function App() {
 
 	return (
 		<div>
-			<Header />
+			{/* <Header /> */}
+			<Navabar />
 			<Outlet />
 			<Footer />
 		</div>

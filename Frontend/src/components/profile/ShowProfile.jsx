@@ -24,8 +24,7 @@ const ShowProfile = ({ provider }) => {
 		<div className="mx-auto w-5/6 mt-28 rounded overflow-hidden shadow-lg bg-red-950">
 			<div className=" mx-auto  w-5/6 p-6 space-y-6">
 				{" "}
-				{/* Added margin here */}
-				{/* Profile Header */}
+				
 				<div className="bg-white shadow-lg rounded-lg p-6 flex items-center">
 					<div className="w-32 h-32 rounded-full overflow-hidden border-4 border-gray-200 mr-6">
 						<img

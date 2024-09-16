@@ -17,24 +17,24 @@ const Bail = () => {
 
 	return (
 		<>
-			<div className="mx-auto w-1/2 mt-28 rounded overflow-hidden shadow-lg">
+			<div className="mx-auto w-full max-w-7xl mt-28 rounded overflow-hidden shadow-lg">
 				<div className="border-b border-gray-200 dark:border-gray-700">
-					<ul className="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400">
-						<li className="me-2">
+					<ul className="flex flex-wrap text-sm font-medium text-center text-gray-500 dark:text-gray-400">
+						<li className="w-full sm:w-auto mb-2 sm:mb-0">
 							<div
-								className={`inline-flex items-center justify-center p-4 
-								${
-									currentTab === "Charges"
-										? "text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500 group"
-										: "hover:text-gray-600 border-transparent hover:border-gray-300 dark:hover:text-gray-300"
-								} border-b-2  rounded-t-lg   group`}
+								className={`inline-flex items-center justify-center p-4
+          ${
+						currentTab === "Charges"
+							? "text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500"
+							: "hover:text-gray-600 border-transparent hover:border-gray-300 dark:hover:text-gray-300"
+					} border-b-2 rounded-t-lg group`}
 								onClick={() => setCurrentTab("Charges")}>
 								<svg
 									className={`w-4 h-4 me-2 ${
 										currentTab === "Charges"
 											? "text-blue-600 dark:text-blue-500"
 											: "text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300"
-									} `}
+									}`}
 									aria-hidden="true"
 									xmlns="http://www.w3.org/2000/svg"
 									fill="currentColor"
@@ -44,21 +44,21 @@ const Bail = () => {
 								Add Charges
 							</div>
 						</li>
-						<li className="me-2">
+						<li className="w-full sm:w-auto mb-2 sm:mb-0">
 							<div
-								className={`inline-flex items-center justify-center p-4 
-								${
-									currentTab === "DashBoard"
-										? "text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500 group"
-										: "hover:text-gray-600 border-transparent hover:border-gray-300 dark:hover:text-gray-300"
-								} border-b-2  rounded-t-lg   group`}
+								className={`inline-flex items-center justify-center p-4
+          ${
+						currentTab === "DashBoard"
+							? "text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500"
+							: "hover:text-gray-600 border-transparent hover:border-gray-300 dark:hover:text-gray-300"
+					} border-b-2 rounded-t-lg group`}
 								onClick={() => setCurrentTab("DashBoard")}>
 								<svg
 									className={`w-4 h-4 me-2 ${
 										currentTab === "DashBoard"
 											? "text-blue-600 dark:text-blue-500"
 											: "text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300"
-									} `}
+									}`}
 									aria-hidden="true"
 									xmlns="http://www.w3.org/2000/svg"
 									fill="currentColor"
@@ -68,21 +68,21 @@ const Bail = () => {
 								Personal Detail
 							</div>
 						</li>
-						<li className="me-2">
+						<li className="w-full sm:w-auto mb-2 sm:mb-0">
 							<div
-								className={`inline-flex items-center justify-center p-4 
-								${
-									currentTab === "Settings"
-										? "text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500 group"
-										: "hover:text-gray-600 border-transparent hover:border-gray-300 dark:hover:text-gray-300"
-								} border-b-2  rounded-t-lg   group`}
+								className={`inline-flex items-center justify-center p-4
+          ${
+						currentTab === "Settings"
+							? "text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500"
+							: "hover:text-gray-600 border-transparent hover:border-gray-300 dark:hover:text-gray-300"
+					} border-b-2 rounded-t-lg group`}
 								onClick={() => setCurrentTab("Settings")}>
 								<svg
 									className={`w-4 h-4 me-2 ${
 										currentTab === "Settings"
 											? "text-blue-600 dark:text-blue-500"
 											: "text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300"
-									} `}
+									}`}
 									aria-hidden="true"
 									xmlns="http://www.w3.org/2000/svg"
 									fill="currentColor"
@@ -92,21 +92,21 @@ const Bail = () => {
 								DocValidation
 							</div>
 						</li>
-						<li className="me-2">
+						<li className="w-full sm:w-auto mb-2 sm:mb-0">
 							<div
-								className={`inline-flex items-center justify-center p-4 
-								${
-									currentTab === "Contacts"
-										? "text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500 group"
-										: "hover:text-gray-600 border-transparent hover:border-gray-300 dark:hover:text-gray-300"
-								} border-b-2  rounded-t-lg   group`}
+								className={`inline-flex items-center justify-center p-4
+          ${
+						currentTab === "Contacts"
+							? "text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500"
+							: "hover:text-gray-600 border-transparent hover:border-gray-300 dark:hover:text-gray-300"
+					} border-b-2 rounded-t-lg group`}
 								onClick={() => setCurrentTab("Contacts")}>
 								<svg
 									className={`w-4 h-4 me-2 ${
 										currentTab === "Contacts"
 											? "text-blue-600 dark:text-blue-500"
 											: "text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300"
-									} `}
+									}`}
 									aria-hidden="true"
 									xmlns="http://www.w3.org/2000/svg"
 									fill="currentColor"
@@ -116,21 +116,21 @@ const Bail = () => {
 								Lawyer
 							</div>
 						</li>
-						<li className="me-2">
+						<li className="w-full sm:w-auto mb-2 sm:mb-0">
 							<div
-								className={`inline-flex items-center justify-center p-4 
-								${
-									currentTab === "Trial"
-										? "text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500 group"
-										: "hover:text-gray-600 border-transparent hover:border-gray-300 dark:hover:text-gray-300"
-								} border-b-2  rounded-t-lg   group`}
+								className={`inline-flex items-center justify-center p-4
+          ${
+						currentTab === "Trial"
+							? "text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500"
+							: "hover:text-gray-600 border-transparent hover:border-gray-300 dark:hover:text-gray-300"
+					} border-b-2 rounded-t-lg group`}
 								onClick={() => setCurrentTab("Trial")}>
 								<svg
 									className={`w-4 h-4 me-2 ${
 										currentTab === "Trial"
 											? "text-blue-600 dark:text-blue-500"
 											: "text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300"
-									} `}
+									}`}
 									aria-hidden="true"
 									xmlns="http://www.w3.org/2000/svg"
 									fill="currentColor"

@@ -1,5 +1,5 @@
 import AuthLayout from "./AuthLayout";
-import Header from "./Header";
+import Header from "./header/Header";
 import Introduction from "./Introduction";
 import Footer from "./Footer";
 import SideAccount from "./SideAccount";
@@ -23,31 +23,39 @@ import EditProfile from "./profile/EditProfile";
 import UserProfileSection from "./profile/UserProfileSection";
 import UserProfile from "./profile/User/UserProfile";
 import LawyerProfile from "./profile/Lawyer/LawyerProfile";
+import DarkMode from "./header/DarkMode";
+import Navabar from "./header/Navabar";
+import AllBailHome from "./home/AllBailHome"
+import IfNoBail from "./home/IfNoBail"
 
 export {
 	AuthLayout,
 	Header,
+	Navabar,
+	DarkMode,
 	Introduction,
 	Footer,
 	SideAccount,
 	HomeCard,
 	RenameCard,
+	DisplayBox,
+	AllBailHome,
+	IfNoBail,
+	DisplayCases,
 	BailEligiblity,
 	BailCharges,
 	PreviousCase,
-	DisplayCases,
 	RowDataCard,
 	BailLawyer,
 	LegalAid,
 	UploadProfilePic,
 	InputPreviousCases,
 	DocValidation,
-	DisplayBox,
 	Settings,
-	ShowProfile,
 	Contact,
-	EditProfile,
 	UserProfileSection,
 	UserProfile,
+	ShowProfile,
 	LawyerProfile,
+	EditProfile,
 };

@@ -19,11 +19,11 @@ import {
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { logout } from "../app/authSlice";
+import { logout } from "../../app/authSlice";
 import axios from "axios";
 import React, { useState } from "react";
-import { toggle } from "../app/modeSlice";
 import { connect } from "react-redux";
+import DarkMode from "./DarkMode";
 
 const products = [
 	{
@@ -106,24 +106,17 @@ const Header = ({ darkMode }) => {
 		console.log(response.data.data);
 		navigate("/bail/" + response.data.data._id);
 	};
-	const toggleDarkMode = async () => {
-		const response = await axios.get("/api/v1/user/toggleMode");
-		dispatch(toggle());
-		console.log(response.data.data);
-	};
 
 	return (
 		<header className="fixed left-0 top-0 w-full bg-navy text-white">
-			<nav
-				aria-label="Global"
-				className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
-				<div className="flex lg:flex-1 justify-between">
+			<nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
+				{/* <div className="flex lg:flex-1 justify-between">
 					<a
 						href="#"
 						className="-m-1.5 p-1.5 justify-between items-center border border-gold rounded-full bg-navy hover:bg-gray-800 hover:border-gray-400 ease-in-out">
 						<ScaleIcon className="h-8 w-8 text-gold" aria-hidden="true" />
 					</a>
-				</div>
+				</div> */}
 
 				<PopoverGroup className="hidden lg:flex lg:gap-x-12 text-white">
 					<Link to="/" className="text-sm font-semibold leading-6 text-white">
@@ -134,7 +127,7 @@ const Header = ({ darkMode }) => {
 						onClick={() => addBail()}>
 						Bail Eligiblity
 					</div>
-					<Popover className="relative">
+					{/* <Popover className="relative">
 						<PopoverButton className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-white">
 							Features
 							<ChevronDownIcon
@@ -158,31 +151,11 @@ const Header = ({ darkMode }) => {
 								))}
 							</div>
 						</PopoverPanel>
-					</Popover>
+					</Popover> */}
 				</PopoverGroup>
 
 				<div className="hidden lg:flex lg:flex-1 lg:justify-end text-white">
-					<div className="mt-2" onClick={() => toggleDarkMode()}>
-						{darkmode ? (
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								height="24px"
-								viewBox="0 -960 960 960"
-								width="24px"
-								fill="#e8eaed">
-								<path d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q14 0 27.5 1t26.5 3q-41 29-65.5 75.5T444-660q0 90 63 153t153 63q55 0 101-24.5t75-65.5q2 13 3 26.5t1 27.5q0 150-105 255T480-120Zm0-80q88 0 158-48.5T740-375q-20 5-40 8t-40 3q-123 0-209.5-86.5T364-660q0-20 3-40t8-40q-78 32-126.5 102T200-480q0 116 82 198t198 82Zm-10-270Z" />
-							</svg>
-						) : (
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								height="24px"
-								viewBox="0 -960 960 960"
-								width="24px"
-								fill="#e8eaed">
-								<path d="M480-360q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35Zm0 80q-83 0-141.5-58.5T280-480q0-83 58.5-141.5T480-680q83 0 141.5 58.5T680-480q0 83-58.5 141.5T480-280ZM200-440H40v-80h160v80Zm720 0H760v-80h160v80ZM440-760v-160h80v160h-80Zm0 720v-160h80v160h-80ZM256-650l-101-97 57-59 96 100-52 56Zm492 496-97-101 53-55 101 97-57 59Zm-98-550 97-101 59 57-100 96-56-52ZM154-212l101-97 55 53-97 101-59-57Zm326-268Z" />
-							</svg>
-						)}
-					</div>
+					{status ? <DarkMode /> : ""}
 					{status ? (
 						<div
 							className="text-white mx-4 bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"

@@ -5,46 +5,10 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import mongoose from "mongoose";
 
 const addDetails = asyncHandler(async (req, res) => {
-  // const {
-  //   userId,
-    // phone,
-    // experience,
-    // email,
-    // address,
-    // specialization,
-    // license,
-    // languages,
-    // website,
-    // socialMedia,
-    // operatingHours,
-    // accreditation,
-    // publications,
-    // awards,
-  // } = req.body;
-const {userId}= req.params;
-  // if (
-  //   [specialization, license, website, address].some(
-  //     (fields) => fields?.trim() === ""
-  //   )
-  // ) {
-  //   throw new ApiError(400, "all fields are required");
-  // }
+  const { userId } = req.params;
 
   const profile = await LawyerProfile.create({
     userId,
-    // phone,
-    // experience,
-    // email,
-    // address,
-    // specialization,
-    // license,
-    // languages,
-    // website,
-    // socialMedia,
-    // operatingHours,
-    // accreditation,
-    // publications,
-    // awards,
   });
   if (!profile) {
     throw new ApiError(500, "Something went wrong");
@@ -72,6 +36,7 @@ const editDetails = asyncHandler(async (req, res) => {
     operatingHours,
     accreditation,
     publications,
+    education,
     awards,
   } = req.body;
 
@@ -99,6 +64,7 @@ const editDetails = asyncHandler(async (req, res) => {
       accreditation,
       publications,
       awards,
+      education,
     },
     { new: true }
   );

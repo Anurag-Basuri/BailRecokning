@@ -62,7 +62,7 @@ export default function EditProfile({ contact, profileId }) {
 	const handleEducationChange = (event) => {
 		setProfile({
 			...profile,
-			education: event.target.value.split(",").map((acc) => acc.trim()),
+			education: event.target.value.split(",").map((lang) => lang.trim()),
 		});
 	};
 
