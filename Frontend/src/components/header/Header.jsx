@@ -110,13 +110,13 @@ const Header = ({ darkMode }) => {
 	return (
 		<header className="fixed left-0 top-0 w-full bg-navy text-white">
 			<nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
-				{/* <div className="flex lg:flex-1 justify-between">
+				<div className="flex lg:flex-1 justify-between">
 					<a
 						href="#"
 						className="-m-1.5 p-1.5 justify-between items-center border border-gold rounded-full bg-navy hover:bg-gray-800 hover:border-gray-400 ease-in-out">
 						<ScaleIcon className="h-8 w-8 text-gold" aria-hidden="true" />
 					</a>
-				</div> */}
+				</div>
 
 				<PopoverGroup className="hidden lg:flex lg:gap-x-12 text-white">
 					<Link to="/" className="text-sm font-semibold leading-6 text-white">

@@ -1,14 +1,6 @@
 import React, { useEffect, useState } from "react";
-import {
-	HomeCard,
-	RenameCard,
-	Introduction,
-	DisplayBox,
-	AllBailHome,
-} from "../components/index.js";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { AllBailHome } from "../components/index.js";
+
 import { connect } from "react-redux";
 
 const Home = ({ darkMode }) => {

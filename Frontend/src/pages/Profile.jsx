@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { LawyerProfile, UserProfile } from "../components";
 
 const Profile = () => {
-	const userData = useSelector((state) => state.auth.userData);
-
+	useEffect(() => {
+		const userData = useSelector((state) => state.auth.userData);
+	}, []);
 	return (
 		<div>
 			{userData.role === "Lawyer" ? <LawyerProfile /> : ""}

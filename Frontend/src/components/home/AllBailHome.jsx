@@ -97,7 +97,7 @@ const AllBailHome = ({ darkMode }) => {
 			)}
 			<div className="h-80v px-6 pt-4 pb-2 mt-16 flex flex-row flex-wrap justify-center mx-auto w-full">
 				{allUserBails.length === 0 ? (
-					<IfNoBail/>
+					<IfNoBail />
 				) : (
 					allUserBails.map((fon, index) => {
 						return (
