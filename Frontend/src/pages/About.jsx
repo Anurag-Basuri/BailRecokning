@@ -3,7 +3,7 @@ import React from "react";
 
 const BailReckonerAbout = () => {
 	return (
-		<div className="bg-gray-100 py-16 mt-20">
+		<div className="bg-gray-100 z-auto mt-20 pt-10 pb-10">
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				{/* Heading Section */}
 				<div className="text-center">
@@ -37,9 +37,16 @@ const BailReckonerAbout = () => {
 						</p>
 						<ul className="mt-4 list-disc pl-6 text-gray-600 space-y-2">
 							<li>
+								<strong>For Educational Purpose:</strong> Information
+								for any IPC or BNS section, and previous cases related to them.
+							</li>
+							<li>
 								<strong>For Undertrial Prisoners:</strong> Immediate insights
 								into bail eligibility based on the charges, imprisonment
 								duration, and more.
+							</li>
+							<li>
+								<strong>For Lawyers/Advocates:</strong> They can present themselves here to get hired and they can charge money accordingly.
 							</li>
 							<li>
 								<strong>For Legal Aid Providers:</strong> Streamlined tools to
@@ -65,15 +72,21 @@ const BailReckonerAbout = () => {
 								children, SCs/STs, economic offenses, etc.
 							</li>
 							<li>
-								<strong>Real-Time Eligibility Tracking:</strong> Monitors bail
+								<strong>Real-Time Bail Checker:</strong> Monitors bail
 								eligibility by analyzing charges and penalties under various
-								laws, and tracking time served by the prisoner.
+								laws, and tracking time served by the prisoner also you can forward your application to your Lawyer.
+							</li>
+							<li>
+								<strong>Hire a Lawyer or Look for Legal-Aid:</strong> Any normal user or an undertrial user can look for help online where they will have more and better option.
 							</li>
 							<li>
 								<strong>Risk & Compliance Evaluation:</strong> Considers
 								judicial discretion on risks like fleeing jurisdiction or
 								influencing evidence, ensuring compliance with procedural
 								requirements.
+							</li>
+							<li>
+								<strong>Document-Verifier:</strong> Verify your documents related to your Bail process.
 							</li>
 							<li>
 								<strong>Integration with Legal Systems:</strong> Can be easily

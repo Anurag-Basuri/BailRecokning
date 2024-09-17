@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react-refresh/only-export-components */
 /* eslint-disable no-unused-vars */
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -34,7 +36,7 @@ const Navabar = ({ darkMode }) => {
 	return (
 		<>
 			<nav
-				className={` fixed w-full z-20 top-0 start-0 border-b ${
+				className={`fixed w-full top-0 left-0 right-0 bg-blue-600 z-50 h-22 ${
 					darkMode ? "border-gray-600 bg-gray-900" : "border-gray-200 "
 				} `}>
 				<div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
