@@ -1,11 +1,11 @@
 import React from "react";
-import {BailLawyer} from "../components/index"
+import { LegalAid } from "../components/index";
 
 const HireLawyer = () => {
 	return (
-		<div>
+		<div className="mt-32">
 			<h1>HireLawyer</h1>
-            <BailLawyer/>
+			<LegalAid />
 		</div>
 	);
 };

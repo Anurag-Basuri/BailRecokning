@@ -13,6 +13,9 @@ import Home from "./pages/Home.jsx";
 import Bail from "./pages/Bail.jsx";
 import Profile from "./pages/Profile.jsx";
 import LawyerInfo from "./pages/LawyerInfo.jsx";
+import HireLawyer from "./pages/HireLawyer.jsx";
+import KnowYourLaw from "./pages/KnowYourLaw.jsx";
+import About from "./pages/About.jsx";
 
 const router = createBrowserRouter([
 	{
@@ -50,6 +53,18 @@ const router = createBrowserRouter([
 			{
 				path: "/bail/:bailId",
 				element: <Bail />,
+			},
+			{
+				path: "/about",
+				element: <About />,
+			},
+			{
+				path: "/hireLawyer",
+				element: <HireLawyer />,
+			},
+			{
+				path: "/knowYourLaw",
+				element: <KnowYourLaw />,
 			},
 		],
 	},

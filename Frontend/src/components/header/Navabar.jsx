@@ -161,13 +161,36 @@ const Navabar = ({ darkMode }) => {
 								</NavLink>
 							</li>
 							<li>
-								<NavLink to = "/About"
+								<NavLink
+									to="/About"
 									className={({ isActive }) =>
 										` ${
 											isActive ? "text-blue-700" : "text-blue-500"
 										} block py-2 px-3 rounded md:bg-transparent bg-gray-200  md:hover:bg-gray-800 md:p-2`
 									}>
 									About
+								</NavLink>
+							</li>
+							<li>
+								<NavLink
+									to="/hireLawyer"
+									className={({ isActive }) =>
+										` ${
+											isActive ? "text-blue-700" : "text-blue-500"
+										} block py-2 px-3 rounded md:bg-transparent bg-gray-200  md:hover:bg-gray-800 md:p-2`
+									}>
+									Hire Lawyer
+								</NavLink>
+							</li>
+							<li>
+								<NavLink
+									to="/knowYourLaw"
+									className={({ isActive }) =>
+										` ${
+											isActive ? "text-blue-700" : "text-blue-500"
+										} block py-2 px-3 rounded md:bg-transparent bg-gray-200  md:hover:bg-gray-800 md:p-2`
+									}>
+									Know Your Law
 								</NavLink>
 							</li>
 							<li>

@@ -1,6 +1,5 @@
 import AuthLayout from "./AuthLayout";
 import Header from "./header/Header";
-import Introduction from "./Introduction";
 import Footer from "./Footer";
 import SideAccount from "./SideAccount";
 import RenameCard from "./home/RenameCard";
@@ -28,8 +27,6 @@ import Navabar from "./header/Navabar";
 import AllBailHome from "./home/AllBailHome";
 import IfNoBail from "./home/IfNoBail";
 import About from "../pages/about";
-import AllBailHome from "./home/AllBailHome";
-import IfNoBail from "./home/IfNoBail";
 import JudgeProfile from "./profile/Judge/JudgeProfile";
 import Timeline from "./bail/Timeline";
 
@@ -38,7 +35,6 @@ export {
 	Header,
 	Navabar,
 	DarkMode,
-	Introduction,
 	Footer,
 	SideAccount,
 	HomeCard,

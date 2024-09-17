@@ -8,7 +8,8 @@ const BailLawyer = () => {
 		const func = async () => {
 			const response = await axios.get("/api/v1/user/allLawyers");
 			console.log(response.data.data);
-			setAllLawyer(response.data.data);
+			// setAllLawyer(response.data.data);
+			//Delete this in future
 		};
 		func();
 	}, []);
