@@ -13,7 +13,6 @@ import Home from "./pages/Home.jsx";
 import Bail from "./pages/Bail.jsx";
 import Profile from "./pages/Profile.jsx";
 import LawyerInfo from "./pages/LawyerInfo.jsx";
-import About from "./pages/About.jsx";
 
 const router = createBrowserRouter([
 	{

@@ -25,7 +25,6 @@ function App() {
 					dispatch(setMode(data.mode));
 				}
 			};
-
 			funC();
 		} catch (error) {
 			console.log("error while getting user data");

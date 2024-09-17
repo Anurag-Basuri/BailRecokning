@@ -13,7 +13,6 @@ const Navabar = ({ darkMode }) => {
 	const status = useSelector((state) => state.auth.status);
 	const darkmode = useSelector((state) => state.mode.darkMode);
 	const [showDrop, setShowDrop] = useState(false);
-
 	const [showAccount, setShowAccount] = useState(false);
 	const logoutbtn = async () => {
 		try {
@@ -32,7 +31,6 @@ const Navabar = ({ darkMode }) => {
 		console.log(response.data.data);
 		navigate("/bail/" + response.data.data._id);
 	};
-
 	return (
 		<>
 			<nav

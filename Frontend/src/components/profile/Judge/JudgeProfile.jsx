@@ -1,20 +1,36 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 import {
 	PreviousCase,
 	Settings,
 	Contact,
+	EditProfile,
 	UserProfileSection,
-	Timeline,
 } from "../../index";
 
-const UserProfile = () => {
+const JudgeProfile = () => {
 	const userData = useSelector((state) => state.auth.userData);
 	const [currentTab, setCurrentTab] = useState("Profile");
+	const [profileId, setProfileId] = useState("");
+
+	useEffect(() => {
+		try {
+			const func = async () => {
+				const response = await axios.get("/api/v1/profile/u/" + userData._id);
+				console.log(response);
+				setProfileId(response.data.data.profile[0]._id);
+			};
+			func();
+		} catch (error) {
+			console.log(error);
+		}
+	}, []);
 	return (
 		<div className="mx-auto w-5/6 mt-28 rounded overflow-hidden shadow-lg">
 			<div className="md:flex">
-				<ul className="flex-column space-y space-y-4 text-sm font-medium text-gray-500 dark:text-gray-400 md:me-4  mb-4 md:mb-0">
+				<ul className="flex-column space-y space-y-4 text-sm font-medium text-gray-500 dark:text-gray-400 md:me-4 mb-4 md:mb-0">
 					<li>
 						<div
 							className={`inline-flex items-center px-4 py-3 ${
@@ -34,25 +50,7 @@ const UserProfile = () => {
 							Profile
 						</div>
 					</li>
-					<li>
-						<div
-							className={`inline-flex items-center px-4 py-3 rounded-lg ${
-								currentTab === "DashBoard"
-									? "bg-blue-700 text-white "
-									: "bg-gray-50"
-							}hover:text-gray-900  hover:bg-gray-100 w-full dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white`}
-							onClick={() => setCurrentTab("DashBoard")}>
-							<svg
-								className="w-4 h-4 me-2  dark:text-gray-400"
-								aria-hidden="true"
-								xmlns="http://www.w3.org/2000/svg"
-								fill="currentColor"
-								viewBox="0 0 18 18">
-								<path d="M6.143 0H1.857A1.857 1.857 0 0 0 0 1.857v4.286C0 7.169.831 8 1.857 8h4.286A1.857 1.857 0 0 0 8 6.143V1.857A1.857 1.857 0 0 0 6.143 0Zm10 0h-4.286A1.857 1.857 0 0 0 10 1.857v4.286C10 7.169 10.831 8 11.857 8h4.286A1.857 1.857 0 0 0 18 6.143V1.857A1.857 1.857 0 0 0 16.143 0Zm-10 10H1.857A1.857 1.857 0 0 0 0 11.857v4.286C0 17.169.831 18 1.857 18h4.286A1.857 1.857 0 0 0 8 16.143v-4.286A1.857 1.857 0 0 0 6.143 10Zm10 0h-4.286A1.857 1.857 0 0 0 10 11.857v4.286c0 1.026.831 1.857 1.857 1.857h4.286A1.857 1.857 0 0 0 18 16.143v-4.286A1.857 1.857 0 0 0 16.143 10Z" />
-							</svg>
-							All Cases
-						</div>
-					</li>
+
 					<li>
 						<div
 							className={`inline-flex items-center px-4 py-3 rounded-lg ${
@@ -97,11 +95,9 @@ const UserProfile = () => {
 				{currentTab === "Profile" ? <UserProfileSection /> : ""}
 				{currentTab === "Settings" ? <Settings /> : ""}
 				{currentTab === "Contact" ? <Contact /> : ""}
-				{currentTab === "DashBoard" ? <PreviousCase /> : ""}
-				
 			</div>
 		</div>
 	);
 };
 
-export default UserProfile;
+export default JudgeProfile;

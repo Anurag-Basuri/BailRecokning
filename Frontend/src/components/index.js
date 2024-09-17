@@ -25,9 +25,13 @@ import UserProfile from "./profile/User/UserProfile";
 import LawyerProfile from "./profile/Lawyer/LawyerProfile";
 import DarkMode from "./header/DarkMode";
 import Navabar from "./header/Navabar";
-import AllBailHome from "./home/AllBailHome"
-import IfNoBail from "./home/IfNoBail"
+import AllBailHome from "./home/AllBailHome";
+import IfNoBail from "./home/IfNoBail";
 import About from "../pages/about";
+import AllBailHome from "./home/AllBailHome";
+import IfNoBail from "./home/IfNoBail";
+import JudgeProfile from "./profile/Judge/JudgeProfile";
+import Timeline from "./bail/Timeline";
 
 export {
 	AuthLayout,
@@ -60,4 +64,6 @@ export {
 	LawyerProfile,
 	EditProfile,
 	About,
+	JudgeProfile,
+	Timeline,
 };

@@ -1,18 +1,19 @@
-import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
-import { LawyerProfile, UserProfile } from "../components";
+import React from "react";
 
-const Profile = () => {
-	useEffect(() => {
-		const userData = useSelector((state) => state.auth.userData);
-	}, []);
+import { JudgeProfile, LawyerProfile, UserProfile } from "../components";
+import { connect } from "react-redux";
+
+const Profile = ({ darkMode, userData }) => {
 	return (
 		<div>
 			{userData.role === "Lawyer" ? <LawyerProfile /> : ""}
 			{userData.role === "User" ? <UserProfile /> : ""}
-			{userData.role === "Judge" ? "" : ""}
+			{userData.role === "Judge" ? <JudgeProfile /> : ""}
 		</div>
 	);
 };
 
-export default Profile;
+export default connect((state) => ({
+	darkMode: state.mode.darkMode,
+	userData: state.auth.userData,
+}))(Profile);

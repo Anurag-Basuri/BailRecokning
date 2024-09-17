@@ -19,8 +19,8 @@ const Login = () => {
 			const newurl = `/api/v1/user/login`;
 			const response = await axios.post(newurl, data);
 
-			dispatch(login(data));
-			console.log(response);
+			dispatch(login(response.data.data.user));
+			// console.log(response.data.data.user);
 
 			localStorage.setItem("token", response.data.data.accessToken);
 			localStorage.setItem("darkMode",false);
