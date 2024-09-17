@@ -1,10 +1,4 @@
-<<<<<<< Updated upstream:Frontend/src/components/profile/ShowProfile.jsx
 import React, { useEffect, useState } from "react";
-import { FaFacebook, FaTwitter, FaStar, FaStarHalfAlt } from "react-icons/fa";
-=======
-/* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
-import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaFacebook, FaTwitter, FaStar, FaStarHalfAlt } from "react-icons/fa";
 import EditProfile from "./EditProfile";
@@ -38,7 +32,6 @@ const lawyer = [
 		Awards: ["Best Criminal Lawyer 2022", "Top 10 Lawyers Under 40"],
 	},
 ];
->>>>>>> Stashed changes:Frontend/src/components/laywerprofile.jsx
 
 const Rating = ({ rating }) => {
 	const stars = [];
@@ -58,100 +51,12 @@ const Rating = ({ rating }) => {
 	return <div className="flex items-center">{stars}</div>;
 };
 
-<<<<<<< Updated upstream:Frontend/src/components/profile/ShowProfile.jsx
 const ShowProfile = ({ provider }) => {
 	return (
 		<div className="mx-auto w-5/6 mt-28 rounded overflow-hidden shadow-lg bg-red-950">
 			<div className=" mx-auto  w-5/6 p-6 space-y-6">
 				{" "}
 				
-=======
-const LawyerProfile = () => {
-	const [activeLink, setActiveLink] = useState("profile");
-
-	const handleLinkClick = (link) => {
-		setActiveLink(link);
-	};
-
-	return (
-		<div className="flex min mt-24">
-			{/* Sidebar */}
-			<div className="w-1/6 bg-gray-800 text-white flex flex-col p-6 space-y-6">
-				<h2 className="text-xl font-semibold mb-6">Navigation</h2>
-				<ul className="space-y-4">
-					<li>
-						<Link
-							to="/profile"
-							className={`block py-2 px-4 rounded ${
-								activeLink === "profile" ? "bg-gray-600" : ""
-							} hover:bg-gray-600`}
-							onClick={() => handleLinkClick("profile")}>
-							Profile
-						</Link>
-					</li>
-					<li>
-						<Link
-							to="/dashboard"
-							className={`block py-2 px-4 rounded ${
-								activeLink === "dashboard" ? "bg-gray-600" : ""
-							} hover:bg-gray-600`}
-							onClick={() => handleLinkClick("dashboard")}>
-							Dashboard
-						</Link>
-					</li>
-					<li>
-						<Link
-							to="/settings"
-							className={`block py-2 px-4 rounded ${
-								activeLink === "settings" ? "bg-gray-600" : ""
-							} hover:bg-gray-600`}
-							onClick={() => handleLinkClick("settings")}>
-							Settings
-						</Link>
-					</li>
-					<li>
-						<div
-							className={`block py-2 px-4 rounded ${
-								activeLink === "edit-profile" ? "bg-gray-600" : ""
-							} hover:bg-gray-600`}
-							onClick={() => handleLinkClick("edit-profile")}>
-							Edit Profile
-						</div>
-					</li>
-					<li>
-						<Link
-							to="/login"
-							className={`block py-2 px-4 rounded ${
-								activeLink === "login" ? "bg-gray-600" : ""
-							} hover:bg-gray-600`}
-							onClick={() => handleLinkClick("login")}>
-							Login
-						</Link>
-					</li>
-					<li>
-						<Link
-							to="/logout"
-							className={`block py-2 px-4 rounded ${
-								activeLink === "logout" ? "bg-gray-600" : ""
-							} hover:bg-gray-600`}
-							onClick={() => handleLinkClick("logout")}>
-							Logout
-						</Link>
-					</li>
-					{/* Add more links as needed */}
-				</ul>
-			</div>
-			{activeLink === "edit-profile" ? (
-				<EditProfile />
-			) : (
-				""
-			)}
-
-			{/* Main Content */}
-            
-			<div className="w-5/6 p-6 space-y-6">
-				{/* Profile Header */}
->>>>>>> Stashed changes:Frontend/src/components/laywerprofile.jsx
 				<div className="bg-white shadow-lg rounded-lg p-6 flex items-center">
 					<div className="w-32 h-32 rounded-full overflow-hidden border-4 border-gray-200 mr-6">
 						<img
@@ -274,7 +179,6 @@ const LawyerProfile = () => {
 							</li>
 						</ul>
 					</div>
-<<<<<<< Updated upstream:Frontend/src/components/profile/ShowProfile.jsx
 
 					{/*Education*/}
 					<div className="bg-white shadow-lg rounded-lg p-6">
@@ -315,8 +219,6 @@ const LawyerProfile = () => {
 							</li>
 						</ul>
 					</div>
-=======
->>>>>>> Stashed changes:Frontend/src/components/laywerprofile.jsx
 				</div>
 			</div>
 		</div>
