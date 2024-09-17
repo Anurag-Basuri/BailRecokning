@@ -27,6 +27,7 @@ import DarkMode from "./header/DarkMode";
 import Navabar from "./header/Navabar";
 import AllBailHome from "./home/AllBailHome"
 import IfNoBail from "./home/IfNoBail"
+import About from "../pages/about";
 
 export {
 	AuthLayout,
@@ -58,4 +59,5 @@ export {
 	ShowProfile,
 	LawyerProfile,
 	EditProfile,
+	About,
 };
