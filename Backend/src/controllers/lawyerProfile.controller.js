@@ -202,6 +202,61 @@ const getAllLawyers = asyncHandler(async (req, res) => {
     );
 });
 
+const getProfileBySearch = asyncHandler(async (req, res) => {
+  const { pName } = req.params;
+
+  const profile = await LawyerProfile.aggregate([
+    {
+      $lookup: {
+        from: "users",
+        localField: "userId",
+        foreignField: "_id",
+        as: "user",
+      },
+    },
+    {
+      $unwind: "$user",
+    },
+    {
+      $match: {
+        "user.fullName": { $regex: "^" + pName + "/", $options: "i" },
+      },
+    },
+    {
+      $project: {
+        specialization: 1,
+        license: 1,
+        websiteUrl: 1,
+        address: 1,
+        OperatingHours: 1,
+        publications: 1,
+        awards: 1,
+        education: 1,
+        socialMedia: 1,
+        accreditation: 1,
+        experience: 1,
+        phone: 1,
+        languages: 1,
+        userInfo: {
+          email: 1,
+          fullName: 1,
+          avatar: 1,
+        },
+      },
+    },
+  ]);
+
+  if (!profile) {
+    throw new ApiError(500, "Something went wrong");
+  }
+
+  return res
+    .status(200)
+    .json(
+      new ApiResponse(200, { profile }, "Successfully fetched lawyer details")
+    );
+});
+
 const getProfileByUserId = asyncHandler(async (req, res) => {
   const { userId } = req.params;
 
@@ -224,10 +279,111 @@ const getProfileByUserId = asyncHandler(async (req, res) => {
     );
 });
 
+const activateLawyerAccount = asyncHandler(async (req, res) => {
+  const { profileId } = req.params;
+
+  const profile = await LawyerProfile.findByIdAndUpdate(
+    profileId,
+    { activate: true },
+    { new: true }
+  );
+
+  if (!profile) {
+    throw new ApiError(500, "Something went wrong");
+  }
+
+  return res
+    .status(200)
+    .json(
+      new ApiResponse(200, { profile }, "Activated lawyer account")
+    );
+});
+
+const deactivateLawyerAccount = asyncHandler(async (req, res) => {
+  const { profileId } = req.params;
+
+  const profile = await LawyerProfile.findByIdAndUpdate(
+    profileId,
+    { activate: false },
+    { new: true }
+  );
+
+  if (!profile) {
+    throw new ApiError(500, "Something went wrong");
+  }
+
+  return res
+    .status(200)
+    .json(
+      new ApiResponse(200, { profile }, "Activated lawyer account")
+    );
+});
+
+const getLawyerWithActivate = asyncHandler(async (req, res) => {
+  const profile = await LawyerProfile.aggregate([
+    {
+      $match: {
+        activate: true,
+      },
+    },
+    {
+      $lookup: {
+        from: "users",
+        localField: "userId",
+        foreignField: "_id",
+        as: "userInfo",
+      },
+    },
+    {
+      $addFields: {
+        userInfo: {
+          $first: "$userInfo",
+        },
+      },
+    },
+    {
+      $project: {
+        specialization: 1,
+        license: 1,
+        websiteUrl: 1,
+        address: 1,
+        OperatingHours: 1,
+        publications: 1,
+        awards: 1,
+        education: 1,
+        socialMedia: 1,
+        accreditation: 1,
+        experience: 1,
+        phone: 1,
+        languages: 1,
+        userInfo: {
+          email: 1,
+          fullName: 1,
+          avatar: 1,
+        },
+      },
+    },
+  ]);
+
+  if (!profile) {
+    throw new ApiError(500, "Something went wrong");
+  }
+
+  return res
+    .status(200)
+    .json(
+      new ApiResponse(200, { profile }, "Successfully fetched lawyer details")
+    );
+});
+
 export {
   addDetails,
   editDetails,
   getProfileById,
   getAllLawyers,
   getProfileByUserId,
+  getLawyerWithActivate,
+  getProfileBySearch,
+  activateLawyerAccount,
+  deactivateLawyerAccount,
 };

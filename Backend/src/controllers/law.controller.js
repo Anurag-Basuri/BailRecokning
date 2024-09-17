@@ -184,7 +184,7 @@ const getAllLaws = asyncHandler(async (req, res) => {
     throw new ApiError(500, "something went wrong");
   }
 
-  return res.status(200).json();
+  return res.status(200).json(new ApiResponse(200,{law},"fetched all the laws form the database"));
 });
 
 export {

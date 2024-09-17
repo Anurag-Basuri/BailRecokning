@@ -8,7 +8,7 @@ export default function LegalAid() {
 	useEffect(() => {
 		try {
 			const func = async () => {
-				const response = await axios.get("/api/v1/profile/l/all");
+				const response = await axios.get("/api/v1/profile/l/all/active");
 				console.log(response.data.data.profile);
 				setLawyers(response.data.data.profile);
 			};

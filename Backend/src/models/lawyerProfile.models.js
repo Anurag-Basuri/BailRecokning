@@ -2,6 +2,10 @@ import mongoose, { Schema } from "mongoose";
 
 const lawyerProfileSchema = new mongoose.Schema(
   {
+    activate:{
+      type:Boolean,
+      default:false,
+    },
     userId: {
       type: Schema.Types.ObjectId,
       ref: "User",
