@@ -29,6 +29,7 @@ import IfNoBail from "./home/IfNoBail";
 import About from "../pages/about";
 import JudgeProfile from "./profile/Judge/JudgeProfile";
 import Timeline from "./bail/Timeline";
+import KYLaw from "./knowYourLaw/KYLaw";
 
 export {
 	AuthLayout,
@@ -62,4 +63,5 @@ export {
 	About,
 	JudgeProfile,
 	Timeline,
+	KYLaw
 };

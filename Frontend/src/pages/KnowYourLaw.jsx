@@ -1,12 +1,12 @@
-import React from 'react'
-import BailCharges from '../components/bail/BailCharges'
+import React from "react";
+import { KYLaw } from "../components";
 
 const KnowYourLaw = () => {
-  return (
-    <div className='mt-32'>
-        <BailCharges/>
-    </div>
-  )
-}
+	return (
+		<div className="mt-32 min-h-screen">
+			<KYLaw />
+		</div>
+	);
+};
 
-export default KnowYourLaw
+export default KnowYourLaw;

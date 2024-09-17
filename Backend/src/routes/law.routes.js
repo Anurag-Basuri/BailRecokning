@@ -14,6 +14,6 @@ router.route("/add").post(verifyJWT, addlaw);
 router.route("/a/addlaws").post(verifyJWT, addLaws);
 router.route("/:lawId").get(verifyJWT, getLawByID);
 router.route("/search/:section").get(verifyJWT, getLawBySearch);
-router.route("/searchs/law").post(verifyJWT, getLawsBySearch);
+router.route("/searchs/law").post( getLawsBySearch);
 
 export default router;

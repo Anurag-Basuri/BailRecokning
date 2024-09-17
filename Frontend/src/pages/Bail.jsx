@@ -18,7 +18,7 @@ const Bail = () => {
 
 	return (
 		<>
-			<div className="mx-auto w-full max-w-7xl mt-28 rounded overflow-hidden shadow-lg">
+			<div className="mx-auto w-full max-w-7xl min-h-screen mt-28 rounded overflow-hidden shadow-lg">
 				<div className="border-b border-gray-200 dark:border-gray-700">
 					<ul className="flex flex-wrap text-sm font-medium text-center text-gray-500 dark:text-gray-400">
 						<li className="w-full sm:w-auto mb-2 sm:mb-0">

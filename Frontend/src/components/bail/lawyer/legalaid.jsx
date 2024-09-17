@@ -4,14 +4,13 @@ import RowDataCard from "./RowDataCard";
 import axios from "axios";
 
 export default function LegalAid() {
-
 	const [lawyers, setLawyers] = useState([]);
 	useEffect(() => {
 		try {
 			const func = async () => {
 				const response = await axios.get("/api/v1/profile/l/all");
 				console.log(response.data.data.profile);
-				setLawyers(response.data.data.profile)
+				setLawyers(response.data.data.profile);
 			};
 			func();
 		} catch (error) {
@@ -21,8 +20,8 @@ export default function LegalAid() {
 
 	return (
 		<div>
-			<div className="flex flex-row justify-center items-center">
-				<h1>Search </h1>
+			<div className="flex flex-row justify-center p-3 space-x-5 items-center mx-auto w-2/3 bg-red-100 border rounded-2xl m-3 ">
+				<h1 className="hidden md:block lg:block">Search </h1>
 				<input
 					className="border w-full p-2 rounded"
 					type="text"

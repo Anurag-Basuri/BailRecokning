@@ -152,12 +152,11 @@ const getLawBySearch = asyncHandler(async (req, res) => {
 const getLawsBySearch = asyncHandler(async (req, res) => {
   const { sections } = req.body;
 
-  console.log(sections);
   if (!sections || sections.length === 0) {
     throw new ApiError(400, "No sections provided");
   }
 
-  const searchTerms = sections.map((section) => section.toLowerCase());
+  const searchTerms = sections.map((section) => section.charge.toLowerCase());
 
   const laws = await Law.aggregate([
     {

@@ -157,7 +157,7 @@ const Navabar = ({ darkMode }) => {
 												: "text-blue-500"
 										} block py-2 px-3 rounded md:bg-transparent bg-gray-200  md:hover:bg-gray-800 md:p-2`
 									}>
-									Bail Eligiblity
+									Create Bail Application
 								</NavLink>
 							</li>
 							<li>

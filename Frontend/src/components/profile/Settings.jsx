@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 
@@ -98,9 +98,9 @@ const Settings = () => {
 					onClick={() => setshowChangeEmail((prev) => !prev)}>
 					<span>Change Email and Name</span>
 				</li>
-				<li className=" flex items-center justify-center py-3 text-sm">
+				<li className=" py-3 text-sm">
 					{showChangeEmail ? (
-						<div className="rounded-lg w-2/3 border bg-white px-4 pt-8 pb-10 shadow-lg">
+						<div className="rounded-lg border bg-white px-4 pt-8 pb-10 shadow-lg">
 							<div className="relative mx-auto  rounded-full">
 								<form
 									onSubmit={handleSubmit(updateAccount)}
@@ -108,7 +108,7 @@ const Settings = () => {
 									action="#">
 									<div>
 										<label
-											htmlFor="password"
+											htmlFor="fullName"
 											className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
 											New Name
 										</label>
@@ -131,7 +131,7 @@ const Settings = () => {
 										</label>
 										<input
 											type="text"
-											name="fullName"
+											name="password"
 											className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 											placeholder="Enter your New Password"
 											{...register("NewPassword", {
