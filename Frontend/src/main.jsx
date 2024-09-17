@@ -13,6 +13,7 @@ import Home from "./pages/Home.jsx";
 import Bail from "./pages/Bail.jsx";
 import Profile from "./pages/Profile.jsx";
 import LawyerInfo from "./pages/LawyerInfo.jsx";
+import About from "./pages/About.jsx";
 
 const router = createBrowserRouter([
 	{
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
 			{
 				path: "/",
 				element: <Home />,
+			},
+			{
+				path: "/About",
+				element: <About />,
 			},
 			{
 				path: "/login",

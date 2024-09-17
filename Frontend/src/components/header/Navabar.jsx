@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../app/authSlice";
@@ -159,6 +160,16 @@ const Navabar = ({ darkMode }) => {
 										} block py-2 px-3 rounded md:bg-transparent bg-gray-200  md:hover:bg-gray-800 md:p-2`
 									}>
 									Bail Eligiblity
+								</NavLink>
+							</li>
+							<li>
+								<NavLink to = "/About"
+									className={({ isActive }) =>
+										` ${
+											isActive ? "text-blue-700" : "text-blue-500"
+										} block py-2 px-3 rounded md:bg-transparent bg-gray-200  md:hover:bg-gray-800 md:p-2`
+									}>
+									About
 								</NavLink>
 							</li>
 							<li>
