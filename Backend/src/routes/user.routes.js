@@ -8,9 +8,10 @@ import {
   getCurrentUser,
   updateAccountDetails,
   getAllJudges,
-  getAllLawyers,
+  getAllLawyersWithActivate,
   updateUserAvatar,
   toggleMode,
+  searchLawyersWithActivate,
 } from "../controllers/user.controller.js";
 import { upload } from "../middleware/multer.middleware.js";
 import { verifyJWT } from "../middleware/auth.middleware.js";
@@ -24,14 +25,15 @@ router.route("/login").post(loginUser);
 // secure routes
 router.route("/logout").post(verifyJWT, logoutUser);
 router.route("/current-user").get(verifyJWT, getCurrentUser);
-router.route("/allLawyers").get(verifyJWT, getAllLawyers);
+router.route("/allLawyers").get(verifyJWT, getAllLawyersWithActivate);
 router.route("/allJudge").get(verifyJWT, getAllJudges);
 router.route("/change-password").post(verifyJWT, changeCurrentPassword);
 router.route("/refreshToken").post(refreshAccessToken);
 router.route("/update-account").patch(verifyJWT, updateAccountDetails);
 router
-.route("/upload-profile-photo")
-.post(verifyJWT, upload.single("avatar"), updateUserAvatar);
+  .route("/upload-profile-photo")
+  .post(verifyJWT, upload.single("avatar"), updateUserAvatar);
 router.route("/toggleMode").get(verifyJWT, toggleMode);
+router.route("/searchLawyer").post(searchLawyersWithActivate);
 
 export default router;

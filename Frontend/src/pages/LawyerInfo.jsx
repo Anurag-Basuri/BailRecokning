@@ -6,9 +6,9 @@ import { useParams } from "react-router-dom";
 const LawyerInfo = () => {
 	const { profileId } = useParams();
 	const [lawyer, setLawyer] = useState([]);
-    
+
 	useEffect(() => {
-		const getInfo = async (req, res) => {
+		const getInfo = async () => {
 			try {
 				const response = await axios.get("/api/v1/profile/" + profileId);
 				console.log(response.data.data.profile);

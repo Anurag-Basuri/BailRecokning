@@ -267,6 +267,61 @@ const getAllLawyers = asyncHandler(async (req, res) => {
     .status(200)
     .json(new ApiResponse(200, user, "Successfully fetched all the lawyers"));
 });
+const getAllLawyersWithActivate = asyncHandler(async (req, res) => {
+  const user = await User.aggregate([
+    {
+      $lookup: {
+        from: "lawyerprofiles",
+        localField: "_id",
+        foreignField: "userId",
+        as: "profile",
+      },
+    },
+    {
+      $unwind: {
+        path: "$profile",
+        preserveNullAndEmptyArrays: false,
+      },
+    },
+    {
+      $match: {
+        "profile.activate": true,
+      },
+    },
+    {
+      $project: {
+        email: 1,
+        fullName: 1,
+        avatar: 1,
+        role: 1,
+        profile: {
+          specialization: 1,
+          license: 1,
+          websiteUrl: 1,
+          address: 1,
+          operatingHours: 1,
+          publications: 1,
+          awards: 1,
+          education: 1,
+          socialMedia: 1,
+          accreditation: 1,
+          experience: 1,
+          phone: 1,
+          languages: 1,
+          _id:1,
+        },
+      },
+    },
+  ]);
+
+  if (!user) {
+    throw new ApiError(500, "something went wrong");
+  }
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, user, "Successfully fetched all the lawyers"));
+});
 
 const getAllJudges = asyncHandler(async (req, res) => {
   const user = await User.aggregate([
@@ -321,6 +376,76 @@ const updateUserAvatar = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, { user }, "Updated avatar successfully"));
 });
 
+const searchLawyersWithActivate = asyncHandler(async (req, res) => {
+  const { search } = req.body;
+
+  const trimmedSearch = search.trim();
+
+  // Perform the aggregation
+  const user = await User.aggregate([
+    {
+      $match: {
+        fullName: { $regex: `^${trimmedSearch}`, $options: "i" },
+      },
+    },
+    {
+      $lookup: {
+        from: "lawyerprofiles",
+        localField: "_id",
+        foreignField: "userId",
+        as: "profile",
+      },
+    },
+    {
+      $unwind: {
+        path: "$profile",
+        preserveNullAndEmptyArrays: false,
+      },
+    },
+    {
+      $match: {
+        "profile.activate": true,
+      },
+    },
+    {
+      $project: {
+        email: 1,
+        fullName: 1,
+        avatar: 1,
+        role: 1,
+        profile: {
+          specialization: 1,
+          license: 1,
+          websiteUrl: 1,
+          address: 1,
+          operatingHours: 1,
+          publications: 1,
+          awards: 1,
+          education: 1,
+          socialMedia: 1,
+          accreditation: 1,
+          experience: 1,
+          phone: 1,
+          languages: 1,
+        },
+      },
+    },
+  ]);
+
+  if (!user) {
+    throw new ApiError(500, "something went wrong");
+  }
+
+  return res
+    .status(200)
+    .json(
+      new ApiResponse(
+        200,
+        { user },
+        "fetched searched activated lawyers successfully"
+      )
+    );
+});
 const toggleMode = asyncHandler(async (req, res) => {
   const user = await User.findByIdAndUpdate(
     req.user._id,
@@ -351,4 +476,6 @@ export {
   getAllJudges,
   updateUserAvatar,
   toggleMode,
+  searchLawyersWithActivate,
+  getAllLawyersWithActivate,
 };

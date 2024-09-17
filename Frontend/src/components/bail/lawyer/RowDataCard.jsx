@@ -7,23 +7,23 @@ const RowDataCard = ({ provider }) => {
 	return (
 		<div
 			className="mx-auto w-2/3 bg-red-100 border rounded-2xl m-3  "
-			onClick={() => navigate("/p/profile/"+provider._id)}>
+			onClick={() => navigate("/p/profile/" + provider.profile._id)}>
 			<div className="flex p-3 justify-between gap-x-6 py-5">
 				<div className="flex min-w-0 gap-x-4">
 					<img
-						alt={provider.userInfo.fullName}
-						src={provider.userInfo.avatar}
+						alt={provider.fullName}
+						src={provider.avatar}
 						className="h-12 w-12 flex-none rounded-full bg-gray-50"
 					/>
 					<div className="min-w-0 flex-auto">
 						<p className="text-sm font-semibold leading-6 text-gray-900">
-							{provider.userInfo.fullName}
+							{provider.fullName}
 						</p>
 						<p className="mt-1 truncate text-xs leading-5 text-gray-500">
-							{provider.userInfo.email}
+							{provider.email}
 						</p>
 						<p className="mt-1 truncate text-xs leading-5 text-gray-500">
-							{provider.phone}
+							{provider.profile.phone}
 						</p>
 						{/* <p className="mt-1 truncate text-xs leading-5 text-gray-500">
 							{provider.Specialization}
@@ -34,8 +34,8 @@ const RowDataCard = ({ provider }) => {
 					<p className="text-sm leading-6 text-gray-900">{provider.role}</p>
 					{provider.OperatingHours ? (
 						<p className="mt-1 text-xs leading-5 text-gray-500">
-							Weekdays: {provider.OperatingHours.weekdays} <br />
-							Weekends: {provider.OperatingHours.weekends}
+							Weekdays: {provider.profile.operatingHours.weekdays} <br />
+							Weekends: {provider.profile.operatingHours.weekends}
 						</p>
 					) : (
 						<div className="mt-1 flex items-center gap-x-1.5">

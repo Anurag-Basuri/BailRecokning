@@ -5,12 +5,28 @@ import axios from "axios";
 
 export default function LegalAid() {
 	const [lawyers, setLawyers] = useState([]);
+	const [searchText, setSearchText] = useState("");
+
+	const searchlawyers = async () => {
+		const response = await axios.post("/api/v1/user/searchLawyer", {
+			search: searchText,
+		});
+		console.log(response.data.data.user);
+		setLawyers(response.data.data.user);
+		// setSearchText("")
+	};
+
+	const onChangeHandler = (event) => {
+		const value = event.target.value;
+		setSearchText(value);
+	};
+
 	useEffect(() => {
 		try {
 			const func = async () => {
-				const response = await axios.get("/api/v1/profile/l/all/active");
-				console.log(response.data.data.profile);
-				setLawyers(response.data.data.profile);
+				const response = await axios.get("/api/v1/user/allLawyers");
+				console.log(response.data.data);
+				setLawyers(response.data.data);
 			};
 			func();
 		} catch (error) {
@@ -25,12 +41,13 @@ export default function LegalAid() {
 				<input
 					className="border w-full p-2 rounded"
 					type="text"
-					name=""
-					id=""
+					value={searchText}
+					onChange={onChangeHandler}
 				/>
 				<button
 					type="button"
-					class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+					onClick={() => searchlawyers()}
+					className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
 					Submit
 				</button>
 			</div>

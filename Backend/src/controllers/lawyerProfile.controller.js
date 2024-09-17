@@ -211,11 +211,11 @@ const getProfileBySearch = asyncHandler(async (req, res) => {
         from: "users",
         localField: "userId",
         foreignField: "_id",
-        as: "user",
+        as: "userInfo",
       },
     },
     {
-      $unwind: "$user",
+      $unwind: "$userInfo",
     },
     {
       $match: {
