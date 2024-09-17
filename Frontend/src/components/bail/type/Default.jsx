@@ -1,17 +1,19 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 
-const Regular = () => {
+const Default = () => {
 	const [formData, setFormData] = useState({
+		bailApplication: "",
 		firCopy: "",
-		chargeSheet: "",
-		courtSummons: "",
-		personalBond: "",
-		affidavit: "",
-		identityProof: "",
-		addressProof: "",
-		backgroundInfo: "",
-		passport: "",
+		remandOrder: "",
+		custodyCertificate: "",
+		nonFilingChargeSheet: "",
+		caseDiary: "",
+		bailBond: "",
+		accusedIdentification: "",
+		suretyDocuments: "",
+		vakalatnama: "",
+		judicialOrders: "",
 	});
 
 	const handleInputChange = (e) => {
@@ -33,124 +35,145 @@ const Regular = () => {
 	return (
 		<div className="min-h-screen bg-white p-10 h-full w-full">
 			<form className="space-y-10">
-				{/* FIR Copy */}
+				{/* Bail Application */}
 				<div>
 					<label className="block text-blue-700 font-medium mb-2">
-						FIR Copy
+						Bail Application (under Section 167(2) CrPC)
+					</label>
+					<input
+						type="file"
+						name="bailApplication"
+						onChange={handleFileChange}
+						className="w-full border border-blue-300 rounded-md focus:outline-none"
+						required
+					/>
+				</div>
+
+				{/* Copy of FIR */}
+				<div>
+					<label className="block text-blue-700 font-medium mb-2">
+						Copy of FIR
 					</label>
 					<input
 						type="file"
 						name="firCopy"
 						onChange={handleFileChange}
 						className="w-full border border-blue-300 rounded-md focus:outline-none"
-						required
 					/>
 				</div>
 
-				{/* Charge Sheet */}
+				{/* Remand or Custody Order */}
 				<div>
 					<label className="block text-blue-700 font-medium mb-2">
-						Charge Sheet
+						Remand or Custody Order
 					</label>
 					<input
 						type="file"
-						name="chargeSheet"
-						onChange={handleFileChange}
-						className="w-full border border-blue-300 rounded-md focus:outline-none"
-						required
-					/>
-				</div>
-
-				{/* Court Summons */}
-				<div>
-					<label className="block text-blue-700 font-medium mb-2">
-						Court Summons/Order
-					</label>
-					<input
-						type="file"
-						name="courtSummons"
+						name="remandOrder"
 						onChange={handleFileChange}
 						className="w-full border border-blue-300 rounded-md focus:outline-none"
 					/>
 				</div>
 
-				{/* Personal Bond */}
+				{/* Custody Certificate */}
 				<div>
 					<label className="block text-blue-700 font-medium mb-2">
-						Personal Bond/Surety Bond
+						Custody Certificate
 					</label>
 					<input
 						type="file"
-						name="personalBond"
+						name="custodyCertificate"
 						onChange={handleFileChange}
 						className="w-full border border-blue-300 rounded-md focus:outline-none"
-						required
 					/>
 				</div>
 
-				{/* Affidavit */}
+				{/* Non-Filing of Charge Sheet (if available) */}
 				<div>
 					<label className="block text-blue-700 font-medium mb-2">
-						Affidavit
+						Non-Filing of Charge Sheet (if available)
 					</label>
 					<input
 						type="file"
-						name="affidavit"
+						name="nonFilingChargeSheet"
 						onChange={handleFileChange}
 						className="w-full border border-blue-300 rounded-md focus:outline-none"
-						required
 					/>
 				</div>
 
-				{/* Identity Proof */}
+				{/* Case Diary or Police Report */}
 				<div>
 					<label className="block text-blue-700 font-medium mb-2">
-						Identity Proof
+						Case Diary or Police Report
 					</label>
 					<input
 						type="file"
-						name="identityProof"
+						name="caseDiary"
 						onChange={handleFileChange}
 						className="w-full border border-blue-300 rounded-md focus:outline-none"
-						required
 					/>
 				</div>
 
-				{/* Address Proof */}
+				{/* Bail Bond/Surety Documents */}
 				<div>
 					<label className="block text-blue-700 font-medium mb-2">
-						Address Proof
+						Bail Bond/Surety Documents
 					</label>
 					<input
 						type="file"
-						name="addressProof"
+						name="bailBond"
 						onChange={handleFileChange}
 						className="w-full border border-blue-300 rounded-md focus:outline-none"
-						required
 					/>
 				</div>
 
-				{/* Background Information */}
+				{/* Personal Identification Documents of the Accused */}
 				<div>
 					<label className="block text-blue-700 font-medium mb-2">
-						Background Information (if applicable)
-					</label>
-					<textarea
-						name="backgroundInfo"
-						value={formData.backgroundInfo}
-						onChange={handleInputChange}
-						className="w-full px-4 py-2 border border-blue-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-						placeholder="Enter background details (if applicable)"></textarea>
-				</div>
-
-				{/* Passport */}
-				<div>
-					<label className="block text-blue-700 font-medium mb-2">
-						Passport (if required)
+						Personal Identification Documents of the Accused
 					</label>
 					<input
 						type="file"
-						name="passport"
+						name="accusedIdentification"
+						onChange={handleFileChange}
+						className="w-full border border-blue-300 rounded-md focus:outline-none"
+					/>
+				</div>
+
+				{/* Surety Documents */}
+				<div>
+					<label className="block text-blue-700 font-medium mb-2">
+						Surety Documents (ID, Address Proof, Financial Capacity)
+					</label>
+					<input
+						type="file"
+						name="suretyDocuments"
+						onChange={handleFileChange}
+						className="w-full border border-blue-300 rounded-md focus:outline-none"
+					/>
+				</div>
+
+				{/* Vakalatnama */}
+				<div>
+					<label className="block text-blue-700 font-medium mb-2">
+						Vakalatnama (Power of Attorney)
+					</label>
+					<input
+						type="file"
+						name="vakalatnama"
+						onChange={handleFileChange}
+						className="w-full border border-blue-300 rounded-md focus:outline-none"
+					/>
+				</div>
+
+				{/* Relevant Judicial Orders or Affidavits (if any) */}
+				<div>
+					<label className="block text-blue-700 font-medium mb-2">
+						Relevant Judicial Orders or Affidavits (if any)
+					</label>
+					<input
+						type="file"
+						name="judicialOrders"
 						onChange={handleFileChange}
 						className="w-full border border-blue-300 rounded-md focus:outline-none"
 					/>
@@ -160,4 +183,4 @@ const Regular = () => {
 	);
 };
 
-export default Regular;
+export default Default;

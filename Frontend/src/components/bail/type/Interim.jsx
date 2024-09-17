@@ -1,17 +1,18 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 
-const Regular = () => {
+const Interim = () => {
 	const [formData, setFormData] = useState({
+		bailApplication: "",
 		firCopy: "",
 		chargeSheet: "",
-		courtSummons: "",
-		personalBond: "",
 		affidavit: "",
+		personalBond: "",
 		identityProof: "",
 		addressProof: "",
-		backgroundInfo: "",
-		passport: "",
+		medicalRecords: "",
+		courtOrders: "",
+		legalRepresentation: "",
 	});
 
 	const handleInputChange = (e) => {
@@ -33,6 +34,20 @@ const Regular = () => {
 	return (
 		<div className="min-h-screen bg-white p-10 h-full w-full">
 			<form className="space-y-10">
+				{/* Interim Bail Application */}
+				<div>
+					<label className="block text-blue-700 font-medium mb-2">
+						Interim Bail Application
+					</label>
+					<input
+						type="file"
+						name="bailApplication"
+						onChange={handleFileChange}
+						className="w-full border border-blue-300 rounded-md focus:outline-none"
+						required
+					/>
+				</div>
+
 				{/* FIR Copy */}
 				<div>
 					<label className="block text-blue-700 font-medium mb-2">
@@ -43,48 +58,19 @@ const Regular = () => {
 						name="firCopy"
 						onChange={handleFileChange}
 						className="w-full border border-blue-300 rounded-md focus:outline-none"
-						required
 					/>
 				</div>
 
-				{/* Charge Sheet */}
+				{/* Charge Sheet or Complaint Details */}
 				<div>
 					<label className="block text-blue-700 font-medium mb-2">
-						Charge Sheet
+						Charge Sheet or Complaint Details
 					</label>
 					<input
 						type="file"
 						name="chargeSheet"
 						onChange={handleFileChange}
 						className="w-full border border-blue-300 rounded-md focus:outline-none"
-						required
-					/>
-				</div>
-
-				{/* Court Summons */}
-				<div>
-					<label className="block text-blue-700 font-medium mb-2">
-						Court Summons/Order
-					</label>
-					<input
-						type="file"
-						name="courtSummons"
-						onChange={handleFileChange}
-						className="w-full border border-blue-300 rounded-md focus:outline-none"
-					/>
-				</div>
-
-				{/* Personal Bond */}
-				<div>
-					<label className="block text-blue-700 font-medium mb-2">
-						Personal Bond/Surety Bond
-					</label>
-					<input
-						type="file"
-						name="personalBond"
-						onChange={handleFileChange}
-						className="w-full border border-blue-300 rounded-md focus:outline-none"
-						required
 					/>
 				</div>
 
@@ -102,10 +88,24 @@ const Regular = () => {
 					/>
 				</div>
 
+				{/* Personal Bond/Surety Bond */}
+				<div>
+					<label className="block text-blue-700 font-medium mb-2">
+						Personal Bond/Surety Bond
+					</label>
+					<input
+						type="file"
+						name="personalBond"
+						onChange={handleFileChange}
+						className="w-full border border-blue-300 rounded-md focus:outline-none"
+						required
+					/>
+				</div>
+
 				{/* Identity Proof */}
 				<div>
 					<label className="block text-blue-700 font-medium mb-2">
-						Identity Proof
+						Identity Proof (Aadhaar, PAN, Passport, etc.)
 					</label>
 					<input
 						type="file"
@@ -130,34 +130,47 @@ const Regular = () => {
 					/>
 				</div>
 
-				{/* Background Information */}
+				{/* Medical Records (if applicable) */}
 				<div>
 					<label className="block text-blue-700 font-medium mb-2">
-						Background Information (if applicable)
-					</label>
-					<textarea
-						name="backgroundInfo"
-						value={formData.backgroundInfo}
-						onChange={handleInputChange}
-						className="w-full px-4 py-2 border border-blue-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-						placeholder="Enter background details (if applicable)"></textarea>
-				</div>
-
-				{/* Passport */}
-				<div>
-					<label className="block text-blue-700 font-medium mb-2">
-						Passport (if required)
+						Medical Records (if applicable)
 					</label>
 					<input
 						type="file"
-						name="passport"
+						name="medicalRecords"
 						onChange={handleFileChange}
 						className="w-full border border-blue-300 rounded-md focus:outline-none"
 					/>
+				</div>
+
+				{/* Court Orders (if applicable) */}
+				<div>
+					<label className="block text-blue-700 font-medium mb-2">
+						Court Orders (if applicable)
+					</label>
+					<input
+						type="file"
+						name="courtOrders"
+						onChange={handleFileChange}
+						className="w-full border border-blue-300 rounded-md focus:outline-none"
+					/>
+				</div>
+
+				{/* Legal Representation Details */}
+				<div>
+					<label className="block text-blue-700 font-medium mb-2">
+						Legal Representation Details
+					</label>
+					<textarea
+						name="legalRepresentation"
+						value={formData.legalRepresentation}
+						onChange={handleInputChange}
+						className="w-full px-4 py-2 border border-blue-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+						placeholder="Enter lawyer's or legal representative's details"></textarea>
 				</div>
 			</form>
 		</div>
 	);
 };
 
-export default Regular;
+export default Interim;

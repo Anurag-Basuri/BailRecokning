@@ -2,6 +2,9 @@
 /* eslint-disable react/no-unescaped-entities */
 import { React, useState } from "react";
 import Regular from "./type/Regular";
+import Anticipatory from "./type/Anticipatory";
+import Interim from "./type/Interim";
+import Default from "./type/Default";
 
 export default function DocValidation() {
 	const [currentTab, setCurrentTab] = useState("RegularBail");
@@ -100,9 +103,9 @@ export default function DocValidation() {
 					</div>
 
 					{currentTab === "RegularBail" ? <Regular /> : ""}
-					{currentTab === "Settings" ? <Settings /> : ""}
-					{currentTab === "Contact" ? <Contact /> : ""}
-					{currentTab === "DashBoard" ? <PreviousCase /> : ""}
+					{currentTab === "AnticipatoryBail" ? <Anticipatory /> : ""}
+					{currentTab === "InterimBail" ? <Interim /> : ""}
+					{currentTab === "DefaultBail" ? <Default /> : ""}
 
 					{/* Submit and Cancel Buttons */}
 					<div className="border-t border-gray-200 pt-8">
