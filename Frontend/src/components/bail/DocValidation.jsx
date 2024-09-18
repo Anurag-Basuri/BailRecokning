@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-vars */
-/* eslint-disable react/no-unescaped-entities */
 import { React, useState } from "react";
 import Regular from "./type/Regular";
 import Anticipatory from "./type/Anticipatory";
@@ -15,10 +14,10 @@ export default function DocValidation() {
 	};
 
 	return (
-		<div className="min-h-screen flex justify-center items-center bg-blue-50 px-4 sm:px-6 lg:px-8">
-			<div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-3xl">
+		<div className="min-h-screen flex justify-center items-center px-4 sm:px-6 lg:px-8 w-full">
+			<div className="bg-white p-8 w-full max-w-3xl">
 				<h2 className="text-2xl font-bold text-indigo-600 mb-6 text-center">
-					Bail Application Form
+					Document Form
 				</h2>
 				<form onSubmit={handleFormSubmit}>
 					<div className="border-b border-gray-200 pb-8 md:pb-12">

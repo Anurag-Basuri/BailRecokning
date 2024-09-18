@@ -122,13 +122,15 @@ const UserForm = () => {
 	} = formState;
 
 	return (
-		<form className="p-10" onSubmit={handleSubmit}>
+		<form
+			className="p-10 mx-auto max-w-4xl bg-white"
+			onSubmit={handleSubmit}>
 			{/* Personal Information */}
 			<div className="border-b border-gray-900/10 pb-12">
 				<h2 className="text-base font-semibold leading-7 text-gray-900">
 					Personal Information (Aadhaar Fetched)
 				</h2>
-				<div className="mt-3 p-4 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+				<div className="mt-3 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2 md:grid-cols-3">
 					<InputField
 						id="fullname"
 						name="fullname"
@@ -197,7 +199,7 @@ const UserForm = () => {
 					</label>
 				</div>
 				<div
-					className={`grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 ${
+					className={`grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2 ${
 						useBackendAddress ? "opacity-50" : ""
 					}`}>
 					<SelectField
@@ -240,7 +242,7 @@ const UserForm = () => {
 				<h2 className="text-base font-semibold leading-7 text-gray-900">
 					Case Details
 				</h2>
-				<div className="mt-3 p-4 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+				<div className="mt-3 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2 md:grid-cols-3">
 					<div className="col-span-full">
 						<label
 							htmlFor="offense-description"
@@ -340,7 +342,7 @@ const UserForm = () => {
 				<h2 className="text-base font-semibold leading-7 text-gray-900">
 					Family Dependents
 				</h2>
-				<div className="mt-3 p-4 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+				<div className="mt-3 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2 md:grid-cols-3">
 					<SelectField
 						id="dependents"
 						name="dependents"
@@ -363,40 +365,109 @@ const UserForm = () => {
 									{ value: "Yes", label: "Yes" },
 									{ value: "No", label: "No" },
 								]}
-								label="Do you have parents?"
+								label="Dependents (Mother/Father)"
 							/>
 							<SelectField
-								id="isMarried"
-								name="isMarried"
-								value={formState.isMarried}
+								id="hasWifeChildren"
+								name="hasWifeChildren"
+								value={formState.hasWifeChildren}
 								onChange={handleChange}
 								options={[
 									{ value: "Yes", label: "Yes" },
 									{ value: "No", label: "No" },
 								]}
-								label="Are you married?"
+								label="Dependents (Wife/Children)"
 							/>
-							{formState.isMarried === "Yes" && (
-								<InputField
-									id="childrenCount"
-									name="childrenCount"
-									type="number"
-									placeholder="Number of children"
-									value={formState.childrenCount}
-									onChange={handleChange}
-									label="Number of Children"
-								/>
-							)}
+							<SelectField
+								id="hasOtherDependents"
+								name="hasOtherDependents"
+								value={formState.hasOtherDependents}
+								onChange={handleChange}
+								options={[
+									{ value: "Yes", label: "Yes" },
+									{ value: "No", label: "No" },
+								]}
+								label="Other Dependents"
+							/>
 						</>
 					)}
 				</div>
 			</div>
 
+			{/* Case History */}
+			<div className="border-b border-gray-900/10 pb-12 mt-12">
+				<h2 className="text-base font-semibold leading-7 text-gray-900">
+					Case History
+				</h2>
+				<div className="mt-3 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2 md:grid-cols-3">
+					<SelectField
+						id="previousBail"
+						name="previousBail"
+						value={formState.previousBail}
+						onChange={handleChange}
+						options={[
+							{ value: "Yes", label: "Yes" },
+							{ value: "No", label: "No" },
+						]}
+						label="Has Previous Bail"
+					/>
+					{formState.previousBail === "Yes" && (
+						<InputField
+							id="bailDetails"
+							name="bailDetails"
+							type="text"
+							placeholder="Details of previous bail"
+							value={formState.bailDetails}
+							onChange={handleChange}
+							label="Previous Bail Details"
+						/>
+					)}
+					<SelectField
+						id="currentStatus"
+						name="currentStatus"
+						value={formState.currentStatus}
+						onChange={handleChange}
+						options={[
+							{ value: "UnderTrial", label: "Under Trial" },
+							{ value: "Convicted", label: "Convicted" },
+							{ value: "Acquitted", label: "Acquitted" },
+						]}
+						label="Current Status"
+					/>
+					<InputField
+						id="caseNumber"
+						name="caseNumber"
+						type="text"
+						placeholder="Case Number"
+						value={formState.caseNumber}
+						onChange={handleChange}
+						label="Case Number"
+					/>
+				</div>
+			</div>
+
+			{/* Notes */}
+			<div className="mt-12">
+				<h2 className="text-base font-semibold leading-7 text-gray-900">
+					Additional Notes
+				</h2>
+				<div className="mt-2">
+					<textarea
+						id="additionalNotes"
+						name="additionalNotes"
+						rows="4"
+						placeholder="Any additional information or notes"
+						value={formState.additionalNotes}
+						onChange={handleChange}
+						className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
+				</div>
+			</div>
+
 			{/* Submit Button */}
-			<div className="mt-6 flex justify-end">
+			<div className="mt-8 flex justify-end">
 				<button
 					type="submit"
-					className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+					className="inline-flex items-center px-4 py-2 text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
 					Submit
 				</button>
 			</div>

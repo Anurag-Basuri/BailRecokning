@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react-refresh/only-export-components */
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
@@ -9,9 +10,9 @@ const Home = ({ darkMode }) => {
 	return (
 		<>
 			<AllBailHome />
-			<div className="h-80v px-6 pt-4 pb-2  mt-16 flex flex-row flex-wrap justify-center mx-auto w-full">
+			{/* <div className="h-80v px-6 pt-4 pb-2  mt-16 flex flex-row flex-wrap justify-center mx-auto w-full">
 				api support docs
-			</div>
+			</div> */}
 		</>
 	);
 };
