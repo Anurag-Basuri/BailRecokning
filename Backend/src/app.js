@@ -27,6 +27,7 @@ import pronouncementRouter from "./routes/pronouncement.routes.js";
 import similarRouter from "./routes/similarCase.routes.js";
 import previousRouter from "./routes/previousCase.routes.js";
 import lawyerProfileRouter from "./routes/lawyerProfile.routes.js"
+import timelineRouter from "./routes/timeline.routes.js"
 
 // routes declaration
 app.use("/api/v1/user", userRouter);
@@ -39,5 +40,6 @@ app.use("/api/v1/pronouncement", pronouncementRouter);
 app.use("/api/v1/similar", similarRouter);
 app.use("/api/v1/previous", previousRouter);
 app.use("/api/v1/profile", lawyerProfileRouter);
+app.use("/api/v1/timeline", timelineRouter);
 
 export { app };
