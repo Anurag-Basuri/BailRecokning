@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, connect } from "react-redux";
 import { HomeCard, RenameCard, DisplayBox, IfNoBail } from "../index.js";
 import axios from "axios";
+import CreateNewBail from "./CreateNewBail.jsx";
 
 const AllBailHome = ({ darkMode }) => {
 	const [allUserBails, setAllUserBails] = useState([]);
@@ -116,13 +117,16 @@ const AllBailHome = ({ darkMode }) => {
 						? "bg-gradient-to-b from-gray-900 via-gray-800 to-gray-700 text-gray-300"
 						: "bg-white text-black"
 				}`}>
+				{/* <div className="px-6 pt-4 pb-2 mx-auto flex flex-wrap justify-center w-full transition-all duration-300">
+					{allUserBails.length != 0 ? <CreateNewBail /> : ""}
+				</div> */}
 				{allUserBails.length === 0 ? (
 					<IfNoBail />
 				) : (
 					allUserBails.map((fon, index) => {
 						return (
 							<div
-								className="m-4 text-xl transition-transform duration-200 hover:scale-105 shadow-lg"
+								className="m-4 text-sm first-letter:transition-transform duration-200 hover:scale-105 shadow-lg"
 								key={index}>
 								<HomeCard
 									fon={fon}

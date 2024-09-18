@@ -30,6 +30,7 @@ import About from "../pages/about";
 import JudgeProfile from "./profile/Judge/JudgeProfile";
 import Timeline from "./bail/Timeline";
 import KYLaw from "./knowYourLaw/KYLaw";
+import CreateNewBail from "./home/CreateNewBail";
 
 export {
 	AuthLayout,
@@ -63,5 +64,6 @@ export {
 	About,
 	JudgeProfile,
 	Timeline,
-	KYLaw
+	KYLaw,
+	CreateNewBail,
 };

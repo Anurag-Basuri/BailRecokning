@@ -107,7 +107,7 @@ export default function DocValidation() {
 					{currentTab === "DefaultBail" ? <Default /> : ""}
 
 					{/* Submit and Cancel Buttons */}
-					<div className="border-t border-gray-200 pt-8">
+					{/* <div className="border-t border-gray-200 pt-8">
 						<div className="flex gap-x-4 justify-end">
 							<button
 								type="submit"
@@ -120,7 +120,7 @@ export default function DocValidation() {
 								Cancel
 							</button>
 						</div>
-					</div>
+					</div> */}
 				</form>
 			</div>
 		</div>

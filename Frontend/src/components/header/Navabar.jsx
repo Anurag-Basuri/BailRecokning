@@ -149,7 +149,7 @@ const Navabar = ({ darkMode }) => {
 									Home
 								</NavLink>
 							</li>
-							{/* <li>
+							<li>
 								<NavLink
 									onClick={() => addBail()}
 									className={({ isActive }) =>
@@ -161,7 +161,7 @@ const Navabar = ({ darkMode }) => {
 									}>
 									Create Bail Application
 								</NavLink>
-							</li> */}
+							</li>
 							<li>
 								<NavLink
 									to="/About"

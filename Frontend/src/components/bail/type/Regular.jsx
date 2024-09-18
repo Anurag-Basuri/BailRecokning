@@ -1,5 +1,5 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
+import axios from "axios"
 
 const Regular = () => {
 	const [formData, setFormData] = useState({
@@ -30,6 +30,12 @@ const Regular = () => {
 		});
 	};
 
+	const uploadRegularBail = async () => {
+		const response = await axios.post("/api/v1/bail/regularBail/"+ bailId);
+		console.log(response.data.data)
+	};
+
+	console.log(formData);
 	return (
 		<div className="min-h-screen bg-white p-10 h-full w-full">
 			<form className="space-y-10">
@@ -154,6 +160,16 @@ const Regular = () => {
 						onChange={handleFileChange}
 						className="w-full border border-blue-300 rounded-md focus:outline-none"
 					/>
+				</div>
+				<div className="border-t border-gray-200 pt-8">
+					<div className="flex gap-x-4 justify-end">
+						<button
+							type="submit"
+							onClick={() => uploadRegularBail()}
+							className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+							Upload
+						</button>
+					</div>
 				</div>
 			</form>
 		</div>
