@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import axios from "axios";
 
 function KYLaw() {
@@ -12,129 +11,141 @@ function KYLaw() {
 		setCharge(value);
 	};
 
-	const addCharge = async () => {
-		console.log("Add", allCharge);
-		setAllCharge((prev) => [...prev, { id: Date.now(), charge }]);
-		setCharge("");
+	const addCharge = () => {
+		if (charge) {
+			setAllCharge((prev) => [...prev, { id: Date.now(), charge }]);
+			setCharge("");
+		}
 	};
 
-	const removeCharges = async (id) => {
-		console.log("remove ", id);
-		setAllCharge((prev) => prev.filter((ch) => ch.id != id));
+	const removeCharges = (id) => {
+		setAllCharge((prev) => prev.filter((ch) => ch.id !== id));
 	};
-	console.log(allCharge);
 
 	useEffect(() => {
-		try {
-			const func = async () => {
+		const fetchLawDetails = async () => {
+			try {
 				const response = await axios.post("/api/v1/law/searchs/law", {
 					sections: allCharge,
 				});
-				console.log(response.data.data.laws);
 				setLawDetail(response.data.data.laws);
-			};
-			func();
-		} catch (error) {
-			console.log(error);
+			} catch (error) {
+				console.log(error);
+			}
+		};
+
+		if (allCharge.length > 0) {
+			fetchLawDetails();
 		}
-	}, [allCharge, addCharge, removeCharges]);
+	}, [allCharge]);
 
 	return (
-		<div className="mt-16 w-full flex flex-col flex-wrap h-80v px-6 pt-4 pb-2 justify-center mx-auto">
-			<div className="w-full flex flex-row flex-wrap justify-center mx-auto ">
-				<h1 className="hidden md:block lg:block">Add Charges</h1>
-				<input
-					type="text"
-					value={charge}
-					className={`px-3 mx-5 py-2 rounded-lg bg-white text-black outline-none focus:bg-gray-50 duration-200 border border-gray-200 w-1/2 `}
-					onChange={onchangeHandler}
-				/>
+		<div className="min-h-screen bg-gray-50 py-8">
+			<div className="container mx-auto p-6 shadow-lg rounded-lg bg-white">
+				<h1 className="text-3xl font-bold text-center text-gray-800 mb-6">
+					Know Your Law Charges
+				</h1>
 
-				<div
-					className="text-white inline mx-5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-					onClick={() => addCharge()}>
-					add
+				{/* Add Charge Section */}
+				<div className="w-full flex flex-col items-center mb-10">
+					<h2 className="text-lg font-semibold text-gray-700 mb-4">
+						Add Charges
+					</h2>
+					<div className="flex items-center w-full justify-center">
+						<input
+							type="text"
+							value={charge}
+							className="px-4 py-2 w-1/2 rounded-lg bg-gray-100 border border-gray-300 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition duration-200"
+							placeholder="Enter charge"
+							onChange={onchangeHandler}
+						/>
+						<button
+							className="ml-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-400 transition duration-200"
+							onClick={addCharge}>
+							Add Charge
+						</button>
+					</div>
+
+					{/* Display All Charges */}
+					<div className="mt-8 flex flex-wrap justify-center">
+						{allCharge.map((chargeItem) => (
+							<div
+								key={chargeItem.id}
+								className="flex items-center bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold px-4 py-2 rounded-lg mr-2 mb-2 shadow-lg transition transform hover:scale-105 cursor-pointer">
+								{chargeItem.charge}
+								<button
+									className="ml-2 px-2 text-sm bg-red-600 rounded-full"
+									onClick={() => removeCharges(chargeItem.id)}>
+									X
+								</button>
+							</div>
+						))}
+					</div>
+				</div>
+
+				{/* Law Details Section */}
+				<div className="w-full mt-10">
+					<h2 className="text-2xl font-bold text-gray-700 mb-6 text-center">
+						Charges Details
+					</h2>
+
+					{lawDetail.length > 0 ? (
+						<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+							{lawDetail.map((charge, id) => (
+								<div
+									key={id}
+									className="w-full bg-white shadow-md rounded-lg p-4 border border-gray-200 hover:shadow-lg transition-shadow duration-200">
+									<h3 className="text-xl font-semibold text-gray-800 mb-2">
+										{charge.lawName}
+									</h3>
+									<div className="text-gray-600 space-y-1">
+										<p>
+											<strong>Section:</strong> {charge.section}
+										</p>
+										<p>
+											<strong>Title:</strong> {charge.sectionTitle}
+										</p>
+										<p>
+											<strong>Description:</strong> {charge.sectionDesc}
+										</p>
+										<p>
+											<strong>Bailable:</strong>{" "}
+											{charge.bailable ? "Yes" : "No"}
+										</p>
+										<p>
+											<strong>Compoundable:</strong>{" "}
+											{charge.compoundable ? "Yes" : "No"}
+										</p>
+										<p>
+											<strong>Cognisable:</strong>{" "}
+											{charge.congnisable ? "Yes" : "No"}
+										</p>
+										<p>
+											<strong>Triable by Court:</strong> {charge.triableByCourt}
+										</p>
+										<p>
+											<strong>Penalty:</strong> {charge.penaltyDescription}
+										</p>
+										<p>
+											<strong>Punishment:</strong> {charge.punishment}
+										</p>
+										<p>
+											<strong>Exception:</strong> {charge.exception}
+										</p>
+										<p>
+											<strong>Fine:</strong> {charge.fineAmount}
+										</p>
+									</div>
+								</div>
+							))}
+						</div>
+					) : (
+						<p className="text-center text-gray-600">
+							No charges details available. Add some charges to view details.
+						</p>
+					)}
 				</div>
 			</div>
-			<div className="mt-12 mx-auto w-2/3 flex flex-row flex-wrap">
-				<div className="inline ">ALL Charges:- </div>
-				{allCharge.map((charge, id) => {
-					return (
-						<div className="flex mx-2" key={id}>
-							<div className="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
-								{charge.charge}{" "}
-								<span
-									className="p-2 hover:bg-gradient-to-br"
-									onClick={() => removeCharges(charge.id)}>
-									X
-								</span>
-							</div>
-						</div>
-					);
-				})}
-			</div>
-
-			<div className="mt-10 mx-auto w-2/3 flex flex-row flex-wrap">
-				Charges Details
-			</div>
-			{lawDetail.map((charge, id) => {
-				return (
-					<div
-						key={id}
-						className="w-full h-80v px-0 pt-4 pb-2 flex flex-row flex-wrap justify-center mx-auto md:w-2/3 lg:w-2/3 md:px-6 lg:px-6">
-						<div className="mt-3 w-full flex flex-col divide-y rounded bg-gray-100 py-2 px-3 text-gray-600 shadow-sm hover:text-gray-700 hover:shadow">
-							<div className="flex items-center py-3 text-sm">
-								<span>lawName</span>
-								<span className="ml-auto">{charge.lawName}</span>
-							</div>
-							<div className="flex items-center py-3 text-sm">
-								<span>Section</span>
-								<span className="ml-auto">{charge.section}</span>
-							</div>
-							<div className="flex items-center py-3 text-sm">
-								<span>sectionTitle</span>
-								<span className="ml-auto">{charge.sectionTitle}</span>
-							</div>
-							<div className="flex items-center py-3 text-sm">
-								<span>sectionDesc</span>
-								<span className="ml-auto">{charge.sectionDesc}</span>
-							</div>
-							<div className="flex items-center py-3 text-sm">
-								<span>bailable</span>
-								<span className="ml-auto">{charge.bailable}</span>
-							</div>
-							<div className="flex items-center py-3 text-sm">
-								<span>compoundable</span>
-								<span className="ml-auto">{charge.compoundable}</span>
-							</div>
-							<div className="flex items-center py-3 text-sm">
-								<span>congnisable</span>
-								<span className="ml-auto">{charge.congnisable}</span>
-							</div>
-							<div className="flex items-center py-3 text-sm">
-								<span>triableByCourt</span>
-								<span className="ml-auto">{charge.triableByCourt}</span>
-							</div>
-							<div className="flex items-center py-3 text-sm">
-								<span>penaltyDescription</span>
-								<span className="ml-auto">{charge.penaltyDescription}</span>
-							</div>
-							<div className="flex items-center py-3 text-sm">
-								<span> punishment</span>
-								<span className="ml-auto">{charge.punishment}</span>
-							</div>
-							<div className="flex items-center py-3 text-sm">
-								<span>exception</span>
-								<span className="ml-auto">{charge.exception}</span>
-							</div>
-							<div className="flex items-center py-3 text-sm">
-								<span>fineAmount</span>
-								<span className="ml-auto">{charge.fineAmount}</span>
-							</div>
-						</div>
-					</div>
-				);
-			})}
 		</div>
 	);
 }
