@@ -198,6 +198,7 @@ const updatePersonalDetails = asyncHandler(async (req, res) => {
 });
 
 const submitRegularBail = asyncHandler(async (req, res) => {
+  console.log(req.files);
   const { backgroundInformation, typeBail } = req.body;
   const firLocalPath = req.files?.firCopy[0].path;
   const chargeSheetLocalPath = req.files?.chargeSheet[0].path;
@@ -290,7 +291,7 @@ const submitRegularBail = asyncHandler(async (req, res) => {
 });
 
 const submitAnticipatoryBail = asyncHandler(async (req, res) => {
-  // console.log(req.files);
+  console.log(req.files);
   const antiAppLocalPath = req.files?.antiApp[0].path;
   const firLocalPath = req.files?.firCopy[0].path;
   const chargeSheetLocalPath = req.files?.chargeSheet[0].path;
@@ -299,7 +300,7 @@ const submitAnticipatoryBail = asyncHandler(async (req, res) => {
   const identityProofLocalPath = req.files?.identityProof[0].path;
   const addressProofLocalPath = req.files?.addressProof[0].path;
   const medicalRecordsLocalPath = req.files?.medicalRecords[0].path;
-  const passportLocalPath = req.files?.passport[0].path;
+  // const passportLocalPath = req.files?.passport[0].path;
   const { caseDetails, typeBail } = req.body;
   const { bailId } = req.params;
 
@@ -312,7 +313,7 @@ const submitAnticipatoryBail = asyncHandler(async (req, res) => {
       affidavitLocalPath,
       identityProofLocalPath,
       addressProofLocalPath,
-      passportLocalPath,
+      // passportLocalPath,
       caseDetails,
       medicalRecordsLocalPath,
       typeBail,
@@ -328,7 +329,7 @@ const submitAnticipatoryBail = asyncHandler(async (req, res) => {
   const affidavit = await uploadOnCloudinary(affidavitLocalPath);
   const identityProof = await uploadOnCloudinary(identityProofLocalPath);
   const addressProof = await uploadOnCloudinary(addressProofLocalPath);
-  const passport = await uploadOnCloudinary(passportLocalPath);
+  // const passport = await uploadOnCloudinary(passportLocalPath);
   const medicalRecords = await uploadOnCloudinary(medicalRecordsLocalPath);
 
   if (!firCopy) {
@@ -352,9 +353,9 @@ const submitAnticipatoryBail = asyncHandler(async (req, res) => {
   if (!addressProof) {
     throw new ApiError(400, "addressProof is required");
   }
-  if (!passport) {
-    throw new ApiError(400, "passport is required");
-  }
+  // if (!passport) {
+  //   throw new ApiError(400, "passport is required");
+  // }
   if (!medicalRecords) {
     throw new ApiError(400, "medicalRecords is required");
   }
@@ -369,7 +370,7 @@ const submitAnticipatoryBail = asyncHandler(async (req, res) => {
       affidavit: affidavit.url,
       identityProof: identityProof.url,
       addressProof: addressProof.url,
-      passport: passport.url,
+      // passport: passport.url,
       medicalRecords: medicalRecords.url,
       caseDetails,
       typeBail,

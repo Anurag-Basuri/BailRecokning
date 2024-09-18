@@ -1,18 +1,20 @@
-/* eslint-disable no-unused-vars */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const Interim = () => {
+const Interim = ({ bailId }) => {
 	const [formData, setFormData] = useState({
-		bailApplication: "",
+		interimApp: "",
 		firCopy: "",
 		chargeSheet: "",
 		affidavit: "",
-		personalBond: "",
+		suretyBond: "",
 		identityProof: "",
 		addressProof: "",
 		medicalRecords: "",
-		courtOrders: "",
-		legalRepresentation: "",
+		order: "",
+		typeBail: "Interim",
 	});
 
 	const handleInputChange = (e) => {
@@ -30,9 +32,46 @@ const Interim = () => {
 			[name]: files[0],
 		});
 	};
+	const [disableButton, setDisableButton] = useState(false);
+
+	const uploadRegularBail = async (e) => {
+		toast("Uploading interim bail");
+		setDisableButton(true);
+		e.preventDefault();
+		const formData1 = new FormData();
+		formData1.append("interimApp", formData.interimApp);
+		formData1.append("firCopy", formData.firCopy);
+		formData1.append("chargeSheet", formData.chargeSheet);
+		formData1.append("suretyBond", formData.suretyBond);
+		formData1.append("affidavit", formData.affidavit);
+		formData1.append("identityProof", formData.identityProof);
+		formData1.append("addressProof", formData.addressProof);
+		formData1.append("order", formData.order);
+		formData1.append("medicalRecords", formData.medicalRecords);
+		formData1.append("typeBail", formData.typeBail);
+
+		console.log(formData);
+		console.log(formData1);
+
+		try {
+			const response = await axios.post(
+				`/api/v1/bail/interimBail/${bailId}`,
+				formData1
+			);
+			console.log(response.data.data.bail);
+			toast("Successfully submited interim bail");
+		} catch (error) {
+			console.log("error in upload", error);
+		}
+	};
+
+	useEffect(() => {
+		setDisableButton(false);
+	}, []);
 
 	return (
 		<div className="min-h-screen bg-white p-10 h-full w-full">
+			<ToastContainer />
 			<form className="space-y-10">
 				{/* Interim Bail Application */}
 				<div>
@@ -41,7 +80,7 @@ const Interim = () => {
 					</label>
 					<input
 						type="file"
-						name="bailApplication"
+						name="interimApp"
 						onChange={handleFileChange}
 						className="w-full border border-blue-300 rounded-md focus:outline-none"
 						required
@@ -95,7 +134,7 @@ const Interim = () => {
 					</label>
 					<input
 						type="file"
-						name="personalBond"
+						name="suretyBond"
 						onChange={handleFileChange}
 						className="w-full border border-blue-300 rounded-md focus:outline-none"
 						required
@@ -150,24 +189,27 @@ const Interim = () => {
 					</label>
 					<input
 						type="file"
-						name="courtOrders"
+						name="order"
 						onChange={handleFileChange}
 						className="w-full border border-blue-300 rounded-md focus:outline-none"
 					/>
 				</div>
 
 				{/* Legal Representation Details */}
-				{/* <div>
-					<label className="block text-blue-700 font-medium mb-2">
-						Legal Representation Details
-					</label>
-					<textarea
-						name="legalRepresentation"
-						value={formData.legalRepresentation}
-						onChange={handleInputChange}
-						className="w-full px-4 py-2 border border-blue-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-						placeholder="Enter lawyer's or legal representative's details"></textarea>
-				</div> */}
+				<div className="border-t border-gray-200 pt-8">
+					<div className="flex gap-x-4 justify-end">
+						<button
+							type="submit"
+							onClick={(e) => uploadRegularBail(e)}
+							className={`inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 ${
+								disableButton
+									? "disabled bg-gray-300 text-gray-500 cursor-not-allowed"
+									: ""
+							}`}>
+							Upload
+						</button>
+					</div>
+				</div>
 			</form>
 		</div>
 	);

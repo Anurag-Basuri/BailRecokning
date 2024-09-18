@@ -5,7 +5,7 @@ import Anticipatory from "./type/Anticipatory";
 import Interim from "./type/Interim";
 import Default from "./type/Default";
 
-export default function DocValidation() {
+export default function DocValidation({ bailId }) {
 	const [currentTab, setCurrentTab] = useState("RegularBail");
 
 	const handleFormSubmit = (e) => {
@@ -101,10 +101,10 @@ export default function DocValidation() {
 						</fieldset>
 					</div>
 
-					{currentTab === "RegularBail" ? <Regular /> : ""}
-					{currentTab === "AnticipatoryBail" ? <Anticipatory /> : ""}
-					{currentTab === "InterimBail" ? <Interim /> : ""}
-					{currentTab === "DefaultBail" ? <Default /> : ""}
+					{currentTab === "RegularBail" ? <Regular bailId={bailId} /> : ""}
+					{currentTab === "AnticipatoryBail" ? <Anticipatory bailId={bailId} />:""}
+					{currentTab === "InterimBail" ? <Interim bailId={bailId} /> : ""}
+					{currentTab === "DefaultBail" ? <Default bailId={bailId} /> : ""}
 
 					{/* Submit and Cancel Buttons */}
 					{/* <div className="border-t border-gray-200 pt-8">

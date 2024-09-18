@@ -4,6 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../app/authSlice";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SignUp = () => {
 	const status = useSelector((state) => state.auth.status);
@@ -26,6 +28,7 @@ const SignUp = () => {
 			const response = await axios.post(newurl, newData);
 			// setUser(response.data.data)
 			// dispatch(login(newData));
+			toast("Successfully Created The Account");
 			console.log(response.data.data._id);
 			if (newData.role === "Lawyer") {
 				const response2 = await axios.post(
@@ -49,6 +52,7 @@ const SignUp = () => {
 	return (
 		<>
 			<section className="bg-gray-50 dark:bg-gray-900">
+				<ToastContainer />
 				<div className="flex flex-col mt-6 items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
 					<a
 						href="#"

@@ -1,17 +1,18 @@
-import React, { useState } from "react";
-import axios from "axios"
+import React, { useState,useEffect } from "react";
+import axios from "axios";
 
-const Regular = () => {
+const Regular = ({ bailId }) => {
 	const [formData, setFormData] = useState({
 		firCopy: "",
 		chargeSheet: "",
-		courtSummons: "",
-		personalBond: "",
+		order: "",
+		suretyBond: "",
 		affidavit: "",
 		identityProof: "",
 		addressProof: "",
-		backgroundInfo: "",
+		backgroundInformation: "",
 		passport: "",
+		typeBail: "Regular",
 	});
 
 	const handleInputChange = (e) => {
@@ -24,16 +25,47 @@ const Regular = () => {
 
 	const handleFileChange = (e) => {
 		const { name, files } = e.target;
-		setFormData({
-			...formData,
-			[name]: files[0],
-		});
+		if (files.length > 0) {
+			setFormData({
+				...formData,
+				[name]: files[0], // Get the first file
+			});
+		}
+	};
+	const [disableButton, setDisableButton] = useState(false);
+
+	const uploadRegularBail = async (e) => {
+		setDisableButton(true)
+		e.preventDefault();
+		const formData1 = new FormData();
+		formData1.append("firCopy", formData.firCopy);
+		formData1.append("chargeSheet", formData.chargeSheet);
+		formData1.append("order", formData.order);
+		formData1.append("suretyBond", formData.suretyBond);
+		formData1.append("affidavit", formData.affidavit);
+		formData1.append("identityProof", formData.identityProof);
+		formData1.append("addressProof", formData.addressProof);
+		formData1.append("backgroundInformation", formData.backgroundInformation);
+		formData1.append("passport", formData.passport);
+		formData1.append("typeBail", formData.typeBail);
+
+		console.log(formData);
+		console.log(formData1);
+
+		try {
+			const response = await axios.post(
+				`/api/v1/bail/regularBail/${bailId}`,
+				formData1
+			);
+			console.log(response.data.data.bail);
+		} catch (error) {
+			console.log("error in upload", error);
+		}
 	};
 
-	const uploadRegularBail = async () => {
-		const response = await axios.post("/api/v1/bail/regularBail/"+ bailId);
-		console.log(response.data.data)
-	};
+	useEffect(() => {
+		setDisableButton(false);
+	}, []);
 
 	console.log(formData);
 	return (
@@ -74,7 +106,7 @@ const Regular = () => {
 					</label>
 					<input
 						type="file"
-						name="courtSummons"
+						name="order"
 						onChange={handleFileChange}
 						className="w-full border border-blue-300 rounded-md focus:outline-none"
 					/>
@@ -87,7 +119,7 @@ const Regular = () => {
 					</label>
 					<input
 						type="file"
-						name="personalBond"
+						name="suretyBond"
 						onChange={handleFileChange}
 						className="w-full border border-blue-300 rounded-md focus:outline-none"
 						required
@@ -142,8 +174,8 @@ const Regular = () => {
 						Background Information (if applicable)
 					</label>
 					<textarea
-						name="backgroundInfo"
-						value={formData.backgroundInfo}
+						name="backgroundInformation"
+						value={formData.backgroundInformation}
 						onChange={handleInputChange}
 						className="w-full px-4 py-2 border border-blue-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
 						placeholder="Enter background details (if applicable)"></textarea>
@@ -165,8 +197,12 @@ const Regular = () => {
 					<div className="flex gap-x-4 justify-end">
 						<button
 							type="submit"
-							onClick={() => uploadRegularBail()}
-							className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+							onClick={(e) => uploadRegularBail(e)}
+							className={`inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 ${
+								disableButton
+									? "disabled bg-gray-300 text-gray-500 cursor-not-allowed"
+									: ""
+							}`}>
 							Upload
 						</button>
 					</div>

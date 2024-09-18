@@ -102,10 +102,6 @@ router.route("/anticipatoryBail/:bailId").post(
       maxCount: 1,
     },
     {
-      name: "passport",
-      maxCount: 1,
-    },
-    {
       name: "medicalRecords",
       maxCount: 1,
     },
