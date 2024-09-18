@@ -1,4 +1,4 @@
-import mongoose,{Schema} from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const bailSchema = new mongoose.Schema(
   {
@@ -7,9 +7,9 @@ const bailSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
-    bailApplicationName:{
-      type:String,
-      default: "Untitled Application"
+    bailApplicationName: {
+      type: String,
+      default: "Untitled Application",
     },
     dateOfArrest: {
       type: Date,
@@ -36,15 +36,6 @@ const bailSchema = new mongoose.Schema(
       type: String,
       default: "Pending",
     },
-    // judgeComments:{ //can make a new table and this can be an array
-    //     type:
-    // },
-    suretyAmount: {
-      type: Number,
-    },
-    personalBondAmount: {
-      type: Number,
-    },
     verdict: {
       type: String,
       lowercase: true,
@@ -56,6 +47,105 @@ const bailSchema = new mongoose.Schema(
     judge: {
       type: Schema.Types.ObjectId,
       ref: "User",
+    },
+    firCopy: {
+      type: String,
+    },
+    chargeSheet: {
+      type: String,
+    },
+    order: {
+      type: String,
+    },
+    suretyBond: {
+      type: String,
+    },
+    affidavit: {
+      type: String,
+    },
+    identityProof: {
+      type: String,
+    },
+    addressProof: {
+      type: String,
+    },
+    backgroundInformation: {
+      type: String,
+    },
+    passport: {
+      type: String,
+    },
+    anticipatoryBailApplication: {
+      type: String,
+    },
+    caseDetails: {
+      type: String,
+    },
+    medicalRecords: {
+      type: String,
+    },
+    interimBailApplication: {
+      type: String,
+    },
+    bailApplicationDefaultBail: {
+      type: String,
+    },
+    remand: {
+      type: String,
+    },
+    custodyCertificate: {
+      type: String,
+    },
+    nonFilingOfChargeSheet: {
+      type: String,
+    },
+    policeReport: {
+      type: String,
+    },
+    bailBond: {
+      type: String,
+    },
+    suretyDocument: {
+      type: String,
+    },
+    personalIDOA: {
+      type: String,
+    },
+    vakalatnama: {
+      type: String,
+    },
+    affidavitsDefaultBail: {
+      type: String,
+    },
+    familyDependents: {
+      type: Object,
+      default: {
+        dependents: false,
+        parents: false,
+        married: false,
+        noOfChildren: 0,
+      },
+    },
+    health: {
+      type: Object,
+      default: {
+        healthIssue: false,
+        deatils: "",
+      },
+    },
+    gender: {
+      type: String,
+    },
+    age: {
+      type: Number,
+    },
+    violence: {
+      type: Boolean,
+      default: false,
+    },
+    typeBail: {
+      type: String,
+      default: "Regular",
     },
   },
   { timestamps: true }

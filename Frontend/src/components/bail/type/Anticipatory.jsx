@@ -157,7 +157,7 @@ const Anticipatory = () => {
 				</div>
 
 				{/* Legal Representation Details */}
-				<div>
+				{/* <div>
 					<label className="block text-blue-700 font-medium mb-2">
 						Legal Representation Details
 					</label>
@@ -167,7 +167,7 @@ const Anticipatory = () => {
 						onChange={handleInputChange}
 						className="w-full px-4 py-2 border border-blue-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
 						placeholder="Enter lawyer's or legal representative's details"></textarea>
-				</div>
+				</div> */}
 			</form>
 		</div>
 	);

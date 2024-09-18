@@ -130,7 +130,7 @@ const Navabar = ({ darkMode }) => {
 						} w-full md:flex md:w-auto md:order-1`}
 						id="navbar-sticky">
 						<ul
-							className={`flex flex-col p-4 md:p-0 mt-4 rounded-lg font-medium border  md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0  ${
+							className={`flex flex-col p-4 md:p-0 mt-4 rounded-lg font-medium border  md:space-x-7 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0  ${
 								darkMode
 									? "bg-gray-800 md:bg-gray-900 border-gray-700"
 									: "border-gray-100 md:bg-white bg-gray-50"
@@ -149,7 +149,7 @@ const Navabar = ({ darkMode }) => {
 									Home
 								</NavLink>
 							</li>
-							<li>
+							{/* <li>
 								<NavLink
 									onClick={() => addBail()}
 									className={({ isActive }) =>
@@ -161,7 +161,7 @@ const Navabar = ({ darkMode }) => {
 									}>
 									Create Bail Application
 								</NavLink>
-							</li>
+							</li> */}
 							<li>
 								<NavLink
 									to="/About"
