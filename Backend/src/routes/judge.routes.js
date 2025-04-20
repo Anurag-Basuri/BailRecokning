@@ -1,10 +1,26 @@
-import { Router } from "express";
-import { verifyJWT } from "../middleware/auth.middleware.js";
-import { addJudge, removeJudge } from "../controllers/judge.controller.js";
+import express from "express";
+import { asyncHandler } from "../utils/asyncHandler.js";
+import { authMiddleware } from "../middleware/auth.middleware.js";
+import {
+  getJudge,
+  updateJudge,
+  listJudges,
+  getJudgeCases,
+  getJudgeBails,
+} from "../services/judge.service.js";
 
-const router = Router();
+const router = express.Router();
 
-router.route("/add").post(verifyJWT, addJudge);
-router.route("/remove/:judgeId").post(verifyJWT, removeJudge);
+// Apply auth middleware to all routes
+router.use(authMiddleware);
+
+// Judge routes
+router.get("/", asyncHandler(listJudges));
+router.get("/:id", asyncHandler(getJudge));
+router.patch("/:id", asyncHandler(updateJudge));
+
+// Judge cases and bails
+router.get("/:id/cases", asyncHandler(getJudgeCases));
+router.get("/:id/bails", asyncHandler(getJudgeBails));
 
 export default router;

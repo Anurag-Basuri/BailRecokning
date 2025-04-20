@@ -1,4 +1,13 @@
-import { Router } from "express";
+import express from "express";
+import { asyncHandler } from "../utils/asyncHandler.js";
+import { validate } from "../middleware/validation.js";
+import { userValidation } from "../middleware/validation.js";
+import { authMiddleware } from "../middleware/auth.middleware.js";
+import {
+  getUserProfile,
+  updateUserProfile,
+  deleteUserProfile,
+} from "../services/user.service.js";
 import {
   loginUser,
   logoutUser,
@@ -14,26 +23,41 @@ import {
   searchLawyersWithActivate,
 } from "../controllers/user.controller.js";
 import { upload } from "../middleware/multer.middleware.js";
-import { verifyJWT } from "../middleware/auth.middleware.js";
 
-const router = Router();
+const router = express.Router();
+
+// Apply auth middleware to all routes
+router.use(authMiddleware);
+
+// Get user profile
+router.get("/profile", asyncHandler(getUserProfile));
+
+// Update user profile
+router.patch(
+  "/profile",
+  validate(userValidation.update),
+  asyncHandler(updateUserProfile)
+);
+
+// Delete user profile
+router.delete("/profile", asyncHandler(deleteUserProfile));
 
 router.route("/register").post(registerUser);
 
 router.route("/login").post(loginUser);
 
 // secure routes
-router.route("/logout").post(verifyJWT, logoutUser);
-router.route("/current-user").get(verifyJWT, getCurrentUser);
-router.route("/allLawyers").get(verifyJWT, getAllLawyersWithActivate);
-router.route("/allJudge").get(verifyJWT, getAllJudges);
-router.route("/change-password").post(verifyJWT, changeCurrentPassword);
+router.route("/logout").post(logoutUser);
+router.route("/current-user").get(getCurrentUser);
+router.route("/allLawyers").get(getAllLawyersWithActivate);
+router.route("/allJudge").get(getAllJudges);
+router.route("/change-password").post(changeCurrentPassword);
 router.route("/refreshToken").post(refreshAccessToken);
-router.route("/update-account").patch(verifyJWT, updateAccountDetails);
+router.route("/update-account").patch(updateAccountDetails);
 router
   .route("/upload-profile-photo")
-  .post(verifyJWT, upload.single("avatar"), updateUserAvatar);
-router.route("/toggleMode").get(verifyJWT, toggleMode);
+  .post(upload.single("avatar"), updateUserAvatar);
+router.route("/toggleMode").get(toggleMode);
 router.route("/searchLawyer").post(searchLawyersWithActivate);
 
 export default router;
