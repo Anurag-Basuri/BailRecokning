@@ -1,37 +1,44 @@
-import { v2 as cloudinary } from "cloudinary";
-import fs from "fs";
+import multer from "multer";
+import path from "path";
+import { ApiError } from "./errorHandler.js";
+import { ALLOWED_FILE_TYPES, MAX_FILE_SIZE } from "../constants.js";
 
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "uploads/");
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    cb(
+      null,
+      file.fieldname + "-" + uniqueSuffix + path.extname(file.originalname)
+    );
+  },
 });
 
-const uploadOnCloudinary = async (localFilePath) => {
-  try {
-    if (!localFilePath) {
-      console.error("No local file path provided.");
-      return null;
-    }
+const fileFilter = (req, file, cb) => {
+  const fileType = file.mimetype;
+  const allowedTypes = Object.values(ALLOWED_FILE_TYPES).flat();
 
-    const response = await cloudinary.uploader.upload(localFilePath, {
-      resource_type: "auto",
-    });
-
-    // Delete local file after successful upload
-    fs.unlinkSync(localFilePath);
-
-    return response;
-  } catch (error) {
-    console.error("Error uploading file to Cloudinary:", error);
-
-    if (fs.existsSync(localFilePath)) {
-      // Delete local file if it exists
-      fs.unlinkSync(localFilePath);
-    }
-
-    return null;
+  if (allowedTypes.includes(fileType)) {
+    cb(null, true);
+  } else {
+    cb(
+      new ApiError(
+        400,
+        "Invalid file type. Only PDF, DOC, DOCX, JPG, PNG, GIF, MP4, and WAV files are allowed."
+      ),
+      false
+    );
   }
 };
 
-export { uploadOnCloudinary };
+const upload = multer({
+  storage: storage,
+  fileFilter: fileFilter,
+  limits: {
+    fileSize: MAX_FILE_SIZE,
+  },
+});
+
+export default upload;

@@ -1,61 +1,69 @@
 import express from "express";
-import cors from "cors";
 import cookieParser from "cookie-parser";
-import helmet from "helmet";
-import rateLimit from "express-rate-limit";
-import { errorHandler } from "./middleware/error.middleware.js";
+import morgan from "morgan";
+import path from "path";
+import { fileURLToPath } from "url";
+import connectDB from "./db/connection.js";
+import securityMiddleware from "./middleware/security.js";
+import { loginLimiter, apiLimiter } from "./middleware/rateLimiter.js";
+import errorHandler from "./utils/errorHandler.js";
+import logger from "./utils/logger.js";
+
+// Import routes
+import authRoutes from "./routes/auth.routes.js";
+import userRoutes from "./routes/user.routes.js";
+import caseRoutes from "./routes/case.routes.js";
+import bailRoutes from "./routes/bail.routes.js";
+import lawyerRoutes from "./routes/lawyer.routes.js";
+import judgeRoutes from "./routes/judge.routes.js";
+import documentRoutes from "./routes/document.routes.js";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 
+// Connect to MongoDB
+connectDB();
+
 // Security middleware
-app.use(helmet());
-app.use(
-  rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 100, // limit each IP to 100 requests per windowMs
-    message: "Too many requests from this IP, please try again later",
-  })
-);
+securityMiddleware(app);
 
-app.use(
-  cors({
-    origin: process.env.CORS_ORIGIN,
-    credentials: true,
-  })
-);
-
-app.use(express.json({ limit: "16kb" }));
-app.use(express.urlencoded({ extended: true, limit: "16kb" }));
-app.use(express.static("public"));
+// Body parser
+app.use(express.json({ limit: "10kb" }));
+app.use(express.urlencoded({ extended: true, limit: "10kb" }));
 app.use(cookieParser());
 
-// routes import
-import userRouter from "./routes/user.routes.js";
-import lawRouter from "./routes/law.routes.js";
-import bailRouter from "./routes/bail.routes.js";
-import chargesRouter from "./routes/charges.routes.js";
-import lawyerRouter from "./routes/lawyer.routes.js";
-import judgeRouter from "./routes/judge.routes.js";
-import pronouncementRouter from "./routes/pronouncement.routes.js";
-import similarRouter from "./routes/similarCase.routes.js";
-import previousRouter from "./routes/previousCase.routes.js";
-import lawyerProfileRouter from "./routes/lawyerProfile.routes.js";
-import timelineRouter from "./routes/timeline.routes.js";
+// Static files
+app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 
-// routes declaration
-app.use("/api/v1/user", userRouter);
-app.use("/api/v1/law", lawRouter); // only for admin but now anyone can use it - update in future
-app.use("/api/v1/bail", bailRouter);
-app.use("/api/v1/charge", chargesRouter);
-app.use("/api/v1/lawyer", lawyerRouter);
-app.use("/api/v1/judge", judgeRouter);
-app.use("/api/v1/pronouncement", pronouncementRouter);
-app.use("/api/v1/similar", similarRouter);
-app.use("/api/v1/previous", previousRouter);
-app.use("/api/v1/profile", lawyerProfileRouter);
-app.use("/api/v1/timeline", timelineRouter);
+// Logging
+if (process.env.NODE_ENV === "development") {
+  app.use(morgan("dev"));
+}
 
-// Error handling middleware
+// Rate limiting
+app.use("/api/auth/login", loginLimiter);
+app.use("/api", apiLimiter);
+
+// Routes
+app.use("/api/auth", authRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/cases", caseRoutes);
+app.use("/api/bails", bailRoutes);
+app.use("/api/lawyers", lawyerRoutes);
+app.use("/api/judges", judgeRoutes);
+app.use("/api/documents", documentRoutes);
+
+// Error handling
 app.use(errorHandler);
 
-export { app };
+// 404 handler
+app.use((req, res, next) => {
+  res.status(404).json({
+    success: false,
+    message: "Route not found",
+  });
+});
+
+export default app;
