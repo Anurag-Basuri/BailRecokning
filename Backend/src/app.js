@@ -1,8 +1,21 @@
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import helmet from "helmet";
+import rateLimit from "express-rate-limit";
+import { errorHandler } from "./middleware/error.middleware.js";
 
 const app = express();
+
+// Security middleware
+app.use(helmet());
+app.use(
+  rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100, // limit each IP to 100 requests per windowMs
+    message: "Too many requests from this IP, please try again later",
+  })
+);
 
 app.use(
   cors({
@@ -26,8 +39,8 @@ import judgeRouter from "./routes/judge.routes.js";
 import pronouncementRouter from "./routes/pronouncement.routes.js";
 import similarRouter from "./routes/similarCase.routes.js";
 import previousRouter from "./routes/previousCase.routes.js";
-import lawyerProfileRouter from "./routes/lawyerProfile.routes.js"
-import timelineRouter from "./routes/timeline.routes.js"
+import lawyerProfileRouter from "./routes/lawyerProfile.routes.js";
+import timelineRouter from "./routes/timeline.routes.js";
 
 // routes declaration
 app.use("/api/v1/user", userRouter);
@@ -41,5 +54,8 @@ app.use("/api/v1/similar", similarRouter);
 app.use("/api/v1/previous", previousRouter);
 app.use("/api/v1/profile", lawyerProfileRouter);
 app.use("/api/v1/timeline", timelineRouter);
+
+// Error handling middleware
+app.use(errorHandler);
 
 export { app };
