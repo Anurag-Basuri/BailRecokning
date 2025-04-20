@@ -17,6 +17,7 @@
 		"@reduxjs/toolkit": "^2.2.7",
 		"axios": "^1.7.7",
 		"chart.js": "^4.4.4",
+		"framer-motion": "^11.0.3",
 		"react": "^18.3.1",
 		"react-chartjs-2": "^5.2.0",
 		"react-dom": "^18.3.1",
@@ -30,6 +31,9 @@
 	},
 	"devDependencies": {
 		"@eslint/js": "^9.9.0",
+		"@tailwindcss/aspect-ratio": "^0.4.2",
+		"@tailwindcss/forms": "^0.5.7",
+		"@tailwindcss/typography": "^0.5.10",
 		"@testing-library/jest-dom": "^6.4.2",
 		"@testing-library/react": "^14.2.1",
 		"@types/react": "^18.3.3",
